@@ -188,6 +188,15 @@ a {
 	visibility:visible;
 	display:block;
 }
+.dropdown_list {
+	list-style-type:none;
+	padding:0;
+}
+.dropdown_list_item {
+	width:100%;
+	padding:5px 0px;
+	margin:0;	
+}
 
 /*--------------------------
 The dropdown_container before
@@ -315,9 +324,6 @@ the dropdowns
 }
 #mobile_nav_link:hover {
 	background-color: rgb(206, 200, 208);
-}
-.pure-menu-list{
-	width:100%;
 }
 /*------------------------------------------------------*/
 /* Contact logo grid styles */
