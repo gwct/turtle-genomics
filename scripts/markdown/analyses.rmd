@@ -1,0 +1,60 @@
+---
+title: "Turtle analysis plans"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+These are some notes on ideas for analyses and questions we may be able to answer.
+
+[< Back to samples](index.html)
+
+# Reference-based annotations
+
+By using the already annotated genomes, we can map reads and lift over/[liftoff](https://github.com/agshumate/Liftoff) coding coordinates to the new genomes. Reference bias can be addressed by using the most closely related annotated genome for each unannotated sample and through iterative mapping.
+
+This will require downloading the reads for each unannotated sample.
+
+## Analyses/questions
+
+1. Gene tree and species tree inference, with analysis of gene tree discordance. Possibility to study discordance over long timescales across chromosomes by aligning windows and building trees.
+2. Substitution rate analyses: Does variation in longevity or age to sexual maturity correlate with rate shifts? More generally, maybe we could compare rates to species in other groups to definitively assess how rates are slower in turtles.
+3. Scans for positive selection: Determine which genes are under positive selection in which turtle lineages (using [HyPhy](http://hyphy.org/about/)).
+
+# de-novo annotations
+
+For the newly sequenced and un-annotated genomes, we could perform some type of de novo gene predictions followed by orthogroup clustering to facilitate gene family analysis with [CAFE](https://github.com/hahnlab/CAFE5)
+
+## Anaylses/questions
+
+1. What is the rate of gene gain/loss in turtles? How does this compare to other groups (primates, insects, birds, etc.)
+2. Are there any gene families involved in longevity, aging, cancer, or immunity that are rapidly changing in turtle lineages. Specifically, we could look at gene families implicated in the [Lonesome George genome paper](https://www.nature.com/articles/s41559-018-0733-x) -- with a denser sampling of turtles we could more accuralty pinpoint where these changes occurred.
+
+
+[< Back to samples](index.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
