@@ -35,7 +35,7 @@ html_template = """
 				<li>Patrick Minx</li>
 				<li><a href="https://www.wtamu.edu/academics/college-agriculture-natural-sciences/department-life-earth-environmental-sciences/faculty/Peter-Scott-bio.html" target="_blank">Peter Scott</a></li>
 				<li>Andrew Shedlock</li>
-				<li><a href="https://sites.lifesci.ucla.edu/eeb-shafferlab/" target="_blank">Brad Shafer</a></li>
+				<li><a href="https://sites.lifesci.ucla.edu/eeb-shafferlab/" target="_blank">Brad Shaffer</a></li>
 				<li><a href="https://gwct.github.io/" target="_blank">Gregg Thomas</a></li>
 			</ul>
 		</div>
