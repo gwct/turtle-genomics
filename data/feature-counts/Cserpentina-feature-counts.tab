@@ -1,0 +1,35 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Chelydra_serpentina.Chelydra_serpentina-1.0.104.gff3.gz -o Cserpentina-features.tab --overwrite
+# Runtime:        10/07/2021 15:13:08
+# ----------------
+# Input file:            Chelydra_serpentina.Chelydra_serpentina-1.0.104.gff3.gz
+# Output file:           Cserpentina-features.tab
+# ----------------
+# 10.07.2021 | 15:13:08 Detecting compression...
+# 10.07.2021 | 15:13:08 Counting features...
+# Features types read:   19
+# Total features read:   1001210
+# ----------------
+# 10.07.2021 | 15:13:16 Writing output...
+# ----------------
+feature type	count	avg length
+region	113431	21169.22894094207
+biological_region	162281	283.0414096536255
+ncRNA_gene	1021	1282.6797257590597
+snRNA	324	144.71296296296296
+exon	325928	189.64738224393116
+gene	20414	38277.25120015675
+mRNA	29492	48046.61813373118
+CDS	318821	160.90997456252882
+three_prime_UTR	13224	603.5889292196007
+five_prime_UTR	15286	136.48691613240874
+lnc_RNA	133	9976.390977443609
+snoRNA	309	111.96763754045307
+pseudogene	138	8362.057971014492
+pseudogenic_transcript	138	8362.057971014492
+miRNA	137	89.94890510948905
+rRNA	65	873.8461538461538
+scRNA	19	192.10526315789474
+ncRNA	45	266.1777777777778
+Y_RNA	4	94.5

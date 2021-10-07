@@ -1,0 +1,35 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Pelusios_castaneus.Pelusios_castaneus-1.0.104.gff3.gz -o Pcastaneus-feature-counts.tab --overwrite
+# Runtime:        10/07/2021 15:14:31
+# ----------------
+# Input file:            Pelusios_castaneus.Pelusios_castaneus-1.0.104.gff3.gz
+# Output file:           Pcastaneus-feature-counts.tab
+# ----------------
+# 10.07.2021 | 15:14:31 Detecting compression...
+# 10.07.2021 | 15:14:31 Counting features...
+# Features types read:   19
+# Total features read:   819165
+# ----------------
+# 10.07.2021 | 15:14:38 Writing output...
+# ----------------
+feature type	count	avg length
+region	69036	29610.777652239412
+gene	19343	37060.363283875304
+mRNA	27057	45362.327309014305
+three_prime_UTR	13655	696.8465763456609
+exon	308056	198.95759861843302
+CDS	299831	161.21419399595106
+five_prime_UTR	18189	160.88888888888889
+biological_region	62221	378.1150576172032
+ncRNA_gene	771	2489.85084306096
+lnc_RNA	193	10933.212435233161
+snoRNA	313	110.24281150159744
+snRNA	111	137.42342342342343
+miRNA	80	86.925
+Y_RNA	2	106.0
+scRNA	17	179.11764705882354
+pseudogene	101	9719.158415841584
+pseudogenic_transcript	101	9719.158415841584
+ncRNA	15	277.8
+rRNA	73	613.2191780821918

@@ -1,0 +1,21 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i GCA_003942145.1_ASM394214v1/GCA_003942145.1_ASM394214v1_genomic.gff.gz -o Pmegacephalum-feature-counts.tab
+# Runtime:        10/07/2021 15:18:17
+# ----------------
+# Input file:            GCA_003942145.1_ASM394214v1/GCA_003942145.1_ASM394214v1_genomic.gff.gz
+# Output file:           Pmegacephalum-feature-counts.tab
+# ----------------
+# 10.07.2021 | 15:18:17 Detecting compression...
+# 10.07.2021 | 15:18:17 Counting features...
+# Features types read:   5
+# Total features read:   747577
+# ----------------
+# 10.07.2021 | 15:18:26 Writing output...
+# ----------------
+feature type	count	avg length
+region	359693	6446.409018246115
+gene	21529	32287.768591202563
+mRNA	21529	32287.768591202563
+exon	172413	174.4816342155174
+CDS	172413	174.4816342155174

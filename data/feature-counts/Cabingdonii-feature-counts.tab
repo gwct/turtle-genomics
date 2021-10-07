@@ -1,0 +1,35 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Chelonoidis_abingdonii.ASM359739v1.104.gff3.gz -o Cabingdonii-features.tab
+# Runtime:        10/07/2021 15:08:54
+# ----------------
+# Input file:            Chelonoidis_abingdonii.ASM359739v1.104.gff3.gz
+# Output file:           Cabingdonii-features.tab
+# ----------------
+# 10.07.2021 | 15:08:54 Detecting compression...
+# 10.07.2021 | 15:08:54 Counting features...
+# Features types read:   19
+# Total features read:   797560
+# ----------------
+# 10.07.2021 | 15:09:01 Writing output...
+# ----------------
+feature type	count	avg length
+region	10618	216681.9266340177
+biological_region	63479	406.9178783534712
+gene	20204	33952.73826964958
+mRNA	31793	40333.576825087286
+exon	330136	169.40147393801342
+CDS	323890	158.87266355861559
+five_prime_UTR	6559	115.52340295776796
+three_prime_UTR	4823	599.6427534729421
+ncRNA_gene	2910	1211.610996563574
+lnc_RNA	402	9460.751243781095
+snoRNA	273	110.82051282051282
+miRNA	123	89.23577235772358
+rRNA	318	111.90880503144655
+ncRNA	1469	165.36147038801906
+snRNA	351	125.26780626780626
+pseudogene	95	6609.221052631579
+pseudogenic_transcript	95	6609.221052631579
+scRNA	18	167.27777777777777
+V_gene_segment	4	2410.5

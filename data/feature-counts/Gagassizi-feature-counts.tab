@@ -1,0 +1,36 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Gopherus_agassizii.ASM289641v1.104.gff3.gz -o Gagassizi-features.tab --overwrite
+# Runtime:        10/07/2021 15:13:46
+# ----------------
+# Input file:            Gopherus_agassizii.ASM289641v1.104.gff3.gz
+# Output file:           Gagassizi-features.tab
+# ----------------
+# 10.07.2021 | 15:13:46 Detecting compression...
+# 10.07.2021 | 15:13:46 Counting features...
+# Features types read:   20
+# Total features read:   1152032
+# ----------------
+# 10.07.2021 | 15:13:56 Writing output...
+# ----------------
+feature type	count	avg length
+region	172559	12661.139210357038
+gene	20137	37191.58394994289
+mRNA	34327	53128.24208349113
+exon	420621	199.46706417416155
+CDS	401455	160.4018781681633
+three_prime_UTR	16274	714.7856089467863
+five_prime_UTR	26125	193.75651674641148
+biological_region	51577	326.9506950772631
+ncRNA_gene	3998	5932.228614307153
+ncRNA	1391	167.1193386053199
+lnc_RNA	2243	16915.034774855103
+rRNA	300	111.69333333333333
+snRNA	345	139.43478260869566
+scRNA	22	171.1818181818182
+miRNA	120	89.55833333333334
+pseudogene	119	6345.378151260505
+pseudogenic_transcript	119	6345.378151260505
+snoRNA	298	108.99328859060402
+J_gene_segment	1	56.0
+V_gene_segment	1	296.0

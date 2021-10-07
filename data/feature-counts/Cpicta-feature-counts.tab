@@ -1,0 +1,37 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.104.gff3.gz -o Cpicta-features.tab --overwrite
+# Runtime:        10/07/2021 15:12:33
+# ----------------
+# Input file:            Chrysemys_picta_bellii.Chrysemys_picta_bellii-3.0.3.104.gff3.gz
+# Output file:           Cpicta-features.tab
+# ----------------
+# 10.07.2021 | 15:12:33 Detecting compression...
+# 10.07.2021 | 15:12:33 Counting features...
+# Features types read:   21
+# Total features read:   1243114
+# ----------------
+# 10.07.2021 | 15:12:43 Writing output...
+# ----------------
+feature type	count	avg length
+region	78595	30099.726140339717
+biological_region	93323	249.06368205051274
+gene	21186	44054.302841499106
+mRNA	39074	64667.67292828991
+exon	487284	208.04372809285755
+five_prime_UTR	31069	248.0081431652129
+CDS	461131	162.98309590983908
+three_prime_UTR	18665	715.2035896062148
+ncRNA_gene	5523	11839.446134347276
+lnc_RNA	4314	24573.69842373667
+rRNA	343	120.91253644314868
+ncRNA	1541	165.26606099935108
+snRNA	252	131.37698412698413
+pseudogene	108	6202.916666666667
+pseudogenic_transcript	108	6202.916666666667
+snoRNA	276	111.16666666666667
+miRNA	270	90.54074074074074
+scRNA	20	163.2
+V_gene_segment	8	2264.75
+J_gene_segment	2	59.0
+tRNA	22	69.5
