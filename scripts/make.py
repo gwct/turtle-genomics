@@ -9,6 +9,7 @@ parser = argparse.ArgumentParser(description="Gets stats from a bunch of abyss a
 parser.add_argument("--all", dest="all", help="Build all pages", action="store_true", default=False);
 parser.add_argument("--index", dest="index", help="Without --all: build index.html. With --all: exlude index.html", action="store_true", default=False);
 parser.add_argument("--assemblies", dest="assemblies", help="Without --all: build assemblies.html. With --all: exlude assemblies.html", action="store_true", default=False);
+parser.add_argument("--annotations", dest="annotations", help="Without --all: build annotations.html. With --all: exlude annotations.html", action="store_true", default=False);
 parser.add_argument("--analyses", dest="analyses", help="Without --all: build analyses.html. With --all: exlude analyses.html", action="store_true", default=False);
 parser.add_argument("--people", dest="people", help="Without --all: build people.html. With --all: exlude people.html", action="store_true", default=False);
 parser.add_argument("--links", dest="links", help="Without --all: build links.html. With --all: exlude links.html", action="store_true", default=False);
@@ -21,6 +22,7 @@ os.chdir("generators");
 pages = {
     'index' : args.index,
     'assemblies' : args.assemblies,
+    'annotations' : args.annotations,
     'analyses' : args.analyses,
     'people' : args.people,
     'links' : args.links
@@ -31,6 +33,9 @@ if args.all:
 
 if pages['index']:
     os.system("python index_generator.py");
+
+if pages['annotations']:
+    os.system("Rscript annotations_generator.r");
 
 if pages['assemblies']:
     os.system("Rscript assemblies_generator.r");

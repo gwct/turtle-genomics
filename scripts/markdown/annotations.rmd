@@ -23,6 +23,7 @@ library(ggplot2)
 #library(ggpubr)
 #library(plyr)
 library(dplyr)
+library(ggrepel)
 #library(kableExtra)
 library(here)
 source("../lib/design.r")
@@ -36,104 +37,144 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tmexicana")
 
 feature_counts = data.frame()
+feature_lens = data.frame()
 
 for(spec in annotated_specs){
-  print(spec)
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
-  print(cur_feature_file)
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
   
   cur_feature_counts$spec = spec
   
   feature_counts = rbind(feature_counts, cur_feature_counts)
+  
+  cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens.tab", sep=""))
+  cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
+  
+  cur_feature_lens$spec = spec
+  
+  feature_lens = rbind(feature_lens, cur_feature_lens)
 }
 
+feature_lens = subset(feature_lens, length<=20000)
 
-#in_data = read.csv("../../data/turtles.csv", header=T, comment.char="#")
-#in_data = subset(in_data, Alternate=="N")
 ```
 
-## Reported coverage
+## Number of genes
 
-```{r coverage-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
-cov_p = ggplot(in_data, aes(x=Label, y=Coverage, color=Annotation.file)) +
-  geom_segment(aes(x=Label, y=0, xend=Label, yend=Coverage), linetype="dotted", color="#666666") +
-  geom_point(size=4) +
-  scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
-  ylab("Reported X coverage") +
+```{r gene-fig, out.width="66%", fig.align="center"}
+#in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+gene_counts = subset(feature_counts, feature.type=="gene")
+
+gene_p = ggplot(gene_counts, aes(x=spec, y=count)) +
+  geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
+  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=2)) +
+  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
+  ylab("# genes") +
   xlab(paste("")) +
-  scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
+  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
         legend.position="bottom")
-print(cov_p)
+print(gene_p)
 
-cat("Max coverage: ", max(in_data$Coverage), "X\n",
-    "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
-    "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
+#cat("Max coverage: ", max(in_data$Coverage), "X\n",
+#    "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
+#    "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
 ```
 
-## Number of scaffolds
+## Distributions of gene length (genes < 20,000bp)
 
-```{r scaffold-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffolds, decreasing=T)])
-scaff_p = ggplot(in_data, aes(x=Label, y=Scaffolds, fill=Annotation.file)) +
-  # geom_segment(aes(x=Label, y=0, xend=Label, yend=Scaffolds), linetype="dotted", color="#666666") +
-  geom_bar(stat="identity") +
+```{r gene-len-dists, out.width="66%", fig.align="center"}
+#in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+gene_lens = subset(feature_lens, feature=="gene")
+
+gene_dist_p = ggplot(gene_lens, aes(x=length)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=2)) +
+  scale_y_continuous(expand=c(0,0)) + 
+  xlab("Gene length") +
+  ylab("# genes") +
+  facet_wrap(~spec) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.title=element_text(size=12),
+        legend.position="bottom")
+print(gene_dist_p)
+```
+
+
+## Number of transcripts
+
+```{r transcript-fig, out.width="66%", fig.align="center"}
+#in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+transcript_counts = subset(feature_counts, feature.type=="transcript" | feature.type=="mRNA")
+cmydas_transcripts = subset(transcript_counts, spec=="Cmydas")
+cmydas_transcripts = sum(cmydas_transcripts$count)
+
+transcript_counts = subset(transcript_counts, spec != "Cmydas")
+transcript_counts = rbind(transcript_counts, data.frame("spec"="Cmydas", "count"=cmydas_transcripts, "feature.type"="transcript", "avg.length"=NA))
+
+transcript_counts$feature.type = "transcript"
+
+transcript_p = ggplot(transcript_counts, aes(x=spec, y=count)) +
+  geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
+  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=6)) +
+  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
+  ylab("# transcripts") +
+  xlab(paste("")) +
+  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.title=element_text(size=12),
+        legend.position="bottom")
+print(transcript_p)
+
+#cat("Max coverage: ", max(in_data$Coverage), "X\n",
+#    "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
+#    "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
+```
+
+## Distributions of transcript length (genes < 20,000bp)
+
+```{r transcript-len-dists, out.width="66%", fig.align="center"}
+
+transcript_lens = subset(feature_lens, feature=="transcript" | feature=="mRNA")
+transcript_lens$feature = "transcript"
+
+transcript_dist_p = ggplot(transcript_lens, aes(x=length)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=6)) +
   scale_y_continuous(expand=c(0,0)) +
-  ylab("# scaffolds") +
-  xlab(paste("")) +
-  scale_fill_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
+  xlab("Transcript length") +
+  ylab("# transcripts") +
+  facet_wrap(~spec) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
         legend.position="bottom")
-print(scaff_p)
-
-cat("Max # scaffold: ", max(in_data$Scaffolds), "\n",
-    "Average # scaffolds: ", signif(mean(in_data$Scaffolds), 4),  "\n",
-    "Min # scaffold: ", min(in_data$Scaffolds), sep="")
+print(transcript_dist_p)
 ```
 
-## Scaffold N50
+## Genes x transcripts
 
-```{r n50-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffold.N50, decreasing=T)])
-n50_p = ggplot(in_data, aes(x=Label, y=Scaffold.N50, color=Annotation.file)) +
-  geom_segment(aes(x=Label, y=0, xend=Label, yend=Scaffold.N50), linetype="dotted", color="#666666") +
-  geom_point(size=4) +
-  scale_y_continuous(expand=c(0,0), limits=c(0,max(in_data$Scaffold.N50) + 7500000)) +
-  ylab("Scaffold N50") +
-  xlab(paste("")) +
-  scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
+```{r gene-transcript-fig, out.width="66%", fig.align="center"}
+
+gene_transcript_counts = merge(gene_counts, transcript_counts, by="spec")
+
+gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y)) +
+  #geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
+  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=1)) +
+  geom_smooth(method="glm", se=F, linetype="dashed", color="#333333") +
+  geom_text_repel(aes(label=spec)) +
+  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
+  ylab("# transcripts") +
+  xlab("# genes") +
+  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
         legend.position="bottom")
-print(n50_p)
+print(gene_transcript_p)
 
-cat("Max scaffold N50: ", max(in_data$Scaffold.N50), "\n",
-    "Average scaffold N50: ", signif(mean(in_data$Scaffold.N50), 4), "\n",
-    "Min scaffold N50: ", min(in_data$Scaffold.N50), sep="")
-```
-
-## Scaffold N50 by # Scaffolds
-
-```{r scaffold-n50-fig, out.width="66%", fig.align="center"}
-scaff_n50_p = ggplot(in_data, aes(x=Scaffolds, y=Scaffold.N50, color=Annotation.file)) +
-  geom_smooth(method="lm", se=F, linetype="dashed", size=1.5, color="#666666") +
-  geom_point(size=4, alpha=0.5) +
-  #scale_y_continuous(expand=c(0,0), limits=c(0,max(in_data$Scaffold.N50) + 7500000)) +
-  ylab("Scaffold N50") +
-  xlab("# Scaffolds") +
-  scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
-  bartheme() +
-  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
-        legend.position="bottom")
-print(scaff_n50_p)
 ```
 
 [< Back to samples](index.html)
