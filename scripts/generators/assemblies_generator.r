@@ -7,6 +7,8 @@
 cat("Rendering assemblies.rmd/html\n")
 Sys.setenv(RSTUDIO_PANDOC="C:/Program Files/RStudio/bin/pandoc/")
 library(rmarkdown)
-setwd("C:/bin/turtle-genomics/scripts/generators/")
+library(here)
+setwd(here("scripts", "generators"))
+print(getwd())
 output_dir = "../.."
 render("../markdown/assemblies.rmd", output_dir = output_dir, params = list(output_dir = output_dir), quiet = TRUE)

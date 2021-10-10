@@ -1,6 +1,6 @@
 # CMDS,,,,,,,,,,,,,,,,,
 # wget --recursive --no-host-directories --cut-dirs=6 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/696/305/GCF_001696305.1_UCN72.1/ -P my_dir/ ,,,,,,,,,,,,,,,,,
-Family,Genus,Species,Abbr,Label,SRA accession,Genome accession,Link,Coverage,Seq technology,Assembler,Size (Mb),GC Percent,Scaffolds,Scaffold N50,Annotation file,Alternate,Notes
+Family,Genus,Species,label,name,SRA accession,Genome accession,Link,Coverage,Seq technology,Assembler,Size (Mb),GC Percent,Scaffolds,Scaffold N50,Annotation file,Alternate,Notes
 Podocnemididae,Podocnemis,expansa,Pexpansa,Podocnemis_expansa,SRR9043028,GCA_007922195.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_007922195.1/,60,10x Genomics,Supernova v2.1.1,2377.64,43.6,43498,37101370,N,N,
 Pelomedusidae,Pelusios,castaneus,Pcastaneus,Pelusios_castaneus,SRR9091361,GCA_007922175.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_007922175.1/,50,10x Genomics,Supernova v2.1.1,1943.68,43.1,69036,14055032,Y,N,
 Chelidae,Emydura,subglobosa,Esubglobosa,Emydura_subglobosa,SRR9104622,GCA_007922225.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_007922225.1/,61,10x Genomics,Supernova v2.1.1,1922.65,42.9,43399,44759016,N,N,
@@ -14,8 +14,8 @@ Emydidae,Chrysemys,picta,Cpicta,Chrysemys_picta,Multiple?,GCA_000241765.3,https:
 Emydidae,Trachemys,scripta,Tscripta,Trachemys_scripta,Multiple?,GCF_013100865.1,https://www.ncbi.nlm.nih.gov/assembly/GCF_013100865.1/,60,Illumina NovaSeq; PacBio,Supernova v1.2,2126.2,44.05,138,140411086,Y,N,
 Cheloniidae,Chelonia,mydas,Cmydas,Chelonia_mydas,Multiple?,GCF_015237465.1,https://www.ncbi.nlm.nih.gov/assembly/GCF_015237465.1/,60,PacBio Sequel I CLR; Illumina NovaSeq; Arima Genomics Hi-C; Bionano Genomics DLS,FALCON,2134.59,44.05,99,134428053,Y,N,3 assemblies
 Platysternidae,Platysternon,megacephalum,Pmegacephalum,Platysternon_megacephalum,Multiple?,GCA_003942145.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_003942145.1/,208,Illumina,SOAPdenovo v.MAY-2017,2319.09,43.9,359693,7221511,Y,N,
-Geomydidae,Cuora,mccordii,Cmccordii,Cuora_mccordii,SRR8180406,GCA_003846335.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_003846335.1/,71,10x Genomics,Supernova v2.1.1,2173.14,44.6,100020,32628679,N,N,
+Geomydidae,Cuora,mccordi,Cmccordi,Cuora_mccordi,SRR8180406,GCA_003846335.1,https://www.ncbi.nlm.nih.gov/assembly/GCA_003846335.1/,71,10x Genomics,Supernova v2.1.1,2173.14,44.6,100020,32628679,N,N,
 Dermochelyidae,Dermochelys,coriacea,Dcoriacea,Dermochelys_corieacea,Multiple?,GCA_009764565.3,https://www.ncbi.nlm.nih.gov/assembly/GCF_009764565.2,63.68,PacBio Sequel I CLR; llumina NovaSeq; Arima Genomics Hi-C; Bionano Genomics DLS,FALCON,2154.17,43.37,40,137568771,N,N,
-Geoemydidae,Cuora,amboinesis,Camboinesis,Cuora_amboinesis,Multiple?,GCA_004028625.2,https://www.ncbi.nlm.nih.gov/assembly/GCA_004028625.2/,58,Illumina,Supernova v2.1.1,1795.77,43.9,89628,247606,N,Y,
+Geomydidae,Cuora,amboinesis,Camboinesis,Cuora_amboinesis,Multiple?,GCA_004028625.2,https://www.ncbi.nlm.nih.gov/assembly/GCA_004028625.2/,58,Illumina,Supernova v2.1.1,1795.77,43.9,89628,247606,N,Y,
 Emydidae,Terrapene,mexicana triunguis,Tmexicana,Terrapene_mexicana_triunguis,Multiple?,GCA_002925995.2,https://www.ncbi.nlm.nih.gov/assembly/GCF_002925995.2/,69,10x Genomics Chromium,Supernova v2.1.0,2571.27,44.6,52260,24249581,Y,Y,Annotation has diff. label
 Testudinidae,Chelonoidis,abingdonii,Cabingdonii,Chelonoidis_abingdonii,,GCA_003597395.1,https://www.ncbi.nlm.nih.gov/assembly/GCF_003597395.1/,28,Illumina HiSeq; PacBio,AllPaths vJAN-2016,2300.74,44.1,10618,1277207,Y,Y,Lonesome George

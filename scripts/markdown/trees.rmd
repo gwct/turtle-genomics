@@ -1,0 +1,236 @@
+---
+title: "Turtle trees"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+navbar:
+  title: Murinae seq
+  right:
+    - text: "Home"
+      href: https://goodest-goodlab.github.io/murinae-seq/
+    - text: "210 exomes"
+      href: https://goodest-goodlab.github.io/murinae-seq/summary_210.html
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(dplyr)
+#library(kableExtra)
+library(tidyr)
+library(ggtree)
+library(phytools)
+library(phangorn)
+#library(reshape2)
+#library(ggExtra)
+library(ggrepel)
+#library(vroom)
+#library(ggdist)
+library(here)
+#source("C:/bin/core/corelib/design.r")
+#source("C:/bin/core/get_tree_info.r")
+source("C:/Users/grt814/bin/core/corelib/design.r")
+source("C:/Users/grt814/bin/core/get_tree_info.r")
+
+#htmltools::includeHTML("../html-chunks/rmd_nav.html")
+```
+
+[< Back to summary](index.html)
+
+# Species tree topology
+
+```{r read, out.width="100%", fig.align = "center", warning=FALSE}
+tree_type = "topo"
+save_tree_fig = F
+
+if(tree_type == "astral"){
+  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred with ASTRAL (no branch lengths shown).\n")
+}else if(tree_type == "concat"){
+  cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred by concatenation of all loci with IQtree.\n")
+}else if(tree_type == "topo"){
+  cat("Topology extracted from previously inferred tree topologies")
+}
+# Info for different tree input types
+
+# tree_file = "../../data/trees/full_coding_iqtree_astral.cf.rooted.tree"
+# astral_tree = read.tree(tree_file)
+# 
+# tree_to_df_list = treeToDF(astral_tree)
+# tree_info_astral = tree_to_df_list[["info"]]
+# #tree_info_astral = treeToDF(astral_tree)
+# tree_info_astral = tree_info_astral %>% separate(label, c("astral", "gcf", "scf"), sep="/", remove=F)
+# tree_info_astral$astral[tree_info_astral$node.type=="tip"] = NA
+# tree_info_astral$astral = as.numeric(tree_info_astral$astral)
+# tree_info_astral$gcf = as.numeric(tree_info_astral$gcf)
+# tree_info_astral$scf = as.numeric(tree_info_astral$scf)
+# Read astral tree data
+
+# concat_file = "../../data/trees/full_coding_iqtree_concat.cf.rooted.tree"
+# concat_tree = read.tree(concat_file)
+# 
+# tree_to_df_list = treeToDF(concat_tree)
+# tree_info_concat = tree_to_df_list[["info"]]
+# #tree_info_concat = treeToDF(concat_tree)
+# tree_info_concat = tree_info_concat %>% separate(label, c("bootstrap", "gcf", "scf"), sep="/", remove=F)
+# tree_info_concat$bootstrap[tree_info_concat$node.type=="tip"] = NA
+# tree_info_concat$bootstrap = as.numeric(tree_info_concat$bootstrap)
+# tree_info_concat$gcf = as.numeric(tree_info_concat$gcf)
+# tree_info_concat$scf = as.numeric(tree_info_concat$scf)
+# Read concat tree data
+
+topo_file = here("data", "tree", "turtle-samples-topo.tre")
+topo_tree = read.tree(topo_file)
+
+tree_to_df_list = treeToDF(topo_tree)
+tree_info_topo = tree_to_df_list[["info"]]
+# Manual topo tree -- Need to fix this for no branch lengths!!
+
+#rf = RF.dist(concat_tree, astral_tree)
+#nrf = RF.dist(concat_tree, astral_tree, normalize=T)
+
+#treecomp = comparePhylo(concat_tree, astral_tree, plot=T)
+# Stores node ids of common clades between trees!
+
+#write.csv(tree_info, "../../data/trees/full-coding-concat-cf-rooted.csv", row.names=F)
+
+if(tree_type == "astral"){
+  tree_info = tree_info_astral
+  turtle_tree = astral_tree
+  xmax = 31
+  iq_tree_labels = "../../data/trees/full_coding_iqtree_astral.cf.branch.rooted"
+  cf_stat_file = "../../data/trees/full_coding_iqtree_astral.cf.stat"
+  cf_rep_dir = "../../data/trees/astral-cf-reps/"
+  delta_outfile = "../../data/trees/astral-delta.tab"
+}else if(tree_type == "concat"){
+  tree_info = tree_info_concat
+  turtle_tree = concat_tree
+  xmax = 0.125
+  iq_tree_labels = "../../data/trees/full_coding_iqtree_concat.cf.branch.rooted"
+  cf_stat_file = "../../data/trees/full_coding_iqtree_concat.cf.stat"
+  cf_rep_dir = "../../data/trees/concat-cf-reps/"
+  delta_outfile = "../../data/trees/concat-delta.tab"
+}else if(tree_type == "topo"){
+  tree_info = tree_info_topo
+  turtle_tree = topo_tree
+  xmax = 5.75
+}
+# Set some values based on tree type
+
+#cf_stats = read.table(cf_stat_file, header=T)
+```
+
+
+```{r topology-fig, out.width="75%", fig.align = "center", warning=FALSE, fig.height=10}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+gcf_tree = ggtree(turtle_tree, size=0.8, ladderize=F) +#, aes(color=tree_info$gcf)) +
+  #scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
+  xlim(0, xmax) +
+  geom_tiplab(color="#333333", fontface='italic', size=4) +
+  theme(legend.position=c(0.05,0.9))
+print(gcf_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# Tree
+```
+
+```{r read-sample-data}
+in_data_file = here("data", "turtles.csv")
+in_data = read.csv(in_data_file, header=T, comment.char="#")
+#in_data = subset(in_data, Alternate=="N")
+
+in_data$num.genes = NA
+in_data$avg.gene.len = NA
+in_data$num.genes.lt20k = NA
+in_data$avg.gene.len.lt20k = NA
+in_data$num.transcripts = NA
+in_data$avg.transcript.len = NA
+in_data$num.transcripts.lt20k = NA
+in_data$avg.transcript.len.lt20k = NA
+
+# Read in the input data
+```
+
+```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE}
+
+annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tmexicana")
+
+feature_counts = data.frame()
+feature_lens = data.frame()
+
+for(spec in annotated_specs){
+  cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
+  cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
+  cur_feature_counts$spec = spec
+  feature_counts = rbind(feature_counts, cur_feature_counts)
+  # Read feature counts for the current species
+  
+  cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens.tab", sep=""))
+  cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
+  cur_feature_lens$spec = spec
+  feature_lens = rbind(feature_lens, cur_feature_lens)
+  # Read feature lengths for the current species
+}
+# Read in the annotation data
+
+```
+
+```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE}
+
+for(cur_spec in annotated_specs){
+  cur_genes = subset(feature_lens, spec==cur_spec & feature=="gene")
+  cur_transcripts = subset(feature_lens, spec==cur_spec)
+  cur_transcripts = subset(cur_transcripts, feature=="transcript" | feature=="mRNA")
+  cur_transcripts$feature = "transcript"
+  # Subset the genes and transcripts, combining "transcript" and "mRNA" features as transcripts
+  
+  in_data$num.genes[in_data$label==cur_spec] = nrow(cur_genes)
+  in_data$avg.gene.len[in_data$label==cur_spec] = mean(cur_genes$length, na.rm=T)
+  # Genes
+  
+  cur_genes_lt20k = subset(cur_genes, length <= 20000)
+  in_data$num.genes.lt20k[in_data$label==cur_spec] = nrow(cur_genes_lt20k)
+  in_data$avg.gene.len.lt20k[in_data$label==cur_spec] = mean(cur_genes_lt20k$length, na.rm=T)
+  # Genes less than 20kb
+  
+  in_data$num.transcripts[in_data$label==cur_spec] = nrow(cur_transcripts)
+  in_data$avg.transcript.len[in_data$label==cur_spec] = mean(cur_transcripts$length, na.rm=T)
+  # Transcripts
+
+  cur_transcripts_lt20k = subset(cur_transcripts, length <= 20000)
+  in_data$num.transcripts.lt20k[in_data$label==cur_spec] = nrow(cur_transcripts_lt20k)
+  in_data$avg.transcript.len.lt20k[in_data$label==cur_spec] = mean(cur_transcripts_lt20k$length, na.rm=T)
+  # Transcripts less than 20kb
+}
+# For each annotated species, add the feature counts and average lengths to the main data frame
+
+```
+
+```{r merge-tree-data, out.width="75%", fig.align = "center", warning=FALSE}
+
+full_data = merge(in_data, tree_info, by="label", all=T)
+write.csv(full_data, here("data", "turtles-full.csv"), row.names=F)
+# Merge the main data frame and the tree data frame and write to file
+
+```
+
+
+[< Back to summary](index.html)

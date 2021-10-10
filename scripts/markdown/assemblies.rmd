@@ -18,12 +18,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
-#library(cowplot)
-#library(ggbeeswarm)
-#library(ggpubr)
-#library(plyr)
 library(dplyr)
-#library(kableExtra)
 source("../lib/design.r")
 ```
 
@@ -34,12 +29,15 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 ```{r read-data}
 in_data = read.csv("../../data/turtles.csv", header=T, comment.char="#")
 in_data = subset(in_data, Alternate=="N")
+# Read in the turtle data and exclude "alternate" species
 ```
 
 ## Reported coverage
 
 ```{r coverage-fig, out.width="66%", fig.align="center"}
 in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+# Order the labels by coverage
+
 cov_p = ggplot(in_data, aes(x=Label, y=Coverage, color=Annotation.file)) +
   geom_segment(aes(x=Label, y=0, xend=Label, yend=Coverage), linetype="dotted", color="#666666") +
   geom_point(size=4) +
@@ -56,14 +54,16 @@ print(cov_p)
 cat("Max coverage: ", max(in_data$Coverage), "X\n",
     "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
     "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
+# Print out some summary stats
 ```
 
 ## Number of scaffolds
 
 ```{r scaffold-fig, out.width="66%", fig.align="center"}
 in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffolds, decreasing=T)])
+# Order the data by number of scaffolds
+
 scaff_p = ggplot(in_data, aes(x=Label, y=Scaffolds, fill=Annotation.file)) +
-  # geom_segment(aes(x=Label, y=0, xend=Label, yend=Scaffolds), linetype="dotted", color="#666666") +
   geom_bar(stat="identity") +
   scale_y_continuous(expand=c(0,0)) +
   ylab("# scaffolds") +
@@ -78,12 +78,15 @@ print(scaff_p)
 cat("Max # scaffold: ", max(in_data$Scaffolds), "\n",
     "Average # scaffolds: ", signif(mean(in_data$Scaffolds), 4),  "\n",
     "Min # scaffold: ", min(in_data$Scaffolds), sep="")
+# Print out some summary stats
 ```
 
 ## Scaffold N50
 
 ```{r n50-fig, out.width="66%", fig.align="center"}
 in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffold.N50, decreasing=T)])
+# Order the data by scaffold N50
+
 n50_p = ggplot(in_data, aes(x=Label, y=Scaffold.N50, color=Annotation.file)) +
   geom_segment(aes(x=Label, y=0, xend=Label, yend=Scaffold.N50), linetype="dotted", color="#666666") +
   geom_point(size=4) +
@@ -100,6 +103,7 @@ print(n50_p)
 cat("Max scaffold N50: ", max(in_data$Scaffold.N50), "\n",
     "Average scaffold N50: ", signif(mean(in_data$Scaffold.N50), 4), "\n",
     "Min scaffold N50: ", min(in_data$Scaffold.N50), sep="")
+# Print out some summary stats
 ```
 
 ## Scaffold N50 by # Scaffolds

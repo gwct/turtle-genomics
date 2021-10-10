@@ -18,13 +18,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
-#library(cowplot)
-#library(ggbeeswarm)
-#library(ggpubr)
-#library(plyr)
 library(dplyr)
 library(ggrepel)
-#library(kableExtra)
 library(here)
 source("../lib/design.r")
 ```
@@ -35,27 +30,31 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
 ```{r read-data}
 annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tmexicana")
+# All species with annotations
 
 feature_counts = data.frame()
 feature_lens = data.frame()
+# Data frames to keep track of feature counts and lengths
 
 for(spec in annotated_specs){
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
-  
   cur_feature_counts$spec = spec
-  
   feature_counts = rbind(feature_counts, cur_feature_counts)
+  # Read feature counts for the current species
   
   cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens.tab", sep=""))
   cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
-  
   cur_feature_lens$spec = spec
-  
   feature_lens = rbind(feature_lens, cur_feature_lens)
+  # Read feature lengths for the current species
 }
 
-feature_lens = subset(feature_lens, length<=20000)
+feature_lens$feature[feature_lens$feature=="mRNA"] = "transcript"
+# Some files refer to transcripts as "mRNA" so we change the labels here
+
+feature_lens_lt20k = subset(feature_lens, length<=20000)
+# A subset of all features less than 20kb long for plotting distributions
 
 ```
 
@@ -63,15 +62,15 @@ feature_lens = subset(feature_lens, length<=20000)
 
 ```{r gene-fig, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
-gene_counts = subset(feature_counts, feature.type=="gene")
+gene_counts = subset(feature_lens, feature=="gene")
+gene_counts = gene_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+# Get genes from feature lengths and summarize by species
 
 gene_p = ggplot(gene_counts, aes(x=spec, y=count)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
   geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=2)) +
-  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
   ylab("# genes") +
   xlab(paste("")) +
-  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
@@ -87,7 +86,8 @@ print(gene_p)
 
 ```{r gene-len-dists, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
-gene_lens = subset(feature_lens, feature=="gene")
+gene_lens = subset(feature_lens_lt20k, feature=="gene")
+# Get genes less than 20kb long
 
 gene_dist_p = ggplot(gene_lens, aes(x=length)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=2)) +
@@ -107,22 +107,15 @@ print(gene_dist_p)
 
 ```{r transcript-fig, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
-transcript_counts = subset(feature_counts, feature.type=="transcript" | feature.type=="mRNA")
-cmydas_transcripts = subset(transcript_counts, spec=="Cmydas")
-cmydas_transcripts = sum(cmydas_transcripts$count)
-
-transcript_counts = subset(transcript_counts, spec != "Cmydas")
-transcript_counts = rbind(transcript_counts, data.frame("spec"="Cmydas", "count"=cmydas_transcripts, "feature.type"="transcript", "avg.length"=NA))
-
-transcript_counts$feature.type = "transcript"
+transcript_counts = subset(feature_lens, feature=="transcript")
+transcript_counts = transcript_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+# Get transcripts and summarize by species
 
 transcript_p = ggplot(transcript_counts, aes(x=spec, y=count)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
   geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=6)) +
-  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
   ylab("# transcripts") +
   xlab(paste("")) +
-  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
@@ -137,9 +130,8 @@ print(transcript_p)
 ## Distributions of transcript length (genes < 20,000bp)
 
 ```{r transcript-len-dists, out.width="66%", fig.align="center"}
-
-transcript_lens = subset(feature_lens, feature=="transcript" | feature=="mRNA")
-transcript_lens$feature = "transcript"
+gene_lens = subset(feature_lens_lt20k, feature=="transcript")
+# Get transcripts less than 20kb long
 
 transcript_dist_p = ggplot(transcript_lens, aes(x=length)) +
   geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=6)) +
@@ -159,16 +151,14 @@ print(transcript_dist_p)
 ```{r gene-transcript-fig, out.width="66%", fig.align="center"}
 
 gene_transcript_counts = merge(gene_counts, transcript_counts, by="spec")
+# Combine gene and transcript counts into a data frame
 
 gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y)) +
-  #geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
   geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=1)) +
   geom_smooth(method="glm", se=F, linetype="dashed", color="#333333") +
   geom_text_repel(aes(label=spec)) +
-  #scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
   ylab("# transcripts") +
   xlab("# genes") +
-  #scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.title=element_text(size=12),
