@@ -39,10 +39,10 @@ library(ggrepel)
 #library(vroom)
 #library(ggdist)
 library(here)
-#source("C:/bin/core/corelib/design.r")
-#source("C:/bin/core/get_tree_info.r")
-source("C:/Users/grt814/bin/core/corelib/design.r")
-source("C:/Users/grt814/bin/core/get_tree_info.r")
+source("C:/bin/core/corelib/design.r")
+source("C:/bin/core/get_tree_info.r")
+#source("C:/Users/grt814/bin/core/corelib/design.r")
+#source("C:/Users/grt814/bin/core/get_tree_info.r")
 
 #htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
@@ -60,7 +60,7 @@ if(tree_type == "astral"){
 }else if(tree_type == "concat"){
   cat("188 species.\n11,775 coding loci.\nGene trees inferred with IQtree.\nSpecies tree inferred by concatenation of all loci with IQtree.\n")
 }else if(tree_type == "topo"){
-  cat("Topology extracted from previously inferred tree topologies")
+  cat("Topology extracted from Thomson et al. 2021: https://www.pnas.org/content/118/7/e2012215118")
 }
 # Info for different tree input types
 
