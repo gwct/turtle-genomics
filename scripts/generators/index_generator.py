@@ -67,7 +67,7 @@ footer = RC.readFooter();
 
 outfilename = "../../" + pagefile;
 
-samples_file = "../../data/turtles.csv";
+samples_file = "../../data/turtles-full.csv";
 
 sample_table = "";
 first = True;
@@ -86,20 +86,25 @@ for line in open(samples_file):
 		sample_table += "<th>Scaffolds</th>";
 		sample_table += "<th>Scaffold N50</th>";
 		sample_table += "<th>Annotated</th>";
+		sample_table += "<th>% Complete BUSCO</th>";
 		sample_table += "<th>Notes</th>";
 		sample_table += "</thead>";
 
 		first = False;
 		continue;
 
+	if line[28] != "tip":
+		continue;
+
 	sample_table += "<tr>";
-	sample_table += "<td>" + line[0] + "</td>";
-	sample_table += "<td><em>" + line[1] + " " + line[2] + "</em></td>";
+	sample_table += "<td>" + line[1] + "</td>";
+	sample_table += "<td><em>" + line[2] + " " + line[3] + "</em></td>";
 	sample_table += "<td><a href='" + line[7] + "' target='_blank'>" + line[6] + "</a></td>";
 	sample_table += "<td>" + line[8] + "X</td>";
 	sample_table += "<td>" + line[13] + "</td>";
 	sample_table += "<td>" + line[14] + "</td>";
 	sample_table += "<td>" + line[15] + "</td>";
+	sample_table += "<td>" + str(round(float(line[30]) / float(line[29]) * 100, 3)) + "</td>";
 	sample_table += "<td>" + line[17] + "</td>";
 	sample_table += "</tr>";
 

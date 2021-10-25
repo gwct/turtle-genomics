@@ -21,6 +21,7 @@ library(ggplot2)
 library(dplyr)
 library(ggrepel)
 library(here)
+library(reshape2)
 source("../lib/design.r")
 ```
 
@@ -130,7 +131,7 @@ print(transcript_p)
 ## Distributions of transcript length (genes < 20,000bp)
 
 ```{r transcript-len-dists, out.width="66%", fig.align="center"}
-gene_lens = subset(feature_lens_lt20k, feature=="transcript")
+transcript_lens = subset(feature_lens_lt20k, feature=="transcript")
 # Get transcripts less than 20kb long
 
 transcript_dist_p = ggplot(transcript_lens, aes(x=length)) +
@@ -164,6 +165,34 @@ gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y)) +
         legend.title=element_text(size=12),
         legend.position="bottom")
 print(gene_transcript_p)
+
+```
+
+## BUSCO results
+
+7480 total BUSCO genes searched
+
+```{r busco-fig, out.width="66%", fig.align="center"}
+
+in_data = read.csv("../../data/turtles-full.csv", header=T, comment.char="#")
+in_data = subset(in_data, node.type=="tip")
+# Read in the turtle data and exclude "alternate" species
+
+busco_data = select(in_data, label, complete.and.single, complete.and.dup, fragmented, missing)
+busco_data_long = melt(busco_data, id.vars=c("label"))
+
+busco_p = ggplot(busco_data_long, aes(x=label, y=value, fill=variable, group=label)) +
+  geom_bar(stat="identity", position="stack") +
+  geom_hline(yintercept=6732, linetype="dashed", col="#333333") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_fill_manual(labels=c("Completed+single copy", "Complete+duplicated", "Fragmented", "Missing"), values=corecol(pal="wilke", offset=2)) +
+  xlab("") +
+  ylab("# of genes") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(busco_p)
 
 ```
 
