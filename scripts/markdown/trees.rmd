@@ -39,8 +39,8 @@ library(ggrepel)
 #library(vroom)
 #library(ggdist)
 library(here)
-source("C:/bin/core/corelib/design.r")
-source("C:/bin/core/get_tree_info.r")
+source("C:/bin/core/r/design.r")
+source("C:/bin/core/r/get_tree_info.r")
 #source("C:/Users/grt814/bin/core/corelib/design.r")
 #source("C:/Users/grt814/bin/core/get_tree_info.r")
 
@@ -124,11 +124,32 @@ if(tree_type == "astral"){
 }else if(tree_type == "topo"){
   tree_info = tree_info_topo
   turtle_tree = topo_tree
-  xmax = 5.75
+  xmax = 11
 }
 # Set some values based on tree type
 
 #cf_stats = read.table(cf_stat_file, header=T)
+```
+
+```{r read-sample-data}
+in_data_file = here("data", "turtles.csv")
+in_data = read.csv(in_data_file, header=T, comment.char="#")
+
+full_data = merge(in_data, tree_info, by="label", all=T)
+#in_data = subset(in_data, Alternate=="N")
+
+full_data = full_data %>% arrange(node)
+
+# in_data$num.genes = NA
+# in_data$avg.gene.len = NA
+# in_data$num.genes.lt20k = NA
+# in_data$avg.gene.len.lt20k = NA
+# in_data$num.transcripts = NA
+# in_data$avg.transcript.len = NA
+# in_data$num.transcripts.lt20k = NA
+# in_data$avg.transcript.len.lt20k = NA
+
+# Read in the input data
 ```
 
 
@@ -137,10 +158,29 @@ h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
 # Colors
 
-gcf_tree = ggtree(turtle_tree, size=0.8, ladderize=F) +#, aes(color=tree_info$gcf)) +
-  #scale_color_continuous(name='gCF', low=l, high=h, limits=c(0,100)) +
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 2.1
+
+gcf_tree = ggtree(turtle_tree, size=0.8, ladderize=F) +#, aes(color=full_data$Family)) +
   xlim(0, xmax) +
-  geom_tiplab(color="#333333", fontface='italic', size=4) +
+  geom_tiplab(aes(color=full_data$Include), fontface='italic', size=4) +
+  scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=25, label="Podocnemididae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=24, label="Pelomedusidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=48, label="Chelidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=21, label="Carettochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=46, label="Trionychidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=44, label="Cheloniidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=15, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=14, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=35, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=32, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=29, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+  
   theme(legend.position=c(0.05,0.9))
 print(gcf_tree)
 
@@ -152,26 +192,11 @@ if(save_tree_fig){
 # Tree
 ```
 
-```{r read-sample-data}
-in_data_file = here("data", "turtles.csv")
-in_data = read.csv(in_data_file, header=T, comment.char="#")
-#in_data = subset(in_data, Alternate=="N")
 
-in_data$num.genes = NA
-in_data$avg.gene.len = NA
-in_data$num.genes.lt20k = NA
-in_data$avg.gene.len.lt20k = NA
-in_data$num.transcripts = NA
-in_data$avg.transcript.len = NA
-in_data$num.transcripts.lt20k = NA
-in_data$avg.transcript.len.lt20k = NA
 
-# Read in the input data
-```
+```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
 
-```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE}
-
-annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tmexicana")
+annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina")
 
 feature_counts = data.frame()
 feature_lens = data.frame()
@@ -193,7 +218,7 @@ for(spec in annotated_specs){
 
 ```
 
-```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE}
+```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
 
 for(cur_spec in annotated_specs){
   cur_genes = subset(feature_lens, spec==cur_spec & feature=="gene")
@@ -226,7 +251,7 @@ for(cur_spec in annotated_specs){
 
 ```{r merge-tree-data, out.width="75%", fig.align = "center", warning=FALSE}
 
-full_data = merge(in_data, tree_info, by="label", all=T)
+
 write.csv(full_data, here("data", "turtles-full.csv"), row.names=F)
 # Merge the main data frame and the tree data frame and write to file
 

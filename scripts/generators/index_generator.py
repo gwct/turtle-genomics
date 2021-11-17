@@ -4,8 +4,8 @@
 ############################################################
 
 import sys, os
-sys.path.append('..')
-import lib.read_chunks as RC
+sys.path.append(os.path.abspath('../lib/'))
+import read_chunks as RC
 
 ######################
 # HTML template
@@ -43,7 +43,7 @@ html_template = """
 	<div class="row">
 		<div class="col-2-24" id="margin"></div>
 		<div class="col-12-24">
-			<span><em>Note: Last 3 rows are alternates</em></span>
+			<span><em>{total_samples} total samples, minus {excluded_samples} excluded samples (<s>strikethrough</s>) yields a dataset of <b>{final_samples} samples</b>.</em></span>
 		</div>
 		<div class="col-10-24" id="margin"></div>
 	</div>
@@ -67,10 +67,12 @@ footer = RC.readFooter();
 
 outfilename = "../../" + pagefile;
 
-samples_file = "../../data/turtles-full.csv";
+samples_file = "../../data/turtles.csv";
 
 sample_table = "";
 first = True;
+num_samples = 0;
+excluded_samples = 0;
 for line in open(samples_file):
 	if line.startswith("#"):
 		continue;
@@ -87,26 +89,40 @@ for line in open(samples_file):
 		sample_table += "<th>Scaffold N50</th>";
 		sample_table += "<th>Annotated</th>";
 		sample_table += "<th>% Complete BUSCO</th>";
-		sample_table += "<th>Notes</th>";
+		#sample_table += "<th>Notes</th>";
 		sample_table += "</thead>";
 
 		first = False;
 		continue;
 
-	if line[28] != "tip":
-		continue;
+	# if line[28] != "tip":
+	# 	continue;
 
-	sample_table += "<tr>";
-	sample_table += "<td>" + line[1] + "</td>";
-	sample_table += "<td><em>" + line[2] + " " + line[3] + "</em></td>";
-	sample_table += "<td><a href='" + line[7] + "' target='_blank'>" + line[6] + "</a></td>";
-	sample_table += "<td>" + line[8] + "X</td>";
-	sample_table += "<td>" + line[13] + "</td>";
-	sample_table += "<td>" + line[14] + "</td>";
-	sample_table += "<td>" + line[15] + "</td>";
-	sample_table += "<td>" + str(round(float(line[30]) / float(line[29]) * 100, 3)) + "</td>";
-	sample_table += "<td>" + line[17] + "</td>";
+	if line[23] == "N":
+		sample_table += "<tr class='strikeout'>";
+		excluded_samples += 1;
+	else:
+		sample_table += "<tr>";
+
+	sample_table += "<td>" + line[0] + "</td>";
+	sample_table += "<td><em>" + line[1] + " " + line[2] + "</em></td>";
+	sample_table += "<td><a href='" + line[10] + "' target='_blank'>" + line[11] + "</a></td>";
+	sample_table += "<td>" + line[12] + "X</td>";
+	sample_table += "<td>" + line[19] + "</td>";
+	sample_table += "<td>" + line[20] + "</td>";
+	sample_table += "<td>" + line[22] + "</td>";
+	if line[36] != "NA":
+		sample_table += "<td>" + str(round(float(line[36]) / float(line[35]) * 100, 3)) + "</td>";
+	else:
+		sample_table += "<td>NA</td>";
+	#sample_table += "<td>" + line[17] + "</td>";
+	if line[23] == "N":
+		sample_table += "</s>";
+
 	sample_table += "</tr>";
+	num_samples += 1;
+
+
 
 with open(outfilename, "w") as outfile:
-    outfile.write(html_template.format(head=head, nav=nav, sample_table=sample_table, footer=footer));
+    outfile.write(html_template.format(head=head, nav=nav, sample_table=sample_table, total_samples=num_samples, excluded_samples=excluded_samples, final_samples=num_samples-excluded_samples, footer=footer));

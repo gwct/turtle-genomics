@@ -12,6 +12,29 @@
     /* border:1px solid purple; */
 }
 
+table {
+    border-collapse: collapse;
+}
+
+td {
+    position: relative;
+    /* padding: 5px 10px; */
+}
+
+tr.strikeout td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 1px solid #999999;
+    width: 100%;
+}
+
+tr.strikeout td {
+    color: #b3b3b3;
+    font-style: italic;
+}
+
 #table_content td {
     width:12.5%;
 	padding-top:2px;
