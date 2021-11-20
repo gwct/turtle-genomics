@@ -1,0 +1,34 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_genomic.gff.gz -o Dcoriacea-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:17:25
+# ----------------
+# Input file:            GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_genomic.gff.gz
+# Output file:           Dcoriacea-feature-counts.tab
+# Length output file:    Dcoriacea-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:17:25 Detecting compression...
+# 11.20.2021 | 13:17:26 Counting features...
+# Features types read:   16
+# Total features read:   1860457
+# ----------------
+# 11.20.2021 | 13:17:41 Writing output...
+# ----------------
+feature type	count	avg length
+region	40	54119051.25
+gene	26849	47952.084658646505
+transcript	3067	67729.77502445386
+exon	931142	300.33861859952617
+mRNA	61126	90664.73116186238
+CDS	808822	162.50921958106974
+lnc_RNA	8689	19722.053631027735
+pseudogene	740	13629.021621621621
+snoRNA	261	110.75095785440612
+tRNA	519	74.95183044315992
+snRNA	152	139.86184210526315
+guide_RNA	15	185.0
+V_gene_segment	106	5887.481132075472
+C_gene_segment	19	55479.84210526316
+cDNA_match	18902	281.8050999894191
+rRNA	8	122.25
+# 11.20.2021 | 13:17:41 Writing lens...

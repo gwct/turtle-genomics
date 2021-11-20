@@ -1,0 +1,23 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCA_020497125.1_ASM2049712v1/GCA_020497125.1_ASM2049712v1_genomic.gff.gz -o Mmutica-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:19:40
+# ----------------
+# Input file:            GCA_020497125.1_ASM2049712v1/GCA_020497125.1_ASM2049712v1_genomic.gff.gz
+# Output file:           Mmutica-feature-counts.tab
+# Length output file:    Mmutica-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:19:40 Detecting compression...
+# 11.20.2021 | 13:19:40 Counting features...
+# Features types read:   5
+# Total features read:   441735
+# ----------------
+# 11.20.2021 | 13:19:44 Writing output...
+# ----------------
+feature type	count	avg length
+region	594	4182408.5454545454
+gene	23448	40457.05804332992
+mRNA	23448	40457.05804332992
+exon	200252	306.24127099854184
+CDS	193993	172.58502626383427
+# 11.20.2021 | 13:19:44 Writing lens...

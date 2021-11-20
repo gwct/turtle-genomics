@@ -30,7 +30,7 @@ source("../lib/design.r")
 Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
 ```{r read-data}
-annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tmexicana")
+annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
 # All species with annotations
 
 feature_counts = data.frame()
@@ -38,6 +38,7 @@ feature_lens = data.frame()
 # Data frames to keep track of feature counts and lengths
 
 for(spec in annotated_specs){
+  #print(spec)
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
   cur_feature_counts$spec = spec
@@ -85,7 +86,7 @@ print(gene_p)
 
 ## Distributions of gene length (genes < 20,000bp)
 
-```{r gene-len-dists, out.width="66%", fig.align="center"}
+```{r gene-len-dists, out.width="66%", fig.align="center", fig.height=8}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 gene_lens = subset(feature_lens_lt20k, feature=="gene")
 # Get genes less than 20kb long
@@ -110,7 +111,7 @@ print(gene_dist_p)
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 transcript_counts = subset(feature_lens, feature=="transcript")
 transcript_counts = transcript_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
-# Get transcripts and summarize by species
+# Get CDS and summarize by species
 
 transcript_p = ggplot(transcript_counts, aes(x=spec, y=count)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
@@ -130,7 +131,7 @@ print(transcript_p)
 
 ## Distributions of transcript length (genes < 20,000bp)
 
-```{r transcript-len-dists, out.width="66%", fig.align="center"}
+```{r transcript-len-dists, out.width="66%", fig.align="center", fig.height=8}
 transcript_lens = subset(feature_lens_lt20k, feature=="transcript")
 # Get transcripts less than 20kb long
 
@@ -166,6 +167,50 @@ gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y)) +
         legend.position="bottom")
 print(gene_transcript_p)
 
+```
+
+## Number of coding exons
+
+```{r cds-fig, out.width="66%", fig.align="center"}
+#in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+cds_counts = subset(feature_lens, feature=="CDS")
+cds_counts = cds_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+# Get transcripts and summarize by species
+
+cds_p = ggplot(cds_counts, aes(x=spec, y=count)) +
+  geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
+  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=0)) +
+  ylab("# CDS") +
+  xlab(paste("")) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.title=element_text(size=12),
+        legend.position="bottom")
+print(cds_p)
+
+#cat("Max coverage: ", max(in_data$Coverage), "X\n",
+#    "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
+#    "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
+```
+
+## Distributions of CDS length (CDS < 750bp)
+
+```{r cds-len-dists, out.width="66%", fig.align="center", fig.height=8}
+cds_lens = subset(feature_lens_lt20k, feature=="CDS")
+cds_lens = subset(cds_lens, length<750)
+# Get CDS less than 20kb long
+
+cds_dist_p = ggplot(cds_lens, aes(x=length)) +
+  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=0)) +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("CDS length") +
+  ylab("# CDS") +
+  facet_wrap(~spec) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.title=element_text(size=12),
+        legend.position="bottom")
+print(cds_dist_p)
 ```
 
 ## BUSCO results

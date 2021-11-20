@@ -1,17 +1,18 @@
 # GFF/GTF feature counting.
 # PYTHON VERSION: 3.9.6
-# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Pelodiscus_sinensis.PelSin_1.0.104.gff3.gz -o Psinensis-feature-counts.tab --overwrite
-# Runtime:        10/07/2021 15:15:29
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i Pelodiscus_sinensis.PelSin_1.0.104.gff3.gz -o Psinensis-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:24:22
 # ----------------
 # Input file:            Pelodiscus_sinensis.PelSin_1.0.104.gff3.gz
 # Output file:           Psinensis-feature-counts.tab
+# Length output file:    Psinensis-feature-counts-lens.tab
 # ----------------
-# 10.07.2021 | 15:15:29 Detecting compression...
-# 10.07.2021 | 15:15:29 Counting features...
+# 11.20.2021 | 13:24:22 Detecting compression...
+# 11.20.2021 | 13:24:22 Counting features...
 # Features types read:   17
 # Total features read:   847962
 # ----------------
-# 10.07.2021 | 15:15:36 Writing output...
+# 11.20.2021 | 13:24:29 Writing output...
 # ----------------
 feature type	count	avg length
 scaffold	19904	110654.33319935692
@@ -31,3 +32,4 @@ miRNA	516	91.32558139534883
 ncRNA	36	268.1388888888889
 rRNA	59	155.11864406779662
 tRNA	22	70.4090909090909
+# 11.20.2021 | 13:24:29 Writing lens...

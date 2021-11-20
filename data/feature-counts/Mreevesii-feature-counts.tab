@@ -1,0 +1,36 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCF_016161935.1_ASM1616193v1/GCF_016161935.1_ASM1616193v1_genomic.gff.gz -o Mreevesii-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:20:14
+# ----------------
+# Input file:            GCF_016161935.1_ASM1616193v1/GCF_016161935.1_ASM1616193v1_genomic.gff.gz
+# Output file:           Mreevesii-feature-counts.tab
+# Length output file:    Mreevesii-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:20:14 Detecting compression...
+# 11.20.2021 | 13:20:14 Counting features...
+# Features types read:   18
+# Total features read:   1986644
+# ----------------
+# 11.20.2021 | 13:20:30 Writing output...
+# ----------------
+feature type	count	avg length
+region	230	10293943.473913044
+gene	39872	35207.50948033708
+mRNA	67488	86957.72827761972
+exon	1009514	258.57836741243807
+CDS	838077	165.96658660242437
+pseudogene	1217	21300.939194741168
+lnc_RNA	14181	24066.471193850928
+transcript	3259	74229.6376189015
+snoRNA	424	144.92216981132074
+snRNA	762	156.58792650918636
+tRNA	6418	74.72327827983796
+guide_RNA	17	184.88235294117646
+C_gene_segment	33	13867.90909090909
+V_gene_segment	255	4833.321568627451
+cDNA_match	4799	282.6299229006043
+rRNA	96	623.8541666666666
+stem_loop	1	24.0
+D_loop	1	1071.0
+# 11.20.2021 | 13:20:30 Writing lens...

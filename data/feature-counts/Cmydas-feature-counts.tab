@@ -1,35 +1,37 @@
 # GFF/GTF feature counting.
 # PYTHON VERSION: 3.9.6
-# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i GCF_015237465.1_rCheMyd1.pri/GCF_015237465.1_rCheMyd1.pri_genomic.gff.gz -o Cmydas-feature-counts.tab --overwrite
-# Runtime:        10/07/2021 15:10:24
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCF_015237465.2_rCheMyd1.pri.v2/GCF_015237465.2_rCheMyd1.pri.v2_genomic.gff.gz -o Cmydas-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:14:53
 # ----------------
-# Input file:            GCF_015237465.1_rCheMyd1.pri/GCF_015237465.1_rCheMyd1.pri_genomic.gff.gz
+# Input file:            GCF_015237465.2_rCheMyd1.pri.v2/GCF_015237465.2_rCheMyd1.pri.v2_genomic.gff.gz
 # Output file:           Cmydas-feature-counts.tab
+# Length output file:    Cmydas-feature-counts-lens.tab
 # ----------------
-# 10.07.2021 | 15:10:24 Detecting compression...
-# 10.07.2021 | 15:10:24 Counting features...
+# 11.20.2021 | 13:14:53 Detecting compression...
+# 11.20.2021 | 13:14:53 Counting features...
 # Features types read:   19
-# Total features read:   1414379
+# Total features read:   2142829
 # ----------------
-# 10.07.2021 | 15:10:36 Writing output...
+# 11.20.2021 | 13:15:11 Writing output...
 # ----------------
 feature type	count	avg length
-region	99	21561546.96969697
-gene	23743	47150.4097207598
-mRNA	50127	75559.59694376284
-exon	706983	299.8477629589396
-CDS	618955	163.32838251569177
-transcript	2408	61112.9377076412
-pseudogene	746	7002.257372654156
-lnc_RNA	3885	21218.912483912485
-tRNA	722	74.31301939058172
+region	93	22950269.043010753
+gene	27777	47183.942794398245
+mRNA	71110	88242.44549289833
+exon	1083441	324.81870447952406
+CDS	939520	163.4759909315395
+transcript	3738	64317.2354200107
+lnc_RNA	9034	23850.50199247288
+pseudogene	714	8994.98319327731
+tRNA	720	74.31944444444444
 snoRNA	267	110.48689138576779
 snRNA	187	142.36898395721926
 guide_RNA	16	183.9375
-C_gene_segment	31	16195.225806451614
-V_gene_segment	212	2065.5896226415093
-cDNA_match	5977	296.63091852099717
+C_gene_segment	29	100255.8275862069
+V_gene_segment	156	6067.121794871795
+cDNA_match	6006	311.962370962371
 rRNA	16	266.5625
 stem_loop	1	25.0
 sequence_feature	1	981.0
 repeat_region	3	18.333333333333332
+# 11.20.2021 | 13:15:12 Writing lens...

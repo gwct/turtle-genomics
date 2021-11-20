@@ -1,17 +1,18 @@
 # GFF/GTF feature counting.
 # PYTHON VERSION: 3.9.6
-# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Chelonoidis_abingdonii.ASM359739v1.104.gff3.gz -o Cabingdonii-features.tab
-# Runtime:        10/07/2021 15:08:54
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i Chelonoidis_abingdonii.ASM359739v1.104.gff3.gz -o Cabingdonii-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:13:58
 # ----------------
 # Input file:            Chelonoidis_abingdonii.ASM359739v1.104.gff3.gz
-# Output file:           Cabingdonii-features.tab
+# Output file:           Cabingdonii-feature-counts.tab
+# Length output file:    Cabingdonii-feature-counts-lens.tab
 # ----------------
-# 10.07.2021 | 15:08:54 Detecting compression...
-# 10.07.2021 | 15:08:54 Counting features...
+# 11.20.2021 | 13:13:58 Detecting compression...
+# 11.20.2021 | 13:13:58 Counting features...
 # Features types read:   19
 # Total features read:   797560
 # ----------------
-# 10.07.2021 | 15:09:01 Writing output...
+# 11.20.2021 | 13:14:04 Writing output...
 # ----------------
 feature type	count	avg length
 region	10618	216681.9266340177
@@ -33,3 +34,4 @@ pseudogene	95	6609.221052631579
 pseudogenic_transcript	95	6609.221052631579
 scRNA	18	167.27777777777777
 V_gene_segment	4	2410.5
+# 11.20.2021 | 13:14:04 Writing lens...

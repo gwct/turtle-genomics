@@ -28,18 +28,18 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
 ```{r read-data}
 in_data = read.csv("../../data/turtles.csv", header=T, comment.char="#")
-in_data = subset(in_data, Alternate=="N")
+in_data = subset(in_data, Include=="Y")
 # Read in the turtle data and exclude "alternate" species
 ```
 
 ## Reported coverage
 
 ```{r coverage-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
+in_data$label = factor(in_data$label, levels=in_data$label[order(in_data$Coverage, decreasing=T)])
 # Order the labels by coverage
 
-cov_p = ggplot(in_data, aes(x=Label, y=Coverage, color=Annotation.file)) +
-  geom_segment(aes(x=Label, y=0, xend=Label, yend=Coverage), linetype="dotted", color="#666666") +
+cov_p = ggplot(in_data, aes(x=label, y=Coverage, color=Annotation.file)) +
+  geom_segment(aes(x=label, y=0, xend=label, yend=Coverage), linetype="dotted", color="#666666") +
   geom_point(size=4) +
   scale_y_continuous(expand=c(0,0), limits=c(0,225)) +
   ylab("Reported X coverage") +
@@ -60,10 +60,10 @@ cat("Max coverage: ", max(in_data$Coverage), "X\n",
 ## Number of scaffolds
 
 ```{r scaffold-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffolds, decreasing=T)])
+in_data$label = factor(in_data$label, levels=in_data$label[order(in_data$Scaffolds, decreasing=T)])
 # Order the data by number of scaffolds
 
-scaff_p = ggplot(in_data, aes(x=Label, y=Scaffolds, fill=Annotation.file)) +
+scaff_p = ggplot(in_data, aes(x=label, y=Scaffolds, fill=Annotation.file)) +
   geom_bar(stat="identity") +
   scale_y_continuous(expand=c(0,0)) +
   ylab("# scaffolds") +
@@ -84,13 +84,13 @@ cat("Max # scaffold: ", max(in_data$Scaffolds), "\n",
 ## Scaffold N50
 
 ```{r n50-fig, out.width="66%", fig.align="center"}
-in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Scaffold.N50, decreasing=T)])
+in_data$label = factor(in_data$label, levels=in_data$label[order(in_data$Scaffold.N50, decreasing=T)])
 # Order the data by scaffold N50
 
-n50_p = ggplot(in_data, aes(x=Label, y=Scaffold.N50, color=Annotation.file)) +
-  geom_segment(aes(x=Label, y=0, xend=Label, yend=Scaffold.N50), linetype="dotted", color="#666666") +
+n50_p = ggplot(in_data, aes(x=label, y=Scaffold.N50, color=Annotation.file)) +
+  geom_segment(aes(x=label, y=0, xend=label, yend=Scaffold.N50), linetype="dotted", color="#666666") +
   geom_point(size=4) +
-  scale_y_continuous(expand=c(0,0), limits=c(0,max(in_data$Scaffold.N50) + 7500000)) +
+  scale_y_continuous(expand=c(0,0), limits=c(0,max(in_data$Scaffold.N50, na.rm=T) + 7500000)) +
   ylab("Scaffold N50") +
   xlab(paste("")) +
   scale_color_manual(name="Annotated", values=c("Y"=corecol(pal="wilke", numcol=1, offset=1), "N"=corecol(pal="wilke", numcol=1))) +

@@ -1,0 +1,35 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCF_013100865.1_CAS_Tse_1.0/GCF_013100865.1_CAS_Tse_1.0_genomic.gff.gz -o Tscripta-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:26:04
+# ----------------
+# Input file:            GCF_013100865.1_CAS_Tse_1.0/GCF_013100865.1_CAS_Tse_1.0_genomic.gff.gz
+# Output file:           Tscripta-feature-counts.tab
+# Length output file:    Tscripta-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:26:04 Detecting compression...
+# 11.20.2021 | 13:26:04 Counting features...
+# Features types read:   17
+# Total features read:   1194044
+# ----------------
+# 11.20.2021 | 13:26:14 Writing output...
+# ----------------
+feature type	count	avg length
+region	138	15407240.326086957
+gene	21877	50356.04548155597
+mRNA	42063	81039.56591303521
+exon	585747	284.68269747860427
+CDS	523701	166.63338622610993
+lnc_RNA	3406	24645.15560775103
+pseudogene	579	8021.400690846287
+transcript	1401	76146.26481084939
+tRNA	364	74.21978021978022
+snRNA	114	131.76315789473685
+snoRNA	254	112.3740157480315
+rRNA	9	726.0
+V_gene_segment	115	3241.121739130435
+C_gene_segment	8	16911.0
+guide_RNA	14	184.35714285714286
+cDNA_match	14253	254.08756051357608
+sequence_feature	1	1119.0
+# 11.20.2021 | 13:26:14 Writing lens...

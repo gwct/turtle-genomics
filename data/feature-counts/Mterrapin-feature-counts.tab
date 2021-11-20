@@ -1,0 +1,25 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCA_001728815.2_terp_v2_2/GCA_001728815.2_terp_v2_2_genomic.gff.gz -o Mterrapin-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:21:01
+# ----------------
+# Input file:            GCA_001728815.2_terp_v2_2/GCA_001728815.2_terp_v2_2_genomic.gff.gz
+# Output file:           Mterrapin-feature-counts.tab
+# Length output file:    Mterrapin-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:21:01 Detecting compression...
+# 11.20.2021 | 13:21:01 Counting features...
+# Features types read:   7
+# Total features read:   21761
+# ----------------
+# 11.20.2021 | 13:21:01 Writing output...
+# ----------------
+feature type	count	avg length
+region	21684	112513.04639365431
+tRNA	22	69.63636363636364
+exon	24	171.625
+gene	13	877.9230769230769
+CDS	15	760.6
+D_loop	1	1035.0
+rRNA	2	1293.5
+# 11.20.2021 | 13:21:01 Writing lens...

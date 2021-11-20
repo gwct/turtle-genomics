@@ -1,17 +1,18 @@
 # GFF/GTF feature counting.
 # PYTHON VERSION: 3.9.6
-# Script call:    /n/home07/gthomas/env/pylib/core/gxf_feature_counter.py -i Terrapene_carolina_triunguis.T_m_triunguis-2.0.104.gff3.gz -o Tmexicana-feature-counts.txt --overwrite
-# Runtime:        10/07/2021 15:15:51
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i Terrapene_carolina_triunguis.T_m_triunguis-2.0.104.gff3.gz -o Tcarolina-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:24:53
 # ----------------
 # Input file:            Terrapene_carolina_triunguis.T_m_triunguis-2.0.104.gff3.gz
-# Output file:           Tmexicana-feature-counts.txt
+# Output file:           Tcarolina-feature-counts.tab
+# Length output file:    Tcarolina-feature-counts-lens.tab
 # ----------------
-# 10.07.2021 | 15:15:51 Detecting compression...
-# 10.07.2021 | 15:15:51 Counting features...
+# 11.20.2021 | 13:24:53 Detecting compression...
+# 11.20.2021 | 13:24:53 Counting features...
 # Features types read:   20
 # Total features read:   983891
 # ----------------
-# 10.07.2021 | 15:15:58 Writing output...
+# 11.20.2021 | 13:25:02 Writing output...
 # ----------------
 feature type	count	avg length
 region	52260	49200.43989667049
@@ -34,3 +35,4 @@ rRNA	25	916.4
 ncRNA	13	289.46153846153845
 Y_RNA	10	88.6
 V_gene_segment	3	2248.0
+# 11.20.2021 | 13:25:02 Writing lens...

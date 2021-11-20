@@ -1,0 +1,35 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i GCF_007399415.2_rGopEvg1_v1.p/GCF_007399415.2_rGopEvg1_v1.p_genomic.gff.gz -o Gevgoodei-feature-counts.tab --lens --overwrite
+# Runtime:        11/20/2021 13:18:59
+# ----------------
+# Input file:            GCF_007399415.2_rGopEvg1_v1.p/GCF_007399415.2_rGopEvg1_v1.p_genomic.gff.gz
+# Output file:           Gevgoodei-feature-counts.tab
+# Length output file:    Gevgoodei-feature-counts-lens.tab
+# ----------------
+# 11.20.2021 | 13:18:59 Detecting compression...
+# 11.20.2021 | 13:18:59 Counting features...
+# Features types read:   17
+# Total features read:   1462854
+# ----------------
+# 11.20.2021 | 13:19:11 Writing output...
+# ----------------
+feature type	count	avg length
+region	383	6001472.130548303
+pseudogene	1311	9557.292906178489
+exon	721476	283.0478865547849
+gene	25154	48272.242506162045
+mRNA	50839	81495.98312319283
+CDS	637858	165.2288989085345
+transcript	1935	69732.0330749354
+lnc_RNA	4009	20972.866051384386
+snRNA	296	150.47635135135135
+snoRNA	334	112.58083832335329
+tRNA	1197	74.78696741854637
+guide_RNA	17	190.35294117647058
+V_gene_segment	135	6099.792592592593
+C_gene_segment	20	16464.25
+cDNA_match	17875	258.8460979020979
+rRNA	14	287.7142857142857
+sequence_feature	1	951.0
+# 11.20.2021 | 13:19:11 Writing lens...

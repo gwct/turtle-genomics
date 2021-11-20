@@ -194,9 +194,9 @@ if(save_tree_fig){
 
 
 
-```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
+```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE, eval=T}
 
-annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Gagassizi", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina")
+annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
 
 feature_counts = data.frame()
 feature_lens = data.frame()
@@ -218,9 +218,13 @@ for(spec in annotated_specs){
 
 ```
 
-```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE, eval=F}
+```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE, eval=T}
 
 for(cur_spec in annotated_specs){
+  print(cur_spec)
+  if(cur_spec == "Mterrapin"){
+    next
+  }
   cur_genes = subset(feature_lens, spec==cur_spec & feature=="gene")
   cur_transcripts = subset(feature_lens, spec==cur_spec)
   cur_transcripts = subset(cur_transcripts, feature=="transcript" | feature=="mRNA")
@@ -251,7 +255,9 @@ for(cur_spec in annotated_specs){
 
 ```{r merge-tree-data, out.width="75%", fig.align = "center", warning=FALSE}
 
-
+full_data = merge(in_data, tree_info, by="label", all=T)
+full_data = full_data %>% arrange(node)
+full_data$label[full_data$label==""]=NA
 write.csv(full_data, here("data", "turtles-full.csv"), row.names=F)
 # Merge the main data frame and the tree data frame and write to file
 
