@@ -30,7 +30,7 @@ source("../lib/design.r")
 Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
 ```{r read-data}
-annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
+annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Lkempii", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
 # All species with annotations
 
 feature_counts = data.frame()

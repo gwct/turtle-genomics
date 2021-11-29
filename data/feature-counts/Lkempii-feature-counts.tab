@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i LepKem1/LepKem1.gff.gz -o Lkempii-feature-counts.tab --lens
+# Runtime:        11/29/2021 10:04:38
+# ----------------
+# Input file:            LepKem1/LepKem1.gff.gz
+# Output file:           Lkempii-feature-counts.tab
+# Length output file:    Lkempii-feature-counts-lens.tab
+# ----------------
+# 11.29.2021 | 10:04:38 Detecting compression...
+# 11.29.2021 | 10:04:38 Counting features...
+# Features types read:   6
+# Total features read:   467095
+# ----------------
+# 11.29.2021 | 10:04:42 Writing output...
+# ----------------
+feature type	count	avg length
+gene	24940	14269.544867682438
+mRNA	29489	15933.573366339991
+CDS	211953	174.39881954961714
+exon	171055	302.56423957206744
+three_prime_UTR	15076	1641.2023746351817
+five_prime_UTR	14582	371.6684954052942
+# 11.29.2021 | 10:04:42 Writing lens...
