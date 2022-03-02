@@ -217,7 +217,7 @@ print(cds_dist_p)
 
 7480 total BUSCO genes searched
 
-```{r busco-fig, out.width="66%", fig.align="center"}
+```{r busco-fig, out.width="66%", fig.align="center", fig.height=6}
 
 in_data = read.csv("../../data/turtles-full.csv", header=T, comment.char="#")
 in_data = subset(in_data, node.type=="tip")
