@@ -98,7 +98,7 @@ for line in open(samples_file):
 	# if line[28] != "tip":
 	# 	continue;
 
-	if line[23] == "N":
+	if line[24] == "N":
 		sample_table += "<tr class='strikeout'>";
 		excluded_samples += 1;
 	else:
@@ -112,11 +112,11 @@ for line in open(samples_file):
 	sample_table += "<td>" + line[20] + "</td>";
 	sample_table += "<td>" + line[22] + "</td>";
 	if line[36] != "NA":
-		sample_table += "<td>" + str(round(float(line[36]) / float(line[35]) * 100, 3)) + "</td>";
+		sample_table += "<td>" + str(round(float(line[37]) / float(line[36]) * 100, 3)) + "</td>";
 	else:
 		sample_table += "<td>NA</td>";
 	#sample_table += "<td>" + line[17] + "</td>";
-	if line[23] == "N":
+	if line[24] == "N":
 		sample_table += "</s>";
 
 	sample_table += "</tr>";

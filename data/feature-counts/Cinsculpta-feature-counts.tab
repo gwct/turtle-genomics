@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i cinsculpta-psinensis-liftoff.gff -o Cinsculpta-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:29:53
+# ----------------
+# Input file:            cinsculpta-psinensis-liftoff.gff
+# Output file:           Cinsculpta-feature-counts.tab
+# Length output file:    Cinsculpta-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:29:53 Detecting compression...
+# 03.29.2022 | 10:29:53 Counting features...
+# Features types read:   6
+# Total features read:   323422
+# ----------------
+# 03.29.2022 | 10:30:11 Writing output...
+# ----------------
+feature type	count	avg length
+gene	16427	38749.759481341694
+mRNA	18810	40143.22222222222
+exon	136995	259.5984378991934
+CDS	134300	178.17459419210724
+three_prime_UTR	8630	1197.93707995365
+five_prime_UTR	8260	153.02929782082325
+# 03.29.2022 | 10:30:11 Writing lens...

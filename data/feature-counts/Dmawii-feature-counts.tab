@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i dmawii-cserpentina-liftoff.gff -o Dmawii-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:32:43
+# ----------------
+# Input file:            dmawii-cserpentina-liftoff.gff
+# Output file:           Dmawii-feature-counts.tab
+# Length output file:    Dmawii-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:32:43 Detecting compression...
+# 03.29.2022 | 10:32:43 Counting features...
+# Features types read:   6
+# Total features read:   625372
+# ----------------
+# 03.29.2022 | 10:32:46 Writing output...
+# ----------------
+feature type	count	avg length
+gene	18650	33212.89646112601
+mRNA	26953	41595.71869550699
+exon	279638	191.37321465609108
+CDS	275530	162.15554023155374
+five_prime_UTR	12693	133.65122508469236
+three_prime_UTR	11908	597.7129660732281
+# 03.29.2022 | 10:32:46 Writing lens...

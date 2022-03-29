@@ -1,5 +1,5 @@
 ---
-title: "Turtle assembly stats"
+title: "Turtle annotation stats"
 author: "[gwct](https://gwct.github.io/)"
 date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
 output:
@@ -31,23 +31,41 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
 ```{r read-data}
 annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Lkempii", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
+
+liftoff_specs = c("Pexpansa", "Esubglobosa", "Mtuberculata", "Dmawii", "Cinsculpta", "Cmccordi", "Rswinhoei", "Amarmorata")
 # All species with annotations
+
+final_specs = c(annotated_specs, liftoff_specs)
 
 feature_counts = data.frame()
 feature_lens = data.frame()
 # Data frames to keep track of feature counts and lengths
 
-for(spec in annotated_specs){
+for(spec in final_specs){
   #print(spec)
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
   cur_feature_counts$spec = spec
+    
+  if(spec %in% annotated_specs){
+    cur_feature_counts$type = "Pre-annotated"
+  }else{
+    cur_feature_counts$type = "Liftoff"
+  }
+  
   feature_counts = rbind(feature_counts, cur_feature_counts)
   # Read feature counts for the current species
   
   cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens.tab", sep=""))
   cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
   cur_feature_lens$spec = spec
+  
+  if(spec %in% annotated_specs){
+    cur_feature_lens$type = "Pre-annotated"
+  }else{
+    cur_feature_lens$type = "Liftoff"
+  }
+  
   feature_lens = rbind(feature_lens, cur_feature_lens)
   # Read feature lengths for the current species
 }
@@ -65,17 +83,18 @@ feature_lens_lt20k = subset(feature_lens, length<=20000)
 ```{r gene-fig, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 gene_counts = subset(feature_lens, feature=="gene")
-gene_counts = gene_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+gene_counts = gene_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
 # Get genes from feature lengths and summarize by species
 
-gene_p = ggplot(gene_counts, aes(x=spec, y=count)) +
+gene_p = ggplot(gene_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=2)) +
+  geom_point(size=4) +
+  scale_y_continuous(limits=c(0,50000), expand=c(0,0)) +
   ylab("# genes") +
   xlab(paste("")) +
+  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(gene_p)
 
@@ -91,15 +110,15 @@ print(gene_p)
 gene_lens = subset(feature_lens_lt20k, feature=="gene")
 # Get genes less than 20kb long
 
-gene_dist_p = ggplot(gene_lens, aes(x=length)) +
-  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=2)) +
+gene_dist_p = ggplot(gene_lens, aes(x=length, fill=type)) +
+  geom_histogram(bins=50) +
   scale_y_continuous(expand=c(0,0)) + 
   xlab("Gene length") +
   ylab("# genes") +
   facet_wrap(~spec) +
+  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(gene_dist_p)
 ```
@@ -110,17 +129,18 @@ print(gene_dist_p)
 ```{r transcript-fig, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 transcript_counts = subset(feature_lens, feature=="transcript")
-transcript_counts = transcript_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+transcript_counts = transcript_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
 # Get CDS and summarize by species
 
-transcript_p = ggplot(transcript_counts, aes(x=spec, y=count)) +
+transcript_p = ggplot(transcript_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=6)) +
+  geom_point(size=4) +
+  scale_y_continuous(limits=c(0,80000), expand=c(0,0)) +
   ylab("# transcripts") +
   xlab(paste("")) +
+  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(transcript_p)
 
@@ -135,15 +155,15 @@ print(transcript_p)
 transcript_lens = subset(feature_lens_lt20k, feature=="transcript")
 # Get transcripts less than 20kb long
 
-transcript_dist_p = ggplot(transcript_lens, aes(x=length)) +
-  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=6)) +
+transcript_dist_p = ggplot(transcript_lens, aes(x=length, fill=type)) +
+  geom_histogram(bins=50) +
   scale_y_continuous(expand=c(0,0)) +
+  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   xlab("Transcript length") +
   ylab("# transcripts") +
   facet_wrap(~spec) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(transcript_dist_p)
 ```
@@ -155,15 +175,15 @@ print(transcript_dist_p)
 gene_transcript_counts = merge(gene_counts, transcript_counts, by="spec")
 # Combine gene and transcript counts into a data frame
 
-gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y)) +
-  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=1)) +
+gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y, color=type.x)) +
+  geom_point(size=3, alpha=0.7) +
   geom_smooth(method="glm", se=F, linetype="dashed", color="#333333") +
   geom_text_repel(aes(label=spec)) +
   ylab("# transcripts") +
   xlab("# genes") +
+  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(gene_transcript_p)
 
@@ -174,23 +194,21 @@ print(gene_transcript_p)
 ```{r cds-fig, out.width="66%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 cds_counts = subset(feature_lens, feature=="CDS")
-cds_counts = cds_counts %>% group_by(spec) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
+cds_counts = cds_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
 # Get transcripts and summarize by species
 
-cds_p = ggplot(cds_counts, aes(x=spec, y=count)) +
+cds_p = ggplot(cds_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4, color=corecol(pal="wilke", numcol=1, offset=0)) +
+  geom_point(size=4) +
+  scale_y_continuous(limits=c(0,1000000), expand=c(0,0)) +
   ylab("# CDS") +
   xlab(paste("")) +
+  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(cds_p)
 
-#cat("Max coverage: ", max(in_data$Coverage), "X\n",
-#    "Average coverage: ", signif(mean(in_data$Coverage), 4), "X\n",
-#    "Min coverage: ", min(in_data$Coverage), "X\n", sep="")
 ```
 
 ## Distributions of CDS length (CDS < 750bp)
@@ -200,15 +218,15 @@ cds_lens = subset(feature_lens_lt20k, feature=="CDS")
 cds_lens = subset(cds_lens, length<750)
 # Get CDS less than 20kb long
 
-cds_dist_p = ggplot(cds_lens, aes(x=length)) +
-  geom_histogram(bins=50, fill=corecol(pal="wilke", numcol=1, offset=0)) +
+cds_dist_p = ggplot(cds_lens, aes(x=length, fill=type)) +
+  geom_histogram(bins=50) +
   scale_y_continuous(expand=c(0,0)) +
   xlab("CDS length") +
   ylab("# CDS") +
   facet_wrap(~spec) +
+  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.title=element_text(size=12),
         legend.position="bottom")
 print(cds_dist_p)
 ```
@@ -238,6 +256,68 @@ busco_p = ggplot(busco_data_long, aes(x=label, y=value, fill=variable, group=lab
   guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
   coord_flip()
 print(busco_p)
+
+```
+
+## Liftoff annotations
+
+(Liftoff)[https://github.com/agshumate/Liftoff] is a program that maps annotated features from one genome to another.
+
+### Genes
+
+```{r liftoff-genes, out.width="66%", fig.align="center", fig.height=6}
+
+liftoff = data.frame("spec"=c(), "genes"=c(), "transcripts"=c(), "cds"=c(), "ref"=c(), "ref.genes"=c(), "ref.transcripts"=c())
+for(spec in liftoff_specs){
+  print(spec)
+  
+  row = subset(in_data, label==spec)
+  ref = row$liftoff.ref
+  ref_genes = in_data[in_data$label==ref,]$num.genes
+  ref_transcripts = in_data[in_data$label==ref,]$num.transcripts
+
+  
+  liftoff = rbind(liftoff, data.frame("spec"=spec, "genes"=row$num.genes, "transcripts"=row$num.transcripts, "ref"=ref, "ref.genes"=ref_genes, "ref.transcripts"=ref_transcripts))
+}
+
+liftoff$perc.ref.genes = liftoff$genes / liftoff$ref.genes
+liftoff$genes.label = paste(liftoff$genes, " / ", liftoff$ref.genes, " (", liftoff$ref, ")", sep="")
+
+liftoff_genes_p = ggplot(liftoff, aes(x=spec, y=perc.ref.genes)) +
+  geom_bar(stat="identity", position="stack", fill=corecol(numcol=1, pal="wilke", offset=2)) +
+  geom_hline(yintercept=0.9, linetype="dashed", col="#333333") +
+  geom_text(aes(label=genes.label), size=4, position=position_stack(vjust=0.5), color="#f2f2f2") +
+  scale_y_continuous(expand=c(0,0)) +
+  #scale_fill_manual(labels=c("Completed+single copy", "Complete+duplicated", "Fragmented", "Missing"), values=corecol(pal="wilke", offset=2)) +
+  xlab("") +
+  ylab("Proportion reference genes recovered") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(liftoff_genes_p)
+
+```
+
+### Transcripts
+
+```{r liftoff-transcripts, out.width="66%", fig.align="center", fig.height=6}
+
+liftoff$perc.ref.transcripts = liftoff$transcripts / liftoff$ref.transcripts
+liftoff$transcripts.label = paste(liftoff$transcripts, " / ", liftoff$ref.transcripts, " (", liftoff$ref, ")", sep="")
+
+liftoff_transcripts_p = ggplot(liftoff, aes(x=spec, y=perc.ref.transcripts)) +
+  geom_bar(stat="identity", position="stack", fill=corecol(numcol=1, pal="wilke", offset=6)) +
+  geom_hline(yintercept=0.9, linetype="dashed", col="#333333") +
+  geom_text(aes(label=genes.label), size=4, position=position_stack(vjust=0.5), color="#f2f2f2") +
+  scale_y_continuous(expand=c(0,0)) +
+  xlab("") +
+  ylab("Proportion reference transcripts recovered") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(liftoff_transcripts_p)
 
 ```
 

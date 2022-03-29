@@ -1,0 +1,26 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i amarmorata-cpicta-liftoff.gff -o Amarmorata-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:29:23
+# ----------------
+# Input file:            amarmorata-cpicta-liftoff.gff
+# Output file:           Amarmorata-feature-counts.tab
+# Length output file:    Amarmorata-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:29:23 Detecting compression...
+# 03.29.2022 | 10:29:23 Counting features...
+# Features types read:   8
+# Total features read:   972618
+# ----------------
+# 03.29.2022 | 10:29:28 Writing output...
+# ----------------
+feature type	count	avg length
+gene	20827	41818.3005713737
+mRNA	38429	62302.773686538814
+exon	438387	205.7356810306875
+CDS	428638	163.68671699662653
+five_prime_UTR	28491	248.92934610929768
+three_prime_UTR	17837	723.2398385378707
+V_gene_segment	7	371.42857142857144
+J_gene_segment	2	59.0
+# 03.29.2022 | 10:29:28 Writing lens...

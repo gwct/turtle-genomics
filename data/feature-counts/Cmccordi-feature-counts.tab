@@ -1,0 +1,31 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i cmccordi-mreevesii-liftoff.gff -o Cmccordi-feature-counts.tab --lens
+# Runtime:        03/29/2022 12:26:02
+# ----------------
+# Input file:            cmccordi-mreevesii-liftoff.gff
+# Output file:           Cmccordi-feature-counts.tab
+# Length output file:    Cmccordi-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 12:26:02 Detecting compression...
+# 03.29.2022 | 12:26:02 Counting features...
+# Features types read:   13
+# Total features read:   1808313
+# ----------------
+# 03.29.2022 | 12:26:12 Writing output...
+# ----------------
+feature type	count	avg length
+gene	35283	36004.88595074115
+mRNA	65795	85157.12999468045
+exon	914807	264.9998655454101
+CDS	771025	166.76051360202328
+lnc_RNA	13657	22948.50589441312
+transcript	3117	73557.58421559191
+tRNA	3624	74.35209713024283
+snRNA	363	143.21487603305786
+snoRNA	322	128.3416149068323
+guide_RNA	17	184.8235294117647
+rRNA	60	584.4
+V_gene_segment	212	1106.2075471698113
+C_gene_segment	31	3359.0967741935483
+# 03.29.2022 | 12:26:13 Writing lens...

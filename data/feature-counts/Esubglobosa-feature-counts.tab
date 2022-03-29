@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i esubglobosa-pcastaneus-liftoff.gff -o Esubglobosa-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:34:00
+# ----------------
+# Input file:            esubglobosa-pcastaneus-liftoff.gff
+# Output file:           Esubglobosa-feature-counts.tab
+# Length output file:    Esubglobosa-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:34:00 Detecting compression...
+# 03.29.2022 | 10:34:00 Counting features...
+# Features types read:   6
+# Total features read:   598938
+# ----------------
+# 03.29.2022 | 10:34:03 Writing output...
+# ----------------
+feature type	count	avg length
+gene	18430	35146.71047205643
+mRNA	25899	43633.44017143519
+exon	266851	200.46389932958843
+CDS	263182	164.3389707502793
+five_prime_UTR	12100	145.68611570247933
+three_prime_UTR	12476	677.7879127925618
+# 03.29.2022 | 10:34:04 Writing lens...

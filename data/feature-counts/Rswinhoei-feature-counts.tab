@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i rswinhoei-psinensis-liftoff.gff -o Rswinhoei-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:37:21
+# ----------------
+# Input file:            rswinhoei-psinensis-liftoff.gff
+# Output file:           Rswinhoei-feature-counts.tab
+# Length output file:    Rswinhoei-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:37:21 Detecting compression...
+# 03.29.2022 | 10:37:21 Counting features...
+# Features types read:   6
+# Total features read:   445969
+# ----------------
+# 03.29.2022 | 10:37:24 Writing output...
+# ----------------
+feature type	count	avg length
+gene	17902	41064.27924254273
+mRNA	20375	42367.69344785276
+exon	194142	256.8614416252022
+CDS	189469	164.07598604521056
+five_prime_UTR	13409	186.44529793422328
+three_prime_UTR	10672	1522.871064467766
+# 03.29.2022 | 10:37:24 Writing lens...

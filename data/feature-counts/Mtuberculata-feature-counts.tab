@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i mtuberculata-pcastaneus-liftoff.gff -o Mtuberculota-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:35:49
+# ----------------
+# Input file:            mtuberculata-pcastaneus-liftoff.gff
+# Output file:           Mtuberculota-feature-counts.tab
+# Length output file:    Mtuberculota-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:35:49 Detecting compression...
+# 03.29.2022 | 10:35:49 Counting features...
+# Features types read:   6
+# Total features read:   591933
+# ----------------
+# 03.29.2022 | 10:35:52 Writing output...
+# ----------------
+feature type	count	avg length
+gene	18366	34634.50560818904
+mRNA	25876	43005.86980213325
+exon	263739	199.7179484262851
+CDS	260353	164.61255679788596
+five_prime_UTR	11231	137.55676253227674
+three_prime_UTR	12368	666.4671733505821
+# 03.29.2022 | 10:35:52 Writing lens...

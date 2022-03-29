@@ -198,10 +198,15 @@ if(save_tree_fig){
 
 annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Lkempii", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
 
+liftoff_specs = c("Pexpansa", "Esubglobosa", "Mtuberculata", "Dmawii", "Cinsculpta", "Cmccordi", "Rswinhoei", "Amarmorata")
+# All species with annotations
+
+final_specs = c(annotated_specs, liftoff_specs)
+
 feature_counts = data.frame()
 feature_lens = data.frame()
 
-for(spec in annotated_specs){
+for(spec in final_specs){
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
   cur_feature_counts$spec = spec
@@ -220,11 +225,9 @@ for(spec in annotated_specs){
 
 ```{r add-feature-counts, out.width="75%", fig.align = "center", warning=FALSE, eval=T}
 
-for(cur_spec in annotated_specs){
+for(cur_spec in final_specs){
   #print(cur_spec)
-  if(cur_spec == "Mterrapin"){
-    next
-  }
+
   cur_genes = subset(feature_lens, spec==cur_spec & feature=="gene")
   cur_transcripts = subset(feature_lens, spec==cur_spec)
   cur_transcripts = subset(cur_transcripts, feature=="transcript" | feature=="mRNA")

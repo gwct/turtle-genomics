@@ -1,0 +1,24 @@
+# GFF/GTF feature counting.
+# PYTHON VERSION: 3.9.6
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i pexpansa-pcastaneus-liftoff.gff -o Pexpansa-feature-counts.tab --lens
+# Runtime:        03/29/2022 10:36:34
+# ----------------
+# Input file:            pexpansa-pcastaneus-liftoff.gff
+# Output file:           Pexpansa-feature-counts.tab
+# Length output file:    Pexpansa-feature-counts-lens.tab
+# ----------------
+# 03.29.2022 | 10:36:34 Detecting compression...
+# 03.29.2022 | 10:36:34 Counting features...
+# Features types read:   6
+# Total features read:   587209
+# ----------------
+# 03.29.2022 | 10:36:38 Writing output...
+# ----------------
+feature type	count	avg length
+gene	18520	38492.865064794816
+mRNA	26023	47895.596357068745
+exon	261218	201.77199503862673
+CDS	257870	165.1456121301431
+three_prime_UTR	12554	688.2853273856938
+five_prime_UTR	11024	131.45110667634253
+# 03.29.2022 | 10:36:38 Writing lens...
