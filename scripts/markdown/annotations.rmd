@@ -80,7 +80,7 @@ feature_lens_lt20k = subset(feature_lens, length<=20000)
 
 ## Number of genes
 
-```{r gene-fig, out.width="66%", fig.align="center"}
+```{r gene-fig, out.width="50%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 gene_counts = subset(feature_lens, feature=="gene")
 gene_counts = gene_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
@@ -95,7 +95,8 @@ gene_p = ggplot(gene_counts, aes(x=spec, y=count, color=type)) +
   scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
-        legend.position="bottom")
+        legend.position="bottom",
+        legend.margin=margin(t=0, r=0, b=0, l=0, unit="cm"))
 print(gene_p)
 
 #cat("Max coverage: ", max(in_data$Coverage), "X\n",
@@ -105,7 +106,7 @@ print(gene_p)
 
 ## Distributions of gene length (genes < 20,000bp)
 
-```{r gene-len-dists, out.width="66%", fig.align="center", fig.height=8}
+```{r gene-len-dists, out.width="75%", fig.align="center", fig.height=8}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 gene_lens = subset(feature_lens_lt20k, feature=="gene")
 # Get genes less than 20kb long
@@ -126,7 +127,7 @@ print(gene_dist_p)
 
 ## Number of transcripts
 
-```{r transcript-fig, out.width="66%", fig.align="center"}
+```{r transcript-fig, out.width="50%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 transcript_counts = subset(feature_lens, feature=="transcript")
 transcript_counts = transcript_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
@@ -151,7 +152,7 @@ print(transcript_p)
 
 ## Distributions of transcript length (genes < 20,000bp)
 
-```{r transcript-len-dists, out.width="66%", fig.align="center", fig.height=8}
+```{r transcript-len-dists, out.width="75%", fig.align="center", fig.height=8}
 transcript_lens = subset(feature_lens_lt20k, feature=="transcript")
 # Get transcripts less than 20kb long
 
@@ -170,7 +171,7 @@ print(transcript_dist_p)
 
 ## Genes x transcripts
 
-```{r gene-transcript-fig, out.width="66%", fig.align="center"}
+```{r gene-transcript-fig, out.width="50%", fig.align="center"}
 
 gene_transcript_counts = merge(gene_counts, transcript_counts, by="spec")
 # Combine gene and transcript counts into a data frame
@@ -191,7 +192,7 @@ print(gene_transcript_p)
 
 ## Number of coding exons
 
-```{r cds-fig, out.width="66%", fig.align="center"}
+```{r cds-fig, out.width="50%", fig.align="center"}
 #in_data$Label = factor(in_data$Label, levels=in_data$Label[order(in_data$Coverage, decreasing=T)])
 cds_counts = subset(feature_lens, feature=="CDS")
 cds_counts = cds_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
@@ -213,7 +214,7 @@ print(cds_p)
 
 ## Distributions of CDS length (CDS < 750bp)
 
-```{r cds-len-dists, out.width="66%", fig.align="center", fig.height=8}
+```{r cds-len-dists, out.width="75%", fig.align="center", fig.height=8}
 cds_lens = subset(feature_lens_lt20k, feature=="CDS")
 cds_lens = subset(cds_lens, length<750)
 # Get CDS less than 20kb long
@@ -265,7 +266,7 @@ print(busco_p)
 
 ### Genes
 
-```{r liftoff-genes, out.width="66%", fig.align="center", fig.height=6}
+```{r liftoff-genes, out.width="50%", fig.align="center", fig.height=6}
 
 liftoff = data.frame("spec"=c(), "genes"=c(), "transcripts"=c(), "cds"=c(), "ref"=c(), "ref.genes"=c(), "ref.transcripts"=c())
 for(spec in liftoff_specs){
@@ -301,7 +302,7 @@ print(liftoff_genes_p)
 
 ### Transcripts
 
-```{r liftoff-transcripts, out.width="66%", fig.align="center", fig.height=6}
+```{r liftoff-transcripts, out.width="50%", fig.align="center", fig.height=6}
 
 liftoff$perc.ref.transcripts = liftoff$transcripts / liftoff$ref.transcripts
 liftoff$transcripts.label = paste(liftoff$transcripts, " / ", liftoff$ref.transcripts, " (", liftoff$ref, ")", sep="")

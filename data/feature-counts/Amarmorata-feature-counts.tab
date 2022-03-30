@@ -1,26 +1,26 @@
 # GFF/GTF feature counting.
 # PYTHON VERSION: 3.9.6
-# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i amarmorata-cpicta-liftoff.gff -o Amarmorata-feature-counts.tab --lens
-# Runtime:        03/29/2022 10:29:23
+# Script call:    /n/home07/gthomas/env/pylib/core/python/gxf_feature_counter.py -i amarmorata-cpicta-liftoff.gff -o Amarmorata-feature-counts.tab --lens --overwrite
+# Runtime:        03/30/2022 14:49:15
 # ----------------
 # Input file:            amarmorata-cpicta-liftoff.gff
 # Output file:           Amarmorata-feature-counts.tab
 # Length output file:    Amarmorata-feature-counts-lens.tab
 # ----------------
-# 03.29.2022 | 10:29:23 Detecting compression...
-# 03.29.2022 | 10:29:23 Counting features...
+# 03.30.2022 | 14:49:15 Detecting compression...
+# 03.30.2022 | 14:49:15 Counting features...
 # Features types read:   8
-# Total features read:   972618
+# Total features read:   996007
 # ----------------
-# 03.29.2022 | 10:29:28 Writing output...
+# 03.30.2022 | 14:49:20 Writing output...
 # ----------------
 feature type	count	avg length
-gene	20827	41818.3005713737
-mRNA	38429	62302.773686538814
-exon	438387	205.7356810306875
-CDS	428638	163.68671699662653
-five_prime_UTR	28491	248.92934610929768
-three_prime_UTR	17837	723.2398385378707
-V_gene_segment	7	371.42857142857144
-J_gene_segment	2	59.0
-# 03.29.2022 | 10:29:28 Writing lens...
+gene	20482	43875.276096084366
+mRNA	37831	65052.36953820941
+exon	450131	205.03259939884168
+CDS	440028	163.49301180833947
+five_prime_UTR	29541	249.4335669070106
+three_prime_UTR	17985	719.5123714206283
+J_gene_segment	1	62.0
+V_gene_segment	8	368.375
+# 03.30.2022 | 14:49:20 Writing lens...

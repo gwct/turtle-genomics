@@ -90,12 +90,18 @@ if(tree_type == "astral"){
 # tree_info_concat$scf = as.numeric(tree_info_concat$scf)
 # Read concat tree data
 
-topo_file = here("data", "tree", "turtle-samples-topo.tre")
+topo_file = here("data", "tree", "turtle-samples-topo-rooted.tre")
 topo_tree = read.tree(topo_file)
 
 tree_to_df_list = treeToDF(topo_tree)
 tree_info_topo = tree_to_df_list[["info"]]
 # Manual topo tree -- Need to fix this for no branch lengths!!
+
+topo_file_used = here("data", "tree", "turtle-samples-topo-rooted-included.tre")
+topo_tree_used = read.tree(topo_file_used)
+
+tree_to_df_list = treeToDF(topo_tree_used)
+tree_info_topo_used = tree_to_df_list[["info"]]
 
 #rf = RF.dist(concat_tree, astral_tree)
 #nrf = RF.dist(concat_tree, astral_tree, normalize=T)
@@ -140,6 +146,11 @@ full_data = merge(in_data, tree_info, by="label", all=T)
 
 full_data = full_data %>% arrange(node)
 
+include_data = subset(in_data, !label %in% c("Tcarolina", "Gagassizi", "Camboinensis"))
+include_data = merge(include_data, tree_info_topo_used, by="label", all=T)
+include_data = include_data %>% arrange(node)
+
+
 # in_data$num.genes = NA
 # in_data$avg.gene.len = NA
 # in_data$num.genes.lt20k = NA
@@ -152,6 +163,7 @@ full_data = full_data %>% arrange(node)
 # Read in the input data
 ```
 
+## All available species
 
 ```{r topology-fig, out.width="75%", fig.align = "center", warning=FALSE, fig.height=10}
 h = corecol(numcol=1, pal="wilke", offset=3)
@@ -177,11 +189,11 @@ gcf_tree = ggtree(turtle_tree, size=0.8, ladderize=F) +#, aes(color=full_data$Fa
   geom_cladelabel(node=15, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=14, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=35, label="Emydidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=32, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=29, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=36, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=33, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=30, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
   
-  theme(legend.position=c(0.05,0.9))
+  theme(legend.position=c(0.05,0.2))
 print(gcf_tree)
 
 if(save_tree_fig){
@@ -192,6 +204,46 @@ if(save_tree_fig){
 # Tree
 ```
 
+## Selected species
+
+```{r selected-fig, out.width="75%", fig.align = "center", warning=FALSE, fig.height=10}
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 2.1
+
+gcf_tree = ggtree(topo_tree_used, size=0.8, ladderize=F) +#, aes(color=full_data$Family)) +
+  xlim(0, xmax) +
+  geom_tiplab(aes(color=include_data$Annotation.file), fontface='italic', size=4) +
+  scale_color_manual(name='Annotated?', values=c("N"=corecol(pal="wilke", numcol=1), "Y"=corecol(pal="wilke", numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=22, label="Podocnemididae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=21, label="Pelomedusidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=18, label="Carettochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=40, label="Trionychidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=15, label="Dermochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=38, label="Cheloniidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=12, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=11, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=10, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=31, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=29, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=27, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+  
+  theme(legend.position=c(0.05,0.2))
+print(gcf_tree)
+
+if(save_tree_fig){
+  gcf_tree = gcf_tree + geom_text(aes(x=branch, label=ifelse(tree_info$node.type=="internal",as.character(node), ''), label.size=NA, fill="transparent"), size=2, vjust=-0.2)
+  tree_outfile = paste("../../data/trees/", tree_type, "-gcf-tree.pdf", sep="")
+  ggsave(tree_outfile, gcf_tree, width=8, height=16, unit="in")
+}
+# Tree
+```
 
 
 ```{r read-annotation-data, out.width="75%", fig.align = "center", warning=FALSE, eval=T}
