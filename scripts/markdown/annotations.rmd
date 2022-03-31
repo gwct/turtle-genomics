@@ -262,7 +262,7 @@ print(busco_p)
 
 ## Liftoff annotations
 
-(Liftoff)[https://github.com/agshumate/Liftoff] is a program that maps annotated features from one genome to another.
+[Liftoff](https://github.com/agshumate/Liftoff) is a program that maps annotated features from one genome to another.
 
 ### Genes
 
@@ -270,7 +270,7 @@ print(busco_p)
 
 liftoff = data.frame("spec"=c(), "genes"=c(), "transcripts"=c(), "cds"=c(), "ref"=c(), "ref.genes"=c(), "ref.transcripts"=c())
 for(spec in liftoff_specs){
-  print(spec)
+  #print(spec)
   
   row = subset(in_data, label==spec)
   ref = row$liftoff.ref
