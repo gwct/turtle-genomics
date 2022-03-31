@@ -130,7 +130,7 @@ if(tree_type == "astral"){
 }else if(tree_type == "topo"){
   tree_info = tree_info_topo
   turtle_tree = topo_tree
-  xmax = 11
+  xmax = 12
 }
 # Set some values based on tree type
 
@@ -189,9 +189,9 @@ gcf_tree = ggtree(turtle_tree, size=0.8, ladderize=F) +#, aes(color=full_data$Fa
   geom_cladelabel(node=15, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=14, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=36, label="Emydidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=33, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=30, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=37, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=34, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
   
   theme(legend.position=c(0.05,0.2))
 print(gcf_tree)
@@ -230,9 +230,9 @@ gcf_tree = ggtree(topo_tree_used, size=0.8, ladderize=F) +#, aes(color=full_data
   geom_cladelabel(node=12, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=11, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=10, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=31, label="Emydidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=29, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
-  geom_cladelabel(node=27, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=32, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=28, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
   
   theme(legend.position=c(0.05,0.2))
 print(gcf_tree)
