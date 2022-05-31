@@ -39,10 +39,10 @@ library(ggrepel)
 #library(vroom)
 #library(ggdist)
 library(here)
-source("C:/bin/core/r/design.r")
-source("C:/bin/core/r/get_tree_info.r")
-#source("C:/Users/grt814/bin/core/corelib/design.r")
-#source("C:/Users/grt814/bin/core/get_tree_info.r")
+#source("C:/bin/core/r/design.r")
+#source("C:/bin/core/r/get_tree_info.r")
+source("C:/Users/grt814/bin/core/r/design.r")
+source("C:/Users/grt814/bin/core/r/get_tree_info.r")
 
 #htmltools::includeHTML("../html-chunks/rmd_nav.html")
 ```
@@ -318,5 +318,82 @@ write.csv(full_data, here("data", "turtles-full.csv"), row.names=F)
 
 ```
 
+## Selected species with branch lengths
 
-[< Back to summary](index.html)
+```{r get-bl, out.width="75%", fig.align = "center", warning=FALSE, fig.height=10}
+
+con_tree_file = here("data", "tree", "thomson-trees", "turtle.con.tre")
+# Tree from Thomson et al. with branch lengths
+
+con_tree = read.nexus(con_tree_file)
+con_tree_rooted = root(con_tree, c("Alligator_mississippiensis", "Gallus_gallus"))
+tree_to_df_list = treeToDF(con_tree_rooted)
+con_info = tree_to_df_list[["info"]]
+# Read, root, and parse the tree
+
+tips_to_keep = data.frame("current.tip"=c("Cmccordi", "Mmutica", "Mreevesii", "Cabingdonii", "Gevgoodei", "Tscripta", "Mterrapin", "Cpicta", "Amarmorata", "Pmegacephalum", "Dmawii", "Cserpentina", "Cmydas", "Lkempii", "Dcoriacea", "Psinensis", "Rswinhoei", "Cinsculpta", "Esubglobosa", "Mtuberculata", "Pcastaneus", "Pexpansa"), 
+                          "thomson.tip"=c("Cuora_mccordi__HBS41892", "Mauremys_mutica__MVZ230476", "Mauremys_reevesii_HBS113152", "Chelonoidis_abingdoni_HBS117543", "Gopherus_agassizii_GOAG01", "Trachemys_scripta_elegans_HBS23001", "Malaclemys_terrapin_MVZ137745", "Chrysemys_picta_HBS27134", "Emys_marmorata_HBS39734", "Platysternon_megacephalum_HBS16255", "Dermatemys_mawii_HBS116865", "Chelydra_serpentina_HBS23551", "Chelonia_mydas_HBS109887", "Lepidochelys_olivacea_HBS125086", "Dermochelys_coriacea__MVZ149847", "Pelodiscus_sinensis_AMNH106666", "Rafetus_swinhoei_sp_AMNH200163", "Carretochelys_insculpta_HBS119093", "Emydura_subglobosa_244", "Mesoclemmys_gibbus_BPN1497", "Pelusios_castaneus_CAS219222", "Podocnemis_expansa_HBS117929"))
+# Get the tips in the Thomson tree that correspond to the tips in our tree
+
+new_tree = keep.tip(con_tree_rooted, tips_to_keep$thomson.tip)
+# Prune the Thomson tree to our tips
+
+for(i in 1:length(new_tree$tip.label)){
+  #print(new_tree[["tip.label"]][i])
+  cur_tip = new_tree[["tip.label"]][i]
+  new_tree[["tip.label"]][i] = tips_to_keep$current.tip[tips_to_keep$thomson.tip == cur_tip]
+  #print(new_tree[["tip.label"]][i])
+}
+# For each tip in the new pruned tree, re-name the tip to match our genome abbr.
+
+tree_to_df_list = treeToDF(new_tree)
+new_info = tree_to_df_list[["info"]]
+include_tips = subset(include_data, node.type=="tip")
+# Read and parse the new pruned tree
+
+new_info = merge(new_info, select(include_tips, label, Annotation.file), by="label", all.x=T)
+# Merge the tip info from the new tree and the original tree
+
+new_info = new_info[order(new_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
+famoffset = 0.05
+
+new_tree_p = ggtree(new_tree, size=0.8, ladderize=F) +#, aes(color=full_data$Family)) +
+  xlim(0, 0.3) +
+  geom_tiplab(aes(color=new_info$Annotation.file), fontface='italic', size=4) +
+  scale_color_manual(name='Annotated?', values=c("N"=corecol(pal="wilke", numcol=1), "Y"=corecol(pal="wilke", numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=18, label="Podocnemididae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=17, label="Pelomedusidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=2, label="Carettochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=7, label="Dermochelyidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=6, label="Chelydridae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=8, label="Dermatemydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=19, label="Platysternidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset) +
+
+  theme(legend.position=c(0.05,0.1))
+
+  rotate <- ggtree::rotate
+  new_tree_p = new_tree_p %>% rotate(43) %>% rotate(42) %>% rotate(24) %>% rotate(27) %>% rotate(40) %>% rotate(38) %>% rotate(25) %>% rotate(35) %>% rotate(29) %>% rotate(30) %>% rotate(31)
+  # Rotate nodes in the new tree to match the ordering of the original trees
+  
+print(new_tree_p)
+
+new_tree$node.label = NULL
+# No branch labels for cactus
+
+write.tree(new_tree, file(here("data", "tree", "pruned-thomson.tre")))
+# Write the new tree out
+
+```
+
+
+[< Back to summary](index.html)/
