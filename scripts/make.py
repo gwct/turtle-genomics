@@ -11,6 +11,7 @@ parser.add_argument("--index", dest="index", help="Without --all: build index.ht
 parser.add_argument("--assemblies", dest="assemblies", help="Without --all: build assemblies.html. With --all: exlude assemblies.html", action="store_true", default=False);
 parser.add_argument("--trees", dest="trees", help="Without --all: build trees.html. With --all: exlude trees.html", action="store_true", default=False);
 parser.add_argument("--annotations", dest="annotations", help="Without --all: build annotations.html. With --all: exlude annotations.html", action="store_true", default=False);
+parser.add_argument("--cactus", dest="cactus", help="Without --all: build cactus.html. With --all: exlude cactus.html", action="store_true", default=False);
 parser.add_argument("--analyses", dest="analyses", help="Without --all: build analyses.html. With --all: exlude analyses.html", action="store_true", default=False);
 parser.add_argument("--people", dest="people", help="Without --all: build people.html. With --all: exlude people.html", action="store_true", default=False);
 parser.add_argument("--links", dest="links", help="Without --all: build links.html. With --all: exlude links.html", action="store_true", default=False);
@@ -25,6 +26,7 @@ pages = {
     'assemblies' : args.assemblies,
     'trees' : args.trees,
     'annotations' : args.annotations,
+    'cactus' : args.cactus,
     'analyses' : args.analyses,
     'people' : args.people,
     'links' : args.links
@@ -44,6 +46,9 @@ if pages['assemblies']:
 
 if pages['trees']:
     os.system("Rscript trees_generator.r");
+
+if pages['cactus']:
+    os.system("Rscript cactus_generator.r");
 
 if pages['analyses']:
     os.system("Rscript analyses_generator.r");

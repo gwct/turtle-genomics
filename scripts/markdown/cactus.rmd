@@ -1,0 +1,102 @@
+---
+title: "Turtle cactus stats"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide 
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(ggbeeswarm)
+library(dplyr)
+library(chron)
+library(kableExtra)
+source("../lib/design.r")
+```
+
+[< Back to samples](index.html)
+
+Assemblies from each genome were downloaded from NCBI on 07.22.2021
+
+```{r read-data}
+in_data = read.csv("../../data/turtles-include-cactus.csv", header=T, comment.char="#")
+# Read in the turtle data
+```
+
+## Requested resources per job
+
+```{r req-resources, out.width="66%", fig.align="center"}
+
+resources = data.frame("Step"=c("Mask", "Blast", "Align", "Convert"), 
+                       "Partition"=c("gpu", "gpu", "bigmem", "shared"), 
+                       "Memory"=c("100g", "400g", "450g", "12g"), 
+                       "CPUs"=c("64", "64", "64", "8"), 
+                       "GPUs"=c("4", "4", "NA", "NA"), 
+                       "Time"=c("2h", "48h", "48h", "4h"))
+
+
+resources %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+# Display calibration points as a table
+```
+
+## Runtime summaries
+
+Masking steps for tips take less than 15 minutes.
+
+Converting HAL to FASTA takes only 30 seconds.
+
+```{r runtime-fig, out.width="66%", fig.align="center"}
+
+mask = select(in_data, cactus.node, mask.wall.time)
+names(mask)[2] = "time"
+mask$step = "Mask"
+
+blast = select(in_data, cactus.node, blast.wall.time)
+names(blast)[2] = "time"
+blast$step = "Blast"
+
+align = select(in_data, cactus.node, align.wall.time)
+names(align)[2] = "time"
+align$step = "Align"
+
+time_data = rbind(blast, align)
+time_data$time = chron(time=time_data$time)
+
+time_data$hours = hours(time_data$time) + minutes(time_data$time) / 60 + seconds(time_data$time) / 60 / 60
+
+time_data$step = factor(time_data$step, levels=c("Blast", "Align"))
+
+time_p = ggplot(data=time_data, aes(x=step, y=hours, group=step)) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("Cactus step") +
+  ylab("Time (hours)") +
+  bartheme()
+
+print(time_p)
+# Print out some summary stats
+
+in_data$blast.wall.time = chron(time=in_data$blast.wall.time)
+in_data$blast.wall.hours = hours(in_data$blast.wall.time) + minutes(in_data$blast.wall.time) / 60 + seconds(in_data$blast.wall.time) / 60 / 60
+
+# blast_p = ggplot(in_data, aes(x=branch.length, y=blast.wall.hours)) +
+#   geom_point() +
+#   geom_smooth(method="lm") + 
+#   bartheme()
+# print(blast_p)
+
+
+```
+
+[< Back to samples](index.html)

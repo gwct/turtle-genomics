@@ -218,7 +218,7 @@ gcf_tree = ggtree(topo_tree_used, size=0.8, ladderize=F) +#, aes(color=full_data
   xlim(0, xmax) +
   geom_tiplab(aes(color=include_data$Annotation.file), fontface='italic', size=4) +
   scale_color_manual(name='Annotated?', values=c("N"=corecol(pal="wilke", numcol=1), "Y"=corecol(pal="wilke", numcol=1, offset=1))) +
-  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
   
   geom_cladelabel(node=22, label="Podocnemididae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=21, label="Pelomedusidae", align=T, color=famcol, offset=famoffset) +
@@ -347,15 +347,22 @@ for(i in 1:length(new_tree$tip.label)){
 # For each tip in the new pruned tree, re-name the tip to match our genome abbr.
 
 tree_to_df_list = treeToDF(new_tree)
-new_info = tree_to_df_list[["info"]]
+new_info_full = tree_to_df_list[["info"]]
+new_info_full = merge(in_data, new_info_full, by="label", all.y=T)
+new_info_full = new_info_full %>% arrange(node)
+new_info_full$label[new_info_full$label==""]=NA
+
 include_tips = subset(include_data, node.type=="tip")
 # Read and parse the new pruned tree
 
-new_info = merge(new_info, select(include_tips, label, Annotation.file), by="label", all.x=T)
+new_info = merge(new_info_full, select(include_tips, label, Annotation.file), by="label", all.x=T)
 # Merge the tip info from the new tree and the original tree
 
 new_info = new_info[order(new_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
+
+write.csv(new_info, here("data", "turtles-include.csv"), row.names=F)
+# Merge the main data frame and the tree data frame and write to file
 
 famoffset = 0.05
 
@@ -363,7 +370,7 @@ new_tree_p = ggtree(new_tree, size=0.8, ladderize=F) +#, aes(color=full_data$Fam
   xlim(0, 0.3) +
   geom_tiplab(aes(color=new_info$Annotation.file), fontface='italic', size=4) +
   scale_color_manual(name='Annotated?', values=c("N"=corecol(pal="wilke", numcol=1), "Y"=corecol(pal="wilke", numcol=1, offset=1))) +
-  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
   
   geom_cladelabel(node=18, label="Podocnemididae", align=T, color=famcol, offset=famoffset) +
   geom_cladelabel(node=17, label="Pelomedusidae", align=T, color=famcol, offset=famoffset) +
