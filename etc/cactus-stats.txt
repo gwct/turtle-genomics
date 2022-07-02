@@ -1,0 +1,2 @@
+# ll | grep Jun | cut -d "-" -f9 | cut -d "." -f1
+# while read j; do sacct -n -o "Elapsed" -j "$j" | head -n1; done < ids.txt;
