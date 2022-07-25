@@ -18,6 +18,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
+library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
 library(chron)
@@ -32,6 +33,30 @@ Assemblies from each genome were downloaded from NCBI on 07.22.2021
 ```{r read-data}
 in_data = read.csv("../../data/turtles-include-cactus.csv", header=T, comment.char="#")
 # Read in the turtle data
+
+in_data$mask.cputime = in_data$mask.cputime / 60 / 60
+in_data$mask.runtime = in_data$mask.runtime / 60 / 60
+in_data$mask.maxmem = substr(in_data$mask.maxmem,1,nchar(in_data$mask.maxmem)-1)
+in_data$mask.maxmem= as.numeric(in_data$mask.maxmem)
+in_data$mask.maxmem = in_data$mask.maxmem / 1024 / 1024
+
+in_data$blast.cputime = in_data$blast.cputime / 60 / 60
+in_data$blast.runtime = in_data$blast.runtime / 60 / 60
+in_data$blast.maxmem = substr(in_data$blast.maxmem,1,nchar(in_data$blast.maxmem)-1)
+in_data$blast.maxmem= as.numeric(in_data$blast.maxmem)
+in_data$blast.maxmem = in_data$blast.maxmem / 1024 / 1024
+
+in_data$align.cputime = in_data$align.cputime / 60 / 60
+in_data$align.runtime = in_data$align.runtime / 60 / 60
+in_data$align.maxmem = substr(in_data$align.maxmem,1,nchar(in_data$align.maxmem)-1)
+in_data$align.maxmem= as.numeric(in_data$align.maxmem)
+in_data$align.maxmem = in_data$align.maxmem / 1024 / 1024
+
+in_data$convert.cputime = in_data$convert.cputime / 60 / 60
+in_data$convert.runtime = in_data$convert.runtime / 60 / 60
+in_data$convert.maxmem = substr(in_data$convert.maxmem,1,nchar(in_data$convert.maxmem)-1)
+in_data$convert.maxmem= as.numeric(in_data$convert.maxmem)
+in_data$convert.maxmem = in_data$convert.maxmem / 1024 / 1024
 ```
 
 ## Requested resources per job
@@ -50,53 +75,164 @@ resources %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condende
 # Display calibration points as a table
 ```
 
+[< Back to samples](index.html)
+
 ## Runtime summaries
 
 Masking steps for tips take less than 15 minutes.
 
 Converting HAL to FASTA takes only 30 seconds.
 
-```{r runtime-fig, out.width="66%", fig.align="center"}
+```{r runtime-fig, out.width="66%", fig.align="center", fig.height=3.5}
 
-mask = select(in_data, cactus.node, mask.wall.time)
+mask = select(in_data, cactus.node, mask.runtime, mask.time)
 names(mask)[2] = "time"
+names(mask)[3] = "req.time"
 mask$step = "Mask"
 
-blast = select(in_data, cactus.node, blast.wall.time)
+blast = select(in_data, cactus.node, blast.runtime, blast.time)
 names(blast)[2] = "time"
+names(blast)[3] = "req.time"
 blast$step = "Blast"
 
-align = select(in_data, cactus.node, align.wall.time)
+align = select(in_data, cactus.node, align.runtime, align.time)
 names(align)[2] = "time"
+names(align)[3] = "req.time"
 align$step = "Align"
 
 time_data = rbind(blast, align)
-time_data$time = chron(time=time_data$time)
+time_data$perc.time = time_data$time / time_data$req.time
+#time_data$time = chron(time=time_data$time)
 
-time_data$hours = hours(time_data$time) + minutes(time_data$time) / 60 + seconds(time_data$time) / 60 / 60
+#time_data$hours = hours(time_data$time) + minutes(time_data$time) / 60 + seconds(time_data$time) / 60 / 60
 
 time_data$step = factor(time_data$step, levels=c("Blast", "Align"))
 
-time_p = ggplot(data=time_data, aes(x=step, y=hours, group=step)) +
+time_p = ggplot(data=time_data, aes(x=step, y=time, group=step)) +
   geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1)) +
   geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
   xlab("Cactus step") +
   ylab("Time (hours)") +
   bartheme()
+#print(time_p)
+# Display the figure
 
-print(time_p)
-# Print out some summary stats
+time_perc_p = ggplot(data=time_data, aes(x=step, y=perc.time, group=step)) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("Cactus step") +
+  ylab("% of requested\ntime used") +
+  scale_y_continuous(limits=c(0,1)) +
+  bartheme()
+#print(time_perc_p)
+# Display the figure
 
-in_data$blast.wall.time = chron(time=in_data$blast.wall.time)
-in_data$blast.wall.hours = hours(in_data$blast.wall.time) + minutes(in_data$blast.wall.time) / 60 + seconds(in_data$blast.wall.time) / 60 / 60
-
-# blast_p = ggplot(in_data, aes(x=branch.length, y=blast.wall.hours)) +
-#   geom_point() +
-#   geom_smooth(method="lm") + 
-#   bartheme()
-# print(blast_p)
-
+p = plot_grid(time_p, time_perc_p, ncol=2)
+print(p)
 
 ```
+[< Back to samples](index.html)
+
+## CPU time summaries
+
+```{r cputime-fig, out.width="40%", fig.align="center", fig.height=4}
+
+mask = select(in_data, cactus.node, mask.cputime, mask.time)
+names(mask)[2] = "time"
+names(mask)[3] = "req.time"
+mask$step = "Mask"
+
+blast = select(in_data, cactus.node, blast.cputime, blast.time)
+names(blast)[2] = "time"
+names(blast)[3] = "req.time"
+blast$step = "Blast"
+
+align = select(in_data, cactus.node, align.cputime, align.time)
+names(align)[2] = "time"
+names(align)[3] = "req.time"
+align$step = "Align"
+
+convert = select(in_data, cactus.node, convert.cputime, convert.time)
+names(convert)[2] = "time"
+names(convert)[3] = "req.time"
+convert$step = "Convert"
+
+time_data = rbind(mask, blast, align, convert)
+time_data$perc.time = time_data$time / time_data$req.time
+#time_data$time = chron(time=time_data$time)
+
+#time_data$hours = hours(time_data$time) + minutes(time_data$time) / 60 + seconds(time_data$time) / 60 / 60
+
+time_data$step = factor(time_data$step, levels=c("Mask", "Blast", "Align", "Convert"))
+
+time_p = ggplot(data=time_data, aes(x=step, y=time, group=step)) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1, offset=1)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("Cactus step") +
+  ylab("CPU Time (hours)") +
+  bartheme()
+print(time_p)
+# Display the figure
+
+```
+
+[< Back to samples](index.html)
+
+## Max memory summaries
+
+```{r maxmem-fig, out.width="66%", fig.align="center", fig.height=3.5}
+
+mask = select(in_data, cactus.node, mask.maxmem, mask.mem)
+names(mask)[2] = "maxmem"
+names(mask)[3] = "req.mem"
+mask$step = "Mask"
+
+blast = select(in_data, cactus.node, blast.maxmem, blast.mem)
+names(blast)[2] = "maxmem"
+names(blast)[3] = "req.mem"
+blast$step = "Blast"
+
+align = select(in_data, cactus.node, align.maxmem, align.mem)
+names(align)[2] = "maxmem"
+names(align)[3] = "req.mem"
+align$step = "Align"
+
+convert = select(in_data, cactus.node, convert.maxmem, convert.mem)
+names(convert)[2] = "maxmem"
+names(convert)[3] = "req.mem"
+convert$step = "Convert"
+
+mem_data = rbind(mask, blast, align, convert)
+mem_data$perc.mem = mem_data$maxmem / mem_data$req.mem
+#time_data$time = chron(time=time_data$time)
+
+#time_data$hours = hours(time_data$time) + minutes(time_data$time) / 60 + seconds(time_data$time) / 60 / 60
+
+mem_data$step = factor(mem_data$step, levels=c("Mask", "Blast", "Align", "Convert"))
+
+mem_p = ggplot(data=mem_data, aes(x=step, y=maxmem, group=step)) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1, offset=2)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("Cactus step") +
+  ylab("Max memory used (Mb)") +
+  bartheme()
+#print(mem_p)
+# Display the figure
+
+mem_perc_p = ggplot(data=mem_data, aes(x=step, y=perc.mem, group=step)) +
+  geom_quasirandom(size=3, width=0.25, alpha=0.40, color=corecol(numcol=1, offset=2)) +
+  geom_boxplot(outlier.shape=NA, alpha=0.15, width=0.5, color="#666666") +
+  xlab("Cactus step") +
+  ylab("% of requested memory\nused at max") +
+  scale_y_continuous(limits=c(0,1)) +
+  bartheme()
+#print(mem_perc_p)
+# Display the figure
+
+p = plot_grid(mem_p, mem_perc_p, ncol=2)
+print(p)
+
+```
+
 
 [< Back to samples](index.html)
