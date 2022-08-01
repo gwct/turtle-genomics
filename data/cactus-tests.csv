@@ -1,0 +1,13 @@
+cactus.node,mask.id,mask.cputime,mask.runtime,mask.maxmem,mask.time,mask.mem,blast.id,blast.cputime,blast.runtime,blast.maxmem,blast.time,blast.mem,align.id,align.cputime,align.runtime,align.maxmem,align.time,align.mem,convert.id,convert.cputime,convert.runtime,convert.maxmem,convert.time,convert.mem
+simCow.chr6,21125098.batch,3712,58,96104K,1,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+simDog.chr6,21125101.batch,1984,31,187568K,1,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+simHuman.chr6,21125100.batch,2048,32,186204K,1,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+simMouse.chr6,21125102.batch,1856,29,6428K,1,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+simRat.chr6,21125099.batch,2112,33,180684K,1,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Anc0,NA,NA,NA,NA,NA,NA,21160850.batch,3072,48,242816K,24,400,21182654.batch,2240,35,241988K,24,450,21190096.batch,136,17,6148K,1,12
+Anc1,NA,NA,NA,NA,NA,NA,21152665.batch,3328,52,351552K,24,400,21157079.batch,2560,40,453864K,24,450,21160426.batch,96,12,6392K,1,12
+Anc2,NA,NA,NA,NA,NA,NA,21140571.batch,3584,56,237400K,24,400,21140609.batch,2688,42,450032K,24,450,21152593.batch,144,18,6136K,1,12
+mr,NA,NA,NA,NA,NA,NA,21140584.batch,4224,66,301300K,24,400,21140646.batch,2176,34,186500K,24,450,21152614.batch,88,11,6132K,1,12
+# ((simHuman_chr6:0.144018,(simMouse_chr6:0.084509,simRat_chr6:0.091589)mr:0.271974)Anc1:0.020593,(simCow_chr6:0.18908,simDog_chr6:0.16303)Anc2:0.032898)Anc0;,,,,,,,,,,,,,,,,,,,,
+# ls | cut -d """"-"""" -f 3 | cut -d """"."""" -f 1 > ids.txt,,,,,,,,,,,,,,,,,,,,,,,,
+# for i in $(cat ids.txt); do j=$(echo $i | cut -d '-' -f 3 | cut -d """"."""" -f 1); sacct --format=""""JobID%20",CPUTimeRaw,ElapsedRaw,"MaxRSS"""" -j $j | head -n4 | tail -n1; done,,,,,,,,,,,,,,,,,,,,,
