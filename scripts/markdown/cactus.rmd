@@ -23,7 +23,10 @@ library(ggbeeswarm)
 library(dplyr)
 library(chron)
 library(kableExtra)
+library(ggtree)
+library(viridis)
 source("../lib/design.r")
+source("../lib/get_tree_info.r")
 ```
 
 [< Back to samples](index.html)
@@ -57,7 +60,25 @@ in_data$convert.runtime = in_data$convert.runtime / 60 / 60
 in_data$convert.maxmem = substr(in_data$convert.maxmem,1,nchar(in_data$convert.maxmem)-1)
 in_data$convert.maxmem= as.numeric(in_data$convert.maxmem)
 in_data$convert.maxmem = in_data$convert.maxmem / 1024 / 1024
+
+###############
+
+mut_data = read.csv("../../data/cactus-summarize-mutations.csv")
+names(mut_data)[1] = "label"
+mut_data = subset(mut_data, label != "Total" & label != "Average")
+
+cactus_tree = read.tree(file="../../data/tree/turtle-tree-cactus.tre")
+tree_to_df_list = treeToDF(cactus_tree)
+cactus_tree_info = tree_to_df_list[["info"]]
+
+cactus_tree_info = merge(cactus_tree_info, mut_data, by="label")
+
+cactus_tree_info = cactus_tree_info[order(cactus_tree_info$node), ]
+# Re-sort the data frame by R node order after the merge so the trees still work
+
 ```
+
+# Resource summary
 
 ## Requested resources per job
 
@@ -233,6 +254,733 @@ p = plot_grid(mem_p, mem_perc_p, ncol=2)
 print(p)
 
 ```
+
+# Mutation summary
+
+## Substitutions per site
+
+```{r substitutions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+rotateTurtleTree <- function(turtle_tree) {
+  turtle_tree = ggtree::rotate(turtle_tree, 43)
+  turtle_tree = ggtree::rotate(turtle_tree, 42)
+  turtle_tree = ggtree::rotate(turtle_tree, 24)
+  turtle_tree = ggtree::rotate(turtle_tree, 25)
+  turtle_tree = ggtree::rotate(turtle_tree, 26)
+  turtle_tree = ggtree::rotate(turtle_tree, 27)
+  turtle_tree = ggtree::rotate(turtle_tree, 40)
+  turtle_tree = ggtree::rotate(turtle_tree, 38)
+  turtle_tree = ggtree::rotate(turtle_tree, 35)
+  turtle_tree = ggtree::rotate(turtle_tree, 29)
+  turtle_tree = ggtree::rotate(turtle_tree, 30)
+  turtle_tree = ggtree::rotate(turtle_tree, 31)
+  turtle_tree = ggtree::rotate(turtle_tree, 32)
+
+  return(turtle_tree)
+}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$subs.per.site)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Substitutions\nper site', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=subs.per.site, color=subs.per.site)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Substitutions\nper site', option = "C") +
+  xlab("Branch length") +
+  ylab("Substitutions per site") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Insertions
+
+```{r insertions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$Insertions)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Insertions', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Insertions, color=Insertions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Insertions', option = "C") +
+  xlab("Branch length") +
+  ylab("Insertions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Inserted bases
+
+```{r inserted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$InsertionBases)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Insertions', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=InsertionBases, color=InsertionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inserted bases', option = "C") +
+  xlab("Branch length") +
+  ylab("Inserted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+
+## Deletions
+
+```{r deletions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$Deletions)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Deletions', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Deletions, color=Deletions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deletions', option = "C") +
+  xlab("Branch length") +
+  ylab("Deletions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Deleted bases
+
+```{r deleted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$DeletionBases)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Deleted bases', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=DeletionBases, color=DeletionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deleted bases', option = "C") +
+  xlab("Branch length") +
+  ylab("Deleted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Inversions
+
+```{r inversions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$Inversions)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Inversions', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Inversions, color=Inversions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inversions', option = "C") +
+  xlab("Branch length") +
+  ylab("Inversions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Inverted bases
+
+```{r inverted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$InvertedBases)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Inverted bases', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=InvertedBases, color=InvertedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inverted bases', option = "C") +
+  xlab("Branch length") +
+  ylab("Inverted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Duplications
+
+```{r duplications, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$Duplications)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Duplications', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Duplications, color=Duplications)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplications', option = "C") +
+  xlab("Branch length") +
+  ylab("Duplications") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Duplicated bases
+
+```{r duplicated-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$DuplicatedBases)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Duplicated bases', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=DuplicatedBases, color=DuplicatedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplicated bases', option = "C") +
+  xlab("Branch length") +
+  ylab("Duplicated bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Transpositions
+
+```{r transpositions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$Transpositions)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Transpositions', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Transpositions, color=Transpositions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transpositions', option = "C") +
+  xlab("Branch length") +
+  ylab("Transpositions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+## Transposed bases
+
+```{r transposed-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+
+h = corecol(numcol=1, pal="wilke", offset=3)
+l = corecol(numcol=1, offset=3)
+# Colors
+
+famcol = corecol(pal="trek", numcol=1, offset=2)
+famoffset = 0.0275
+famsize = 2
+
+#cactus_tree_info$subs.per.site = cactus_tree_info$Subtitutions / cactus_tree_info$GenomeLength
+
+tree_fig = ggtree(cactus_tree, size=0.8, ladderize=F, aes(color=cactus_tree_info$TranspositionBases)) +
+  #scale_color_continuous(low=l, high=h) +
+  scale_color_viridis(name='Transposed bases', option = "C") +
+  xlim(0, 0.25) +
+  geom_tiplab(fontface='italic', size=2) +
+  geom_text(label=ifelse(cactus_tree_info$node.type != "tip", cactus_tree_info$label, ""), hjust=-0.2, size=2) +
+  geom_nodepoint(alpha=0.85, size=2) +
+  #scale_color_manual(name='Include?', values=c("N"=corecol(pal="wilke", numcol=1,offset=1), "Y"=corecol(numcol=1, offset=1))) +
+  #geom_text(aes(label=node), hjust=-.3, vjust=-.3, color="#ff6db6") +
+  
+  geom_cladelabel(node=21, label="Podocnemididae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=22, label="Pelomedusidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=42, label="Chelidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=3,  label="Carettochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=26, label="Trionychidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=18, label="Dermochelyidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=40, label="Cheloniidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=14, label="Chelydridae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=15, label="Dermatemydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=13, label="Platysternidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=34, label="Emydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=30, label="Testudinidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  geom_cladelabel(node=31, label="Geomydidae", align=T, color=famcol, offset=famoffset, fontsize=famsize) +
+  
+  theme(legend.position="bottom",
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=8))
+
+tree_fig = rotateTurtleTree(tree_fig)
+
+bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=TranspositionBases, color=TranspositionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transposed bases', option = "C") +
+  xlab("Branch length") +
+  ylab("Transposed bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8))
+#print(bl_cor)
+
+tree_leg = get_legend(tree_fig)
+
+p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+print(p)
+```
+
+
+
 
 
 [< Back to samples](index.html)
