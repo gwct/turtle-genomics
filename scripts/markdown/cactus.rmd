@@ -61,6 +61,8 @@ in_data$convert.maxmem = substr(in_data$convert.maxmem,1,nchar(in_data$convert.m
 in_data$convert.maxmem= as.numeric(in_data$convert.maxmem)
 in_data$convert.maxmem = in_data$convert.maxmem / 1024 / 1024
 
+genome_data = select(in_data, clade, Scaffolds, Scaffold.N50)
+
 ###############
 
 mut_data = read.csv("../../data/cactus-summarize-mutations.csv")
@@ -72,6 +74,8 @@ tree_to_df_list = treeToDF(cactus_tree)
 cactus_tree_info = tree_to_df_list[["info"]]
 
 cactus_tree_info = merge(cactus_tree_info, mut_data, by="label")
+
+cactus_tree_info = merge(cactus_tree_info, genome_data, by="clade")
 
 cactus_tree_info = cactus_tree_info[order(cactus_tree_info$node), ]
 # Re-sort the data frame by R node order after the merge so the trees still work
@@ -259,7 +263,7 @@ print(p)
 
 ## Substitutions per site
 
-```{r substitutions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r substitutions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 rotateTurtleTree <- function(turtle_tree) {
   turtle_tree = ggtree::rotate(turtle_tree, 43)
   turtle_tree = ggtree::rotate(turtle_tree, 42)
@@ -324,23 +328,69 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=subs.per.site, color=sub
   geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
   scale_color_viridis(name='Substitutions\nper site', option = "C") +
   xlab("Branch length") +
-  ylab("Substitutions per site") +
+  ylab("Substitutions\nper site") +
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=subs.per.site, color=subs.per.site)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Substitutions\nper site', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Substitutions\nper site") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=subs.per.site, color=subs.per.site)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Substitutions\nper site', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Substitutions\nper site") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+
+# p_right = plot_grid(NULL, bl_cor, NULL, nrow=3, rel_heights=c(0.1,1,0.1))
+# p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2)
+# p_bot = plot_grid(scaff_cor, n50_cor, ncol=2)
+# p_noleg = plot_grid(p_top, p_bot, nrow=2, rel_heights=c(1, 0.8))
+# p = plot_grid(p_noleg, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+
+# p_top = plot_grid(NULL, tree_fig, NULL, ncol=3, rel_heights=c(0.2,1,0.2))
+# p_bot = plot_grid(bl_cor, scaff_cor, n50_cor, ncol=3)
+# p = plot_grid(p_top, p_bot, nrow=2, rel_heights=c(1,0.5))
+
+# p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+# 
+# p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
 print(p)
 ```
 
 ## Insertions
 
-```{r insertions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r insertions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -392,19 +442,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Insertions, color=Insert
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=Insertions, color=Insertions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Insertions', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Insertions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=Insertions, color=Insertions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Insertions', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Insertions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Inserted bases
 
-```{r inserted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r inserted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -456,20 +541,55 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=InsertionBases, color=In
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=InsertionBases, color=InsertionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inserted bases', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Inserted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=InsertionBases, color=InsertionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inserted bases', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Inserted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 
 ## Deletions
 
-```{r deletions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r deletions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -521,19 +641,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Deletions, color=Deletio
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=Deletions, color=Deletions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deletions', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Deletions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=Deletions, color=Deletions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deletions', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Deletions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Deleted bases
 
-```{r deleted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r deleted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -585,19 +740,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=DeletionBases, color=Del
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=DeletionBases, color=DeletionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deleted bases', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Deleted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=DeletionBases, color=DeletionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Deleted bases', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Deleted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Inversions
 
-```{r inversions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r inversions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -649,19 +839,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Inversions, color=Invers
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=Inversions, color=Inversions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inversions', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Inversions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=Inversions, color=Inversions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inversions', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Inversions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Inverted bases
 
-```{r inverted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r inverted-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -713,19 +938,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=InvertedBases, color=Inv
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=InvertedBases, color=InvertedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inverted bases', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Inverted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=InvertedBases, color=InvertedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Inverted bases', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Inverted bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Duplications
 
-```{r duplications, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r duplications, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -777,19 +1037,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Duplications, color=Dupl
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=Duplications, color=Duplications)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplications', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Duplications") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=Duplications, color=Duplications)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplications', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Duplications") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Duplicated bases
 
-```{r duplicated-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r duplicated-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -841,19 +1136,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=DuplicatedBases, color=D
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=DuplicatedBases, color=DuplicatedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplicated bases', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Duplicated bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=DuplicatedBases, color=DuplicatedBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Duplicated bases', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Duplicated bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Transpositions
 
-```{r transpositions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r transpositions, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -905,19 +1235,54 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=Transpositions, color=Tr
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=Transpositions, color=Transpositions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transpositions', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Transpositions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=Transpositions, color=Transpositions)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transpositions', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Transpositions") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
 ## Transposed bases
 
-```{r transposed-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=4}
+```{r transposed-bases, out.width="90%", fig.align = "center", warning=FALSE, fig.height=5}
 
 h = corecol(numcol=1, pal="wilke", offset=3)
 l = corecol(numcol=1, offset=3)
@@ -969,13 +1334,48 @@ bl_cor = ggplot(cactus_tree_info, aes(x=BranchLength, y=TranspositionBases, colo
   bartheme() +
   theme(legend.position="none",
         axis.title=element_text(size=10),
-        axis.text=element_text(size=8))
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
 #print(bl_cor)
+
+scaff_cor = ggplot(cactus_tree_info, aes(x=Scaffolds, y=TranspositionBases, color=TranspositionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transposed bases', option = "C") +
+  xlab("# Scaffolds") +
+  ylab("Transposed bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(scaff_cor)
+
+n50_cor = ggplot(cactus_tree_info, aes(x=Scaffold.N50, y=TranspositionBases, color=TranspositionBases)) +
+  geom_point(size=2, alpha=0.5) +
+  #geom_smooth(method="lm", se=F, formula=y~log10(x)) +
+  geom_smooth(method="lm", se=F, linetype="dashed", color="#333333") +
+  scale_color_viridis(name='Transposed bases', option = "C") +
+  xlab("Scaffold N50") +
+  ylab("Transposed bases") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.title=element_text(size=10),
+        axis.text=element_text(size=8),
+        plot.margin=unit(c(0.5,2,0,0), "cm"))
+#print(n50_cor)
 
 tree_leg = get_legend(tree_fig)
 
-p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
-p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
+p_right = plot_grid(bl_cor, scaff_cor, n50_cor, nrow=3)
+p_top = plot_grid(tree_fig + theme(legend.position="none"), p_right , ncol=2, rel_widths=c(1,0.8))
+p = plot_grid(p_top, tree_leg, nrow=2, rel_heights=c(1,0.1))
+
+# tree_leg = get_legend(tree_fig)
+# 
+# p_top = plot_grid(NULL, bl_cor, tree_leg, nrow=3, rel_heights=c(0.2,1,0.3))
+# p = plot_grid(tree_fig + theme(legend.position="none"), p_top, ncol=2)
 print(p)
 ```
 
