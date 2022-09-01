@@ -1,0 +1,65 @@
+# Kemp's Ridley Genome Annotation file download links
+##Jean P. Elbers
+##jean.elbers@gmail.com
+##Research Institute of Wildlife Ecology, Department of Integrative Biology and Evolution, Vetmeduni Vienna, Vienna, Austria
+## LAST UPDATED: 11 June 2020
+
+# On a Linux computer, you can download the files below with the program wget 
+## ex: wget https://www.dropbox.com/s/llwaml13c7c6q2u/LepKem1.fasta.gz
+## on a Windows computer, you can copy the links into a browser and then download them
+
+LepKem1.fasta.gz (Kemp's ridley genome assembly - same as supercontigs.fasta.txt)
+https://www.dropbox.com/s/llwaml13c7c6q2u/LepKem1.fasta.gz
+md5sum 24fb00a9f292f285c39966cd278c759c
+
+LepKem1.scaffolds.gt200bp.fasta.gz (Kemp's ridley genome assembly - same as LepKem1.fasta.gz but minus 4 scaffolds less than 200 bases because NCBI doesn't allow assemblies with scaffolds less than 200 bp)
+https://www.dropbox.com/s/6ykhbzy254eoiaa/LepKem1.scaffolds.gt200bp.fasta.gz
+md5sum f857d1e928501f9aa1a40d110c5b5abd
+
+LepKem1-11Jun2020.fasta.gz (Kemp's ridley genome assembly submitted to NCBI - same as LepKem1.scaffolds.gt200bp.fasta.gz but with NCBI considered "contamination" removed)
+https://www.dropbox.com/s/f4np3ipgp1iqjmr/LepKem1-11Jun2020.fasta.gz
+md5sum e09d0f56346afbcf72762b0e339213b6
+
+LepKem1-11Jun2020-part-1.sqn.gz (Kemp's ridley genome assembly with annotations part 1 for upload to NCBI - note that the beginning of the file has only my information, should have information for whoever would be on the paper, so not sure if that needs to be updated somehow by NCBI staff or remade)
+https://www.dropbox.com/s/tdj2o3pd02rbeul/LepKem1-11Jun2020-part-1.sqn.gz
+md5sum 0e91f3346b4d988441f9ccc8c2d3155e
+
+LepKem1-11Jun2020-part-2.sqn.gz (Kemp's ridley genome assembly with annotations part 2 for upload to NCBI - note that the beginning of the file has only my information, should have information for whoever would be on the paper, so not sure if that needs to be updated somehow by NCBI staff or remade)
+https://www.dropbox.com/s/mm6e2ktxuo5a05a/LepKem1-11Jun2020-part-2.sqn.gz
+md5sum 824461756faaf74a9ee2356ed2e6af60
+
+LepKem1.gff.gz (Kemp's ridley genome annotations in GFF format)
+https://www.dropbox.com/s/eer7jr7cjlin0dj/LepKem1.gff.gz
+md5sum a547a271d2b93fe0e81caac1bb11ea08
+
+LepKem1-proteins.fasta.gz (Kemp's ridley predicted proteins in FASTA format)
+https://www.dropbox.com/s/moyfaey4wcolrz1/LepKem1-proteins.fasta.gz
+md5sum f4e42594e5a6fb3e0d031e48ef4b978a
+
+LepKem1-transcripts.fasta.gz (Kemp's ridley predicted transcripts in FASTA format)
+https://www.dropbox.com/s/qbcighvaw63kj7s/LepKem1-transcripts.fasta.gz
+md5sum 55dab5eeb0f17943cbafc98373b68762
+
+
+# README for steps used to roughly recreate annotation analysis
+kemps-genome-annotation-readme-with-transcriptome.txt
+https://www.dropbox.com/s/k5ppdlr9ks2chox/kemps-genome-annotation-readme-with-transcriptome.txt
+
+# Microsoft Word document that describes the steps in the README
+https://www.dropbox.com/s/hcojqb7tfkdp1lk/kemps-genome-annotation-manuscript.docx
+
+# In the transcript FASTA file, a mRNA transcript is given a name such as Leke_00000001-RA
+# which corresponds to transcript transcript variant 1 for gene Leke_00000001
+# the corresponding protein is in the protein FASTA file and is also called Leke_00000001-RA
+# Leke_00000001-RB would be transcript variant 2 for gene Leke_00000001
+# Leke_00000001-RC would be transcript variant 3 for gene Leke_00000001
+# etc...
+# the gene have names such as Leke_00000001, Leke_00000002, Leke_00000003, etc. and their functions are in the GFF file in the 9th column under the section called Note=
+# in the Note= section, there is a Gene Abbreviation followed by a description followed by the species the annotation came from followed by the UniProt species id
+# an example with Leke_00000001
+# It has the following note section "Note=Similar to ALP1: Protein ANTAGONIST OF LIKE HETEROCHROMATIN PROTEIN 1 (Arabidopsis thaliana OX%3D3702);"
+# ALP1 is the gene abbreviation
+# Protein ANTAGONIST OF LIKE HETEROCHROMATIN PROTEIN 1 is the gene description
+# Arabidopsis thaliana is the species the closests BLAST match came from
+# OX%3D3702 (really OX=3D3702, can't have = signs in GFF file, except for Note=) means UniProt species 3D3702 [as far as I know]
+# Note that some of the gene abbreviations such ALP1 might be lowercase in some entries ALP1 vs. Alp1
