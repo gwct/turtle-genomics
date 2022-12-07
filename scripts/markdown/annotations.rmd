@@ -260,6 +260,33 @@ print(busco_p)
 
 ```
 
+### Transcriptome BUSCO
+
+
+```{r busco-ts-fig, out.width="66%", fig.align="center", fig.height=6}
+
+bt_data = read.csv("../../data/TurtleAnnotationBuscoScores.csv", header=T, comment.char="#")
+#in_data = subset(in_data, node.type=="tip")
+# Read in the turtle data and exclude "alternate" species
+
+busco_data = select(bt_data, Species, CompleteSingleCopy, CompleteDup, Fragmented, Missing)
+busco_data_long = melt(busco_data, id.vars=c("Species"))
+
+busco_p = ggplot(busco_data_long, aes(x=Species, y=value, fill=variable, group=Species)) +
+  geom_bar(stat="identity", position="stack") +
+  geom_hline(yintercept=6732, linetype="dashed", col="#333333") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_fill_manual(labels=c("Completed+single copy", "Complete+duplicated", "Fragmented", "Missing"), values=corecol(pal="wilke", offset=2)) +
+  xlab("") +
+  ylab("# of genes") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(busco_p)
+
+```
+
 ## Liftoff annotations
 
 [Liftoff](https://github.com/agshumate/Liftoff) is a program that maps annotated features from one genome to another.
