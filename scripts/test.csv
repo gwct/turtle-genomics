@@ -1,0 +1,55 @@
+# PYTHON VERSION: 3.9.15
+# Script call:    get_window_stats.py -i /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/02-fasta -w 10 -o test.csv --overwrite
+# Runtime:        01/19/2023 11:21:14
+# ----------------
+# Window size (-w):                     10kb
+# Input directory:                      /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/02-fasta
+# Repeat threshold:                     0.5
+# Missing data threshold:               0.5
+# Output file:                          /n/home07/gthomas/projects/turtles/scripts/test.csv
+# ----------------
+# HEADER INFO:
+# window:                               Unique window ID (scaffold:start-end)
+# scaffold:                             Scaffold ID of window
+# start:                                The start coordinate of the window (0-based)
+# end:                                  The end coordinate of the window
+# aln.len:                              The length of the alignment, including indels
+# seqs.above.repeat:                    The number of sequences in the alignment with a percentage of sites above the specified repeat threshold (-r)
+# seqs.above.missing:                   The number of sequences in the alignment with a percentage of sites above the specified missing data threshold (-m)
+# avg.seq.len.wo.missing:               The average length of all sequences in the alignment while excluding gaps or missing data (-, X, N)
+# uniq.seqs:                            The number of unique sequences in the alignment
+# ident.seqs:                           The number of identical sequences in the alignment
+# invariant.sites:                      The number of sites in the alignment with only 1 allele
+# informative.sites:                    The number of sites in the alignment that have at least 2 alleles that are present in 2 species
+# sites.w.missing:                      The number of sites in the alignment with at least one missing data character (-, X, N)
+# percent.sites.with.missing:           The percent of sites in the alignment with at least one missing data character (-, X, N)
+# sites.high.missing:                   The number of sites in the alignment that are made up of a high percentage of missing data characters (over -m)
+# sites.all.missing:                    The number of sites in the alignment that are made up of all missing data characters
+# ----------------
+window,scaffold,start,end,aln.len,seqs.above.repeat,seqs.above.missing,avg.seq.len.wo.missing,uniq.seqs,ident.seqs,invariant.sites,informative.sites,sites.w.missingpercent.sites.with.missing,sites.high.missing,sites.all.missing
+NW_025091564.1:0-4772,NW_025091564.1,0,4772,4772,0,19,1501.2272727272727,20,1,0,513,4766,0.998742665549036,3173,1
+NC_050072.1:62420000-62430000,NC_050072.1,62420000,62430000,10000,0,1,7838.181818181818,22,0,84,5016,8694,0.8694,570,1
+NC_050072.1:128140000-128150000,NC_050072.1,128140000,128150000,10000,0,3,7425.818181818182,22,0,225,4573,7380,0.738,1143,1
+NC_050072.1:15240000-15250000,NC_050072.1,15240000,15250000,10000,1,0,8129.363636363636,22,0,452,5947,6683,0.6683,934,1
+NC_050072.1:119040000-119050000,NC_050072.1,119040000,119050000,10000,0,3,7830.227272727273,22,0,78,5077,9063,0.9063,508,1
+NC_050072.1:136910000-136920000,NC_050072.1,136910000,136920000,10000,1,21,583.4545454545455,22,0,0,38,10000,1.0,9960,1
+NC_050072.1:45110000-45120000,NC_050072.1,45110000,45120000,10000,0,1,7403.272727272727,22,0,704,4494,6985,0.6985,1640,1
+NC_050072.1:96870000-96880000,NC_050072.1,96870000,96880000,10000,0,0,7837.227272727273,22,0,464,4859,6489,0.6489,1117,1
+NC_050072.1:4100000-4110000,NC_050072.1,4100000,4110000,10000,0,3,7737.909090909091,22,0,143,4900,8411,0.8411,571,1
+NC_050072.1:40540000-40550000,NC_050072.1,40540000,40550000,10000,3,10,4946.272727272727,22,0,44,3713,9595,0.9595,3922,1
+NC_050072.1:11810000-11820000,NC_050072.1,11810000,11820000,10000,0,0,9074.818181818182,22,0,1313,4811,3499,0.3499,447,1
+NC_050072.1:134340000-134350000,NC_050072.1,134340000,134350000,10000,0,1,7134.863636363636,22,0,537,3650,6679,0.6679,1944,1
+NC_050072.1:45320000-45330000,NC_050072.1,45320000,45330000,10000,2,19,3744.3636363636365,22,0,369,1998,8187,0.8187,6428,1
+NC_050072.1:3400000-3410000,NC_050072.1,3400000,3410000,10000,0,4,7378.136363636364,22,0,328,4340,6884,0.6884,1686,1
+NC_050072.1:57210000-57220000,NC_050072.1,57210000,57220000,10000,1,21,4335.681818181818,22,0,104,2756,8514,0.8514,5217,1
+NC_050072.1:81190000-81200000,NC_050072.1,81190000,81200000,10000,0,4,5845.136363636364,22,0,668,3448,6261,0.6261,3960,1
+NC_050072.1:10230000-10240000,NC_050072.1,10230000,10240000,10000,1,7,5942.772727272727,22,0,287,4315,8935,0.8935,2766,1
+NC_050072.1:60150000-60160000,NC_050072.1,60150000,60160000,10000,1,3,5572.409090909091,22,0,1116,2383,6345,0.6345,4404,1
+NC_050072.1:126390000-126400000,NC_050072.1,126390000,126400000,10000,0,4,6576.727272727273,22,0,103,4040,8942,0.8942,2208,1
+NC_050072.1:99630000-99640000,NC_050072.1,99630000,99640000,10000,0,2,6737.181818181818,22,0,329,4164,7069,0.7069,2222,1
+NC_050072.1:92540000-92550000,NC_050072.1,92540000,92550000,10000,0,0,9396.045454545454,22,0,978,5213,3293,0.3293,90,1
+NC_050072.1:41880000-41890000,NC_050072.1,41880000,41890000,10000,3,5,6259.363636363636,22,0,32,6534,8926,0.8926,1966,1
+NC_050072.1:23110000-23120000,NC_050072.1,23110000,23120000,10000,0,2,6294.954545454545,22,0,525,3670,5664,0.5664,3361,1
+NC_050072.1:107830000-107840000,NC_050072.1,107830000,107840000,10000,0,1,8176.136363636364,22,0,231,4799,6316,0.6316,1057,1
+NC_050072.1:42570000-42580000,NC_050072.1,42570000,42580000,10000,0,8,4827.181818181818,22,0,168,3132,9165,0.9165,3770,1
+NC_050072.1:55880000-55890000,NC_050072.1,55880000,55890000,10000,1,8,6573.227272727273,22,0,267,4403,8806,0.8806,1775,1

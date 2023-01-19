@@ -1,0 +1,402 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Thu Mar 10 10:05:10 2022]
+rule repeat_mask:
+    input: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+    output: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa.masked
+    log: logs/spec-20-repeat-masking.log
+    jobid: 0
+    wildcards: batch=20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, partition=holy-info,shared,bos-info, mem=12g, time=24:00:00, cpus=32
+
+
+        singularity exec /cvmfs/singularity.galaxyproject.org/r/e/repeatmasker:4.1.2.p1--pl5321hdfd78af_1 RepeatMasker -xsmall -pa 8 -gff -q -lib /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cpicta/chrPic1-repeats.fa /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+        
+RepeatMasker version 4.1.2-p1
+Search Engine: NCBI/RMBLAST [ 2.10.0+ ]
+Using Custom Repeat Library: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cpicta/chrPic1-repeats.fa
+
+
+analyzing file /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 7 of 2303
+identifying Simple Repeats in batch 3 of 2303
+identifying Simple Repeats in batch 6 of 2303
+identifying Simple Repeats in batch 1 of 2303
+identifying Simple Repeats in batch 4 of 2303
+identifying Simple Repeats in batch 2 of 2303
+identifying Simple Repeats in batch 8 of 2303
+identifying Simple Repeats in batch 5 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 3 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 7 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 6 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 1 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 4 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 2 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 8 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 5 of 2303
+identifying Simple Repeats in batch 5 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 9 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 9 of 2303
+identifying Simple Repeats in batch 8 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 10 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 10 of 2303
+identifying Simple Repeats in batch 1 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 11 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 11 of 2303
+identifying Simple Repeats in batch 6 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 12 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 12 of 2303
+identifying Simple Repeats in batch 2 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 13 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 13 of 2303
+identifying Simple Repeats in batch 3 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 14 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 14 of 2303
+identifying Simple Repeats in batch 4 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 15 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 15 of 2303
+identifying Simple Repeats in batch 14 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 16 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 16 of 2303
+identifying Simple Repeats in batch 12 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 17 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 17 of 2303
+identifying Simple Repeats in batch 7 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 18 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 18 of 2303
+identifying Simple Repeats in batch 16 of 2303
+identifying Simple Repeats in batch 13 of 2303
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 19 of 2303
+identifying Simple Repeats in batch 20 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 19 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 20 of 2303
+identifying Simple Repeats in batch 17 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 21 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 21 of 2303
+identifying Simple Repeats in batch 10 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 22 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 22 of 2303
+identifying Simple Repeats in batch 11 of 2303
+identifying Simple Repeats in batch 9 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 23 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 23 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 24 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 24 of 2303
+identifying Simple Repeats in batch 19 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 25 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 25 of 2303
+identifying Simple Repeats in batch 15 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 26 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 26 of 2303
+identifying Simple Repeats in batch 20 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 27 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 27 of 2303
+identifying Simple Repeats in batch 23 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 28 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 28 of 2303
+identifying Simple Repeats in batch 25 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 29 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 29 of 2303
+identifying Simple Repeats in batch 24 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 30 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 30 of 2303
+identifying Simple Repeats in batch 18 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 31 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 31 of 2303
+identifying Simple Repeats in batch 22 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 32 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 32 of 2303
+identifying Simple Repeats in batch 26 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 33 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 33 of 2303
+identifying Simple Repeats in batch 21 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 34 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 34 of 2303
+identifying Simple Repeats in batch 30 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 35 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 35 of 2303
+identifying Simple Repeats in batch 29 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 36 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 36 of 2303
+identifying Simple Repeats in batch 34 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 37 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 37 of 2303
+identifying Simple Repeats in batch 33 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 38 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 38 of 2303
+identifying Simple Repeats in batch 31 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 39 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 39 of 2303
+identifying Simple Repeats in batch 28 of 2303
+identifying Simple Repeats in batch 27 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 40 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 40 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 41 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 41 of 2303
+identifying Simple Repeats in batch 38 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 42 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 42 of 2303
+identifying Simple Repeats in batch 36 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 43 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 43 of 2303
+identifying Simple Repeats in batch 35 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 44 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 44 of 2303
+identifying Simple Repeats in batch 43 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 45 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 45 of 2303
+identifying Simple Repeats in batch 40 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 46 of 2303
+identifying Simple Repeats in batch 42 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 46 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 47 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 47 of 2303
+identifying Simple Repeats in batch 37 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 48 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 48 of 2303
+identifying Simple Repeats in batch 32 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 49 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 49 of 2303
+identifying Simple Repeats in batch 39 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 50 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 50 of 2303
+identifying Simple Repeats in batch 41 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 51 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 51 of 2303
+identifying Simple Repeats in batch 48 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 49 of 2303
+identifying Simple Repeats in batch 52 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 52 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 53 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 53 of 2303
+identifying Simple Repeats in batch 44 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 54 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 54 of 2303
+identifying Simple Repeats in batch 46 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 55 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 55 of 2303
+identifying Simple Repeats in batch 47 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 56 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 56 of 2303
+identifying Simple Repeats in batch 45 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 57 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 57 of 2303
+identifying Simple Repeats in batch 55 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 58 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 58 of 2303
+identifying Simple Repeats in batch 53 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 59 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 59 of 2303
+identifying Simple Repeats in batch 57 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 60 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 60 of 2303
+identifying Simple Repeats in batch 54 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 61 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 61 of 2303
+identifying Simple Repeats in batch 58 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 62 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 62 of 2303
+identifying Simple Repeats in batch 56 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 63 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 63 of 2303
+identifying Simple Repeats in batch 51 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 64 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 64 of 2303
+identifying Simple Repeats in batch 50 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 65 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 65 of 2303
+identifying Simple Repeats in batch 60 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 66 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 66 of 2303
+identifying Simple Repeats in batch 52 of 2303
+identifying Simple Repeats in batch 59 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 67 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 67 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 68 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 68 of 2303
+identifying Simple Repeats in batch 61 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 69 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 69 of 2303
+identifying Simple Repeats in batch 62 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 70 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 70 of 2303
+identifying Simple Repeats in batch 63 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 71 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 71 of 2303
+identifying Simple Repeats in batch 64 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 72 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 72 of 2303
+identifying Simple Repeats in batch 65 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 73 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 73 of 2303
+identifying Simple Repeats in batch 68 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 74 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 74 of 2303
+identifying Simple Repeats in batch 66 of 2303
+identifying Simple Repeats in batch 67 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 75 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 75 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 76 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 76 of 2303
+identifying Simple Repeats in batch 69 of 2303
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 77 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 77 of 2303
+slurmstepd: error: *** JOB 65278517 ON bos2-01-0207 CANCELLED AT 2022-03-10T11:00:19 ***

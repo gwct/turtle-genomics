@@ -1,0 +1,110 @@
+[2022-03-14T18:47:02+0000] [MainThread] [I] [toil.statsAndLogging] xmlRoot = <multi_cactus inputSequences="turtle-output/GCA_009430475.1_Amar_v1_genomic.fna turtle-output/Anc00.fa turtle-output/Anc01.fa turtle-output/Anc02.fa turtle-output/Anc03.fa turtle-output/Anc04.fa turtle-output/Anc05.fa turtle-output/Anc06.fa turtle-output/Anc07.fa turtle-output/Anc09.fa turtle-output/Anc10.fa turtle-output/Anc11.fa turtle-output/Anc12.fa turtle-output/Anc13.fa turtle-output/Anc14.fa turtle-output/Anc15.fa turtle-output/Anc16.fa turtle-output/Anc17.fa turtle-output/Anc18.fa turtle-output/Anc19.fa turtle-output/Anc20.fa turtle-output/GCA_003597395.1_ASM359739v1_genomic.fna turtle-output/GCA_007922185.1_Carettochelys_insculpta-1.0_genomic.fna turtle-output/GCA_003846335.1_ASM384633v1_genomic.fna turtle-output/GCF_015237465.2_rCheMyd1.pri.v2_genomic.fna turtle-output/GCA_000241765.3_Chrysemys_picta_BioNano-3.0.4_genomic.fna turtle-output/GCA_007922165.1_Chelydra_serpentina-1.0_genomic.fna turtle-output/GCF_009764565.3_rDerCor1.pri.v4_genomic.fna turtle-output/GCA_007922305.1_Dermatemys_mawii-1.0_genomic.fna turtle-output/GCA_007922225.1_Emydura_subglobosa-1.0_genomic.fna turtle-output/GCF_007399415.2_rGopEvg1_v1.p_genomic.fna turtle-output/LepKem1-11Jun2020.fasta.masked turtle-output/GCA_020497125.1_ASM2049712v1_genomic.fna turtle-output/GCF_016161935.1_ASM1616193v1_genomic.fna turtle-output/GCA_001728815.2_terp_v2_2_genomic.fna turtle-output/GCA_007922155.1_Mesoclemmys_tuberculata-1.0_genomic.fna turtle-output/GCA_007922175.1_Pelusios_castaneus-1.0_genomic.fna turtle-output/GCA_007922195.1_Podocnemis_expansa-1.0_genomic.fna turtle-output/GCA_003942145.1_ASM394214v1_genomic.fna turtle-output/GCA_000230535.1_PelSin_1.0_genomic.fna turtle-output/GCA_019425775.1_ASM1942577v1_genomic.fna turtle-output/GCF_013100865.1_CAS_Tse_1.0_genomic.fna" inputSequenceNames="Amarmorata Anc00 Anc01 Anc02 Anc03 Anc04 Anc05 Anc06 Anc07 Anc09 Anc10 Anc11 Anc12 Anc13 Anc14 Anc15 Anc16 Anc17 Anc18 Anc19 Anc20 Cabingdonii Cinsculpta Cmccordii Cmydas Cpicta Cserpentina Dcoriacea Dmawii Esubglobosa Gevgoodei Lkempii Mmutica Mreevesii Mterrapin Mtuberculata Pcastaneus Pexpansa Pmegacephalum Psinensis Rswinhoei Tscripta">
+	<tree>((((Cmccordii:1.0,(Mmutica:1.0,Mreevesii:1.0)Anc14:1.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,((((Tscripta:1.0,Mterrapin:1.0)Anc19:1.0,Cpicta:1.0)Anc15:1.0,Amarmorata:1.0)Anc09:1.0,Pmegacephalum:1.0)Anc04:1.0)Anc01:1.0,((((Dmawii:1.0,Cserpentina:1.0)Anc16:1.0,((Cmydas:1.0,Lkempii:1.0)Anc20:1.0,Dcoriacea:1.0)Anc17:1.0)Anc10:1.0,((Psinensis:1.0,Rswinhoei:1.0)Anc18:1.0,Cinsculpta:1.0)Anc11:1.0)Anc05:1.0,((Esubglobosa:1.0,Mtuberculata:1.0)Anc12:1.0,(Pcastaneus:1.0,Pexpansa:1.0)Anc13:1.0)Anc06:1.0)Anc02:1.0)Anc00;</tree>
+	<cactus name="Anc00" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc00/Anc00_experiment.xml" />
+	<cactus name="Anc01" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc01/Anc01_experiment.xml" />
+	<cactus name="Anc03" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc03/Anc03_experiment.xml" />
+	<cactus name="Anc07" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc07/Anc07_experiment.xml" />
+	<cactus name="Anc14" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc14/Anc14_experiment.xml" />
+	<cactus name="Anc08" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc08/Anc08_experiment.xml" />
+	<cactus name="Anc04" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc04/Anc04_experiment.xml" />
+	<cactus name="Anc09" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc09/Anc09_experiment.xml" />
+	<cactus name="Anc15" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc15/Anc15_experiment.xml" />
+	<cactus name="Anc19" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc19/Anc19_experiment.xml" />
+	<cactus name="Anc02" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc02/Anc02_experiment.xml" />
+	<cactus name="Anc05" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc05/Anc05_experiment.xml" />
+	<cactus name="Anc10" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc10/Anc10_experiment.xml" />
+	<cactus name="Anc16" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc16/Anc16_experiment.xml" />
+	<cactus name="Anc17" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc17/Anc17_experiment.xml" />
+	<cactus name="Anc20" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc20/Anc20_experiment.xml" />
+	<cactus name="Anc11" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc11/Anc11_experiment.xml" />
+	<cactus name="Anc18" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc18/Anc18_experiment.xml" />
+	<cactus name="Anc06" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc06/Anc06_experiment.xml" />
+	<cactus name="Anc12" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc12/Anc12_experiment.xml" />
+	<cactus name="Anc13" experiment_path="/tmp/tmpfyz1p0_4/progressiveAlignment/Anc13/Anc13_experiment.xml" />
+</multi_cactus>
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.statsAndLogging] Importing file:///n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output/GCA_003597395.1_ASM359739v1_genomic.fna
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.statsAndLogging] Importing file:///n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output/GCF_007399415.2_rGopEvg1_v1.p_genomic.fna
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.job] Saving graph of 1 jobs, 1 new
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.job] Processing job 'run_batch_align_jobs' kind-run_batch_align_jobs/instance-hb0x0zvb v0
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu2c0707.rc.fas.harvard.edu.
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-03-14T18:47:09+0000] [MainThread] [I] [toil.leader] Issued job 'run_batch_align_jobs' kind-run_batch_align_jobs/instance-hb0x0zvb v1 with job batch system ID: 0 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:10+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/cc9e/worker_log.txt
+[2022-03-14T18:47:11+0000] [MainThread] [I] [toil.leader] 0 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T18:47:11+0000] [MainThread] [I] [toil.leader] Issued job 'run_cactus_align' kind-run_cactus_align/instance-mlylqz9h v1 with job batch system ID: 1 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:11+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/3ee0/worker_log.txt
+[2022-03-14T18:47:12+0000] [MainThread] [I] [toil.leader] Issued job 'Job' kind-Job/instance-6h_hmd86 v1 with job batch system ID: 2 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:13+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/f442/worker_log.txt
+[2022-03-14T18:47:13+0000] [MainThread] [I] [toil.leader] Issued job 'preprocess_input_sequences' kind-preprocess_input_sequences/instance-fba5s02e v1 with job batch system ID: 3 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:14+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/3ce5/worker_log.txt
+[2022-03-14T18:47:14+0000] [MainThread] [I] [toil.leader] Issued job 'Job' kind-Job/instance-k0sn5ypc v1 with job batch system ID: 4 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:15+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/dcde/worker_log.txt
+[2022-03-14T18:47:15+0000] [MainThread] [I] [toil.leader] Issued job 'resolve_id_promises' kind-resolve_id_promises/instance-5slimc3u v1 with job batch system ID: 5 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:16+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/52c9/worker_log.txt
+[2022-03-14T18:47:16+0000] [MainThread] [I] [toil.leader] Issued job 'Job' kind-Job/instance-k0sn5ypc v2 with job batch system ID: 6 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:17+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/3634/worker_log.txt
+[2022-03-14T18:47:17+0000] [MainThread] [I] [toil.leader] Issued job 'preprocess_input_sequences' kind-preprocess_input_sequences/instance-fba5s02e v2 with job batch system ID: 7 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:18+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/5eda/worker_log.txt
+[2022-03-14T18:47:18+0000] [MainThread] [I] [toil.leader] Issued job 'run_prepend_unique_ids' kind-run_prepend_unique_ids/instance-mis7lukf v1 with job batch system ID: 8 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:19+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/d2d1/worker_log.txt
+[2022-03-14T18:47:52+0000] [Thread-4  ] [W] [toil.statsAndLogging] Got message from job at time 03-14-2022 18:47:52: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job files/for-job/kind-run_prepend_unique_ids/instance-mis7lukf/cleanup/file-56bf855f70b3419ab31e11174296dc3e/stream used 432.65% disk (8.7 GiB [9291038720B] used, 2.0 GiB [2147483648B] requested).
+[2022-03-14T18:47:53+0000] [MainThread] [I] [toil.leader] Issued job 'run_setup_phase' kind-run_setup_phase/instance-32gms_vh v1 with job batch system ID: 9 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:47:53+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/141f/worker_log.txt
+[2022-03-14T18:47:54+0000] [MainThread] [I] [toil.leader] Issued job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1 with job batch system ID: 10 and cores: 32, disk: 13.0 Gi, and memory: 78.1 Gi
+[2022-03-14T18:47:54+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/worker_log.txt
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] 2022-03-14 18:49:19.027684: Running the command: "cactus_consolidated --sequences Cabingdonii /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa717ia67.tmp Cmccordii /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp90a1gqj3.tmp Gevgoodei /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpbzihvlch.tmp Mmutica /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpawz4vq41.tmp Pmegacephalum /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpdgdf63ru.tmp --speciesTree (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01; --logLevel INFO --alignments /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa1pueilj.tmp --params /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpisjvtdfj.tmp --outputFile /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmps3zwu40n.tmp --outputHalFastaFile /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp4usyqpjw.tmp --outputReferenceFile /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp0ap0sdvv.tmp --outgroupEvents Cmccordii Pmegacephalum Mmutica --referenceEvent Anc08 --secondaryAlignments /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpk0ixv80q.tmp --threads 32"
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Params file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpisjvtdfj.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output file string : /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmps3zwu40n.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output hal fasta file string : /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp4usyqpjw.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output reference fasta file string : /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp0ap0sdvv.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Sequence files and events: Cabingdonii /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa717ia67.tmp Cmccordii /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp90a1gqj3.tmp Gevgoodei /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpbzihvlch.tmp Mmutica /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpawz4vq41.tmp Pmegacephalum /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpdgdf63ru.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Alignments file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa1pueilj.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Secondary alignments file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpk0ixv80q.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constraint alignments file: (null)
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Species tree: (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01;
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Outgroup events: Cmccordii Pmegacephalum Mmutica
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Reference event: Anc08
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Loaded the parameters files, 0 seconds have elapsed
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Set up the cactus disk, 0 seconds have elapsed
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the first flower
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Going to build the event tree with newick string: (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01;
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Parsed the tree
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the basic event tree
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa717ia67.tmp to Cabingdonii
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa717ia67.tmp
+[2022-03-14T18:49:19+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpa717ia67.tmp is specified incomplete, the sequences will not be attached
+[2022-03-14T18:49:34+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp90a1gqj3.tmp to Cmccordii
+[2022-03-14T18:49:34+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp90a1gqj3.tmp
+[2022-03-14T18:49:34+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmp90a1gqj3.tmp is specified incomplete, the sequences will not be attached
+[2022-03-14T18:49:49+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpbzihvlch.tmp to Gevgoodei
+[2022-03-14T18:49:49+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpbzihvlch.tmp
+[2022-03-14T18:49:49+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpbzihvlch.tmp is specified incomplete, the sequences will not be attached
+[2022-03-14T18:50:04+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpawz4vq41.tmp to Mmutica
+[2022-03-14T18:50:04+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpawz4vq41.tmp
+[2022-03-14T18:50:04+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpawz4vq41.tmp is specified incomplete, the sequences will not be attached
+[2022-03-14T18:50:17+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpdgdf63ru.tmp to Pmegacephalum
+[2022-03-14T18:50:17+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpdgdf63ru.tmp
+[2022-03-14T18:50:17+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/24f75575db5756cbab75ce4453bb0c3f/d498/99c9/tmpdgdf63ru.tmp is specified incomplete, the sequences will not be attached
+[2022-03-14T18:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the initial flower with 433067 sequences and 10 events with string: ((((Cmccordii:1,Mmutica:2)Anc07:1,(Cabingdonii:1,Gevgoodei:1)Anc08:1)Anc03:1,Pmegacephalum:2)Anc01:9.22337e+18)ROOT:9.22337e+18;
+[2022-03-14T18:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Established the first Flower in the hierarchy, 72 seconds have elapsed
+[2022-03-14T19:16:30+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Converted alignment coordinates, 1631 seconds have elapsed
+[2022-03-14T19:16:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Stripped the unique IDs, 1632 seconds have elapsed
+[2022-03-14T19:16:33+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Starting annealing round with a minimum chain length of 64 and an alignment trim of 3
+[2022-03-14T19:47:12+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T20:47:12+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T20:53:14+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): There were 159362292 blocks in the sequence graph, representing 6743955860 total aligned bases
+[2022-03-14T20:53:47+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Block degree stats: min 1, avg 5.328231, median 4, max 394349
+[2022-03-14T20:53:47+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Block support stats: min 0.000000, avg 0.738990, median 0.666667, max 5.000000
+[2022-03-14T21:01:15+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Starting melting round with a minimum chain length of 2
+[2022-03-14T21:47:12+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T22:41:30+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): A melting round is destroying 31467290 blocks with an average degree of 8.364870 from chains with length less than 2. Total aligned bases lost: 263219786
+[2022-03-14T22:47:13+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T22:57:38+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Starting melting round with a minimum chain length of 4
+[2022-03-14T23:47:13+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-15T00:04:39+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): A melting round is destroying 27629383 blocks with an average degree of 6.238047 from chains with length less than 4. Total aligned bases lost: 364603707
+[2022-03-15T00:20:03+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Starting melting round with a minimum chain length of 8
+[2022-03-15T00:47:14+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-15T01:14:15+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): A melting round is destroying 29957677 blocks with an average degree of 4.259153 from chains with length less than 8. Total aligned bases lost: 540829343
+[2022-03-15T01:47:15+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-15T02:40:12+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): A melting round is destroying 18513281 blocks with an average degree of 4.033124 from chains with length less than 64. Total aligned bases lost: 504678674
+slurmstepd: error: *** JOB 65781104 ON holygpu2c0707 CANCELLED AT 2022-03-14T22:47:14 DUE TO TIME LIMIT ***

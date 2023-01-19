@@ -1,0 +1,55 @@
+No branch length for Cmccordii: setting to 1
+No branch length for Mmutica: setting to 1
+No branch length for Mreevesii: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Cabingdonii: setting to 1
+No branch length for Gevgoodei: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Tscripta: setting to 1
+No branch length for Mterrapin: setting to 1
+No branch length for : setting to 1
+No branch length for Cpicta: setting to 1
+No branch length for : setting to 1
+No branch length for Amarmorata: setting to 1
+No branch length for : setting to 1
+No branch length for Pmegacephalum: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Dmawii: setting to 1
+No branch length for Cserpentina: setting to 1
+No branch length for : setting to 1
+No branch length for Cmydas: setting to 1
+No branch length for Lkempii: setting to 1
+No branch length for : setting to 1
+No branch length for Dcoriacea: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Psinensis: setting to 1
+No branch length for Rswinhoei: setting to 1
+No branch length for : setting to 1
+No branch length for Cinsculpta: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Esubglobosa: setting to 1
+No branch length for Mtuberculata: setting to 1
+No branch length for : setting to 1
+No branch length for Pcastaneus: setting to 1
+No branch length for Pexpansa: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+Traceback (most recent call last):
+  File "/usr/local/bin/cactus-preprocess", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/dist-packages/cactus/preprocessor/cactus_preprocessor.py", line 524, in main
+    with Toil(options) as toil:
+  File "/usr/local/lib/python3.8/dist-packages/toil/common.py", line 872, in __enter__
+    jobStore.resume()
+  File "/usr/local/lib/python3.8/dist-packages/toil/jobStores/fileJobStore.py", line 116, in resume
+    raise NoSuchJobStoreException(self.jobStoreDir)
+toil.jobStores.abstractJobStore.NoSuchJobStoreException: The job store '/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/jobstore/7' does not exist, so there is nothing to restart.
+real 5.85
+user 2.54
+sys 3.28

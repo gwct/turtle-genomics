@@ -1,0 +1,33 @@
+[2022-03-14T14:45:19+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-Job/instance-m9edalmk
+[2022-03-14T14:45:19+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-EncapsulatedJob/instance-i5e27pi3
+[2022-03-14T14:45:19+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-CactusBlastPhase/instance-76wffeid
+[2022-03-14T14:45:19+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu7c26304.rc.fas.harvard.edu.
+[2022-03-14T14:45:19+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-03-14T14:45:19+0000] [MainThread] [I] [toil.leader] Issued job 'mappingQualityRescoring' kind-mappingQualityRescoring/instance-s3r5k_72 v1 with job batch system ID: 0 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T14:45:20+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/4b388fba54325030a9457f3a074feb6c/599c/worker_log.txt
+[2022-03-14T14:45:21+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T14:46:48+0000] [MainThread] [I] [toil-rt] 2022-03-14 14:46:48.268744: Running the command: "bash -c set -eo pipefail && cat /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpeci4gx6u.tmp | cactus_mirrorAndOrientAlignments INFO | sort -T/tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpstzfni1h -k6,6 -k7,7n -k8,8n | uniq | cactus_splitAlignmentOverlaps INFO | cactus_calculateMappingQualities INFO 5 0.0 0.001 /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpv6o3n2bo.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpb6g12p7s.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplj8bvnhc.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplk5knrub.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpgqw73b__.tmp"
+[2022-03-14T15:45:22+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T16:45:23+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T17:45:24+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-14T18:23:01+0000] [MainThread] [I] [toil-rt] 2022-03-14 18:23:01.128048: Successfully ran: "bash -c 'set -eo pipefail && cat /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpeci4gx6u.tmp | cactus_mirrorAndOrientAlignments INFO | sort -T/tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpstzfni1h -k6,6 -k7,7n -k8,8n | uniq | cactus_splitAlignmentOverlaps INFO | cactus_calculateMappingQualities INFO 5 0.0 0.001 /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpv6o3n2bo.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpb6g12p7s.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplj8bvnhc.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplk5knrub.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpgqw73b__.tmp'" in 12972.8304 seconds and 11.6 Mi memory
+[2022-03-14T18:23:01+0000] [MainThread] [I] [toil-rt] 2022-03-14 18:23:01.199918: Running the command: "bash -c set -eo pipefail && cat /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpb6g12p7s.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplj8bvnhc.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplk5knrub.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpgqw73b__.tmp"
+[2022-03-14T18:28:05+0000] [MainThread] [I] [toil-rt] 2022-03-14 18:28:05.418049: Successfully ran: "bash -c 'set -eo pipefail && cat /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpb6g12p7s.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplj8bvnhc.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmplk5knrub.tmp /tmp/4b388fba54325030a9457f3a074feb6c/599c/c324/tmpgqw73b__.tmp'" in 304.1696 seconds and 1.6 Mi memory
+[2022-03-14T18:36:44+0000] [Thread-4  ] [I] [toil.statsAndLogging] Got message from job at time 03-14-2022 18:36:44: Input cigar file has 97273176 lines
+[2022-03-14T18:36:44+0000] [Thread-4  ] [I] [toil.statsAndLogging] Got message from job at time 03-14-2022 18:36:44: Filtered, non-overlapping primary cigar file has 143468804 lines
+[2022-03-14T18:36:44+0000] [Thread-4  ] [I] [toil.statsAndLogging] Got message from job at time 03-14-2022 18:36:44: Filtered, non-overlapping secondary cigar file has 521262726 lines
+[2022-03-14T18:36:44+0000] [Thread-4  ] [W] [toil.statsAndLogging] Got message from job at time 03-14-2022 18:36:44: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job files/for-job/kind-mappingQualityRescoring/instance-s3r5k_72/cleanup/file-3d582f6377c145e7b5619eb8e6303ea4/stream used 6276.65% disk (125.5 GiB [134790037504B] used, 2.0 GiB [2147483648B] requested).
+[2022-03-14T18:36:47+0000] [MainThread] [I] [toil.leader] Issued job 'Job' kind-Job/instance-m9edalmk v3 with job batch system ID: 1 and cores: 0, disk: 95.4 Mi, and memory: 488.3 Mi
+[2022-03-14T18:36:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/4b388fba54325030a9457f3a074feb6c/039f/worker_log.txt
+[2022-03-14T18:36:50+0000] [MainThread] [I] [toil.leader] Issued job 'EncapsulatedJob' kind-EncapsulatedJob/instance-i5e27pi3 v3 with job batch system ID: 2 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-03-14T18:36:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/4b388fba54325030a9457f3a074feb6c/a5e3/worker_log.txt
+[2022-03-14T18:36:51+0000] [MainThread] [I] [toil.leader] Issued job 'CactusBlastPhase' kind-CactusBlastPhase/instance-76wffeid v3 with job batch system ID: 3 and cores: 1, disk: 2.0 Gi, and memory: 3.3 Gi
+[2022-03-14T18:36:51+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/4b388fba54325030a9457f3a074feb6c/59af/worker_log.txt
+[2022-03-14T18:37:00+0000] [MainThread] [I] [toil.leader] Finished toil run successfully.
+[2022-03-14T18:37:00+0000] [MainThread] [I] [toil.realtimeLogger] Stopping real-time logging server.
+[2022-03-14T18:37:00+0000] [MainThread] [I] [toil.realtimeLogger] Joining real-time logging server thread.
+[2022-03-14T18:40:05+0000] [MainThread] [I] [toil.common] Successfully deleted the job store: FileJobStore(/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/jobstore/8)
+[2022-03-14T18:40:05+0000] [MainThread] [I] [toil.statsAndLogging] cactus-blast has finished after 14086.294756688178 seconds
+real 14092.98
+user 23491.67
+sys 1840.25

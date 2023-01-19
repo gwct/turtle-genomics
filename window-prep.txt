@@ -1,0 +1,31 @@
+0. Sort the MAF files. MAF files must be generated without dupes.
+    time -p ls ../../00-maf-rmdups/ | grep .maf | parallel -j 8 ./maf_sort.sh ../../00-maf-rmdups/{} ">" ../../00-maf-rmdups-sorted/{.}-sorted.maf
+
+        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/00-maf-rmdups-sorted/
+
+1. Index masked reference genome (used to generate MAF) from cactus
+        samtools faidx GCF_009764565.3_rDerCor1.pri.v4_genomic.fna
+
+            /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/GCF_009764565.3_rDerCor1.pri.v4_genomic.fna.fai
+
+2. Make windows with bedtools
+        bedtools makewindows -g GCF_009764565.3_rDerCor1.pri.v4_genomic.fna.fai -w 10000 > windows/GCF_009764565.3_rDerCor1.pri.v4_10kb-windows.bed
+
+            /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/GCF_009764565.3_rDerCor1.pri.v4_10kb-windows.bed
+
+3. Add name column to the bed file
+        awk '{print $1"\t"$2"\t"$3"\t"$1":"$2"-"$3}' GCF_009764565.3_rDerCor1.pri.v4_10kb-windows.bed > GCF_009764565.3_rDerCor1.pri.v4_10kb-windows-named.bed
+
+            /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/GCF_009764565.3_rDerCor1.pri.v4_10kb-windows-named.bed
+
+4. Split bed file by scaffold
+        cut -f 1 GCF_009764565.3_rDerCor1.pri.v4_10kb-windows-named.bed | sort | uniq | parallel -j 4 grep {} GCF_009764565.3_rDerCor1.pri.v4_10kb-windows-named.bed ">" 01-bed/{}-10kb-windows.bed
+
+            /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/01-bed/
+
+5. Convert MAF to FASTA
+        maf_to_fasta_submit.sh
+
+            /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/windows/02-fasta
+
+6. Compile window stats and filters

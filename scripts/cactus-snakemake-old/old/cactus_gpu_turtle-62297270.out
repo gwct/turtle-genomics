@@ -1,0 +1,59 @@
+No branch length for Cmccordii: setting to 1
+No branch length for Mmutica: setting to 1
+No branch length for Mreevesii: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Cabingdonii: setting to 1
+No branch length for Gevgoodei: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Tscripta: setting to 1
+No branch length for Mterrapin: setting to 1
+No branch length for : setting to 1
+No branch length for Cpicta: setting to 1
+No branch length for : setting to 1
+No branch length for Amarmorata: setting to 1
+No branch length for : setting to 1
+No branch length for Pmegacephalum: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Dmawii: setting to 1
+No branch length for Cserpentina: setting to 1
+No branch length for : setting to 1
+No branch length for Cmydas: setting to 1
+No branch length for Lkempii: setting to 1
+No branch length for : setting to 1
+No branch length for Dcoriacea: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Psinensis: setting to 1
+No branch length for Rswinhoei: setting to 1
+No branch length for : setting to 1
+No branch length for Cinsculpta: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Esubglobosa: setting to 1
+No branch length for Mtuberculata: setting to 1
+No branch length for : setting to 1
+No branch length for Pcastaneus: setting to 1
+No branch length for Pexpansa: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+[2022-02-19T01:18:03+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-BatchPreprocessor/instance-g5fbspao
+[2022-02-19T01:18:03+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-BatchPreprocessor/instance-ph2hniyg
+[2022-02-19T01:18:03+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu2c0701.rc.fas.harvard.edu.
+[2022-02-19T01:18:03+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-02-19T01:18:03+0000] [MainThread] [I] [toil.leader] Issued job 'LastzRepeatMaskJob' kind-LastzRepeatMaskJob/instance-srxkyugt v1 with job batch system ID: 0 and cores: 32, disk: 10.0 Gi, and memory: 4.0 Gi
+[2022-02-19T01:18:03+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/71bfc1558b5d5b57992a23a48e8d505e/ddff/worker_log.txt
+[2022-02-19T01:18:05+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T01:18:09+0000] [MainThread] [I] [toil-rt] 2022-02-19 01:18:09.018844: Running the command: "segalign_repeat_masker /tmp/71bfc1558b5d5b57992a23a48e8d505e/ddff/3693/tmp2edgkjqa.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100"
+[2022-02-19T02:18:07+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T03:18:07+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T04:18:09+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T05:18:09+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T06:18:10+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T07:18:11+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T08:18:13+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-19T09:18:14+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+slurmstepd: error: *** JOB 62297270 ON holygpu2c0701 CANCELLED AT 2022-02-19T04:18:17 DUE TO TIME LIMIT ***

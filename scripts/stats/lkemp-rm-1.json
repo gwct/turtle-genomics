@@ -1,0 +1,29 @@
+{
+    "total_runtime": 1021.0565011501312,
+    "rules": {
+        "repeat_mask": {
+            "mean-runtime": 1021.0565011501312,
+            "min-runtime": 1021.0565011501312,
+            "max-runtime": 1021.0565011501312
+        }
+    },
+    "files": {
+        "/n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa.masked": {
+            "start-time": "Thu Mar 10 11:05:48 2022",
+            "stop-time": "Thu Mar 10 11:22:49 2022",
+            "duration": 1021.0565011501312,
+            "priority": 0,
+            "resources": {
+                "_cores": 1,
+                "_nodes": 1,
+                "mem_mb": 1000,
+                "disk_mb": 1000,
+                "tmpdir": "/tmp",
+                "partition": "holy-info,shared,bos-info",
+                "mem": "12g",
+                "time": "24:00:00",
+                "cpus": 32
+            }
+        }
+    }
+}

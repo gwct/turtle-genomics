@@ -1,0 +1,47 @@
+[2022-03-16T13:48:32+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu7c26106.rc.fas.harvard.edu.
+[2022-03-16T13:48:32+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-03-16T13:48:32+0000] [MainThread] [I] [toil.leader] Issued job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v4 with job batch system ID: 0 and cores: 32, disk: 13.0 Gi, and memory: 78.1 Gi
+[2022-03-16T13:48:32+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/31b7dbe6e20c5530a80b63500230d645/6975/worker_log.txt
+[2022-03-16T13:48:34+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] 2022-03-16 13:50:31.209632: Running the command: "cactus_consolidated --sequences Cabingdonii /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpaw0v5rtn.tmp Cmccordii /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpcw3pxb80.tmp Gevgoodei /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpg3x_xo77.tmp Mmutica /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp6gma33se.tmp Pmegacephalum /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpb4ly0vez.tmp --speciesTree (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01; --logLevel INFO --alignments /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpzsfgbjc4.tmp --params /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp2z6k292b.tmp --outputFile /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmprzm2ac_4.tmp --outputHalFastaFile /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpney1i4mi.tmp --outputReferenceFile /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp1l0jm8_r.tmp --outgroupEvents Cmccordii Pmegacephalum Mmutica --referenceEvent Anc08 --secondaryAlignments /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpp7imfm0a.tmp --threads 32"
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Params file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp2z6k292b.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output file string : /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmprzm2ac_4.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output hal fasta file string : /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpney1i4mi.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Output reference fasta file string : /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp1l0jm8_r.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Sequence files and events: Cabingdonii /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpaw0v5rtn.tmp Cmccordii /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpcw3pxb80.tmp Gevgoodei /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpg3x_xo77.tmp Mmutica /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp6gma33se.tmp Pmegacephalum /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpb4ly0vez.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Alignments file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpzsfgbjc4.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Secondary alignments file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpp7imfm0a.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constraint alignments file: (null)
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Species tree: (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01;
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Outgroup events: Cmccordii Pmegacephalum Mmutica
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Reference event: Anc08
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Loaded the parameters files, 0 seconds have elapsed
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Set up the cactus disk, 0 seconds have elapsed
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the first flower
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Going to build the event tree with newick string: (((Cmccordii:1.0,Mmutica:2.0)Anc07:1.0,(Cabingdonii:1.0,Gevgoodei:1.0)Anc08:1.0)Anc03:1.0,Pmegacephalum:2.0)Anc01;
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Parsed the tree
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the basic event tree
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpaw0v5rtn.tmp to Cabingdonii
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpaw0v5rtn.tmp
+[2022-03-16T13:50:31+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpaw0v5rtn.tmp is specified incomplete, the sequences will not be attached
+[2022-03-16T13:53:22+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpcw3pxb80.tmp to Cmccordii
+[2022-03-16T13:53:22+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpcw3pxb80.tmp
+[2022-03-16T13:53:22+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpcw3pxb80.tmp is specified incomplete, the sequences will not be attached
+[2022-03-16T13:53:35+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpg3x_xo77.tmp to Gevgoodei
+[2022-03-16T13:53:35+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpg3x_xo77.tmp
+[2022-03-16T13:53:35+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpg3x_xo77.tmp is specified incomplete, the sequences will not be attached
+[2022-03-16T13:53:48+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp6gma33se.tmp to Mmutica
+[2022-03-16T13:53:48+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp6gma33se.tmp
+[2022-03-16T13:53:48+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmp6gma33se.tmp is specified incomplete, the sequences will not be attached
+[2022-03-16T13:53:58+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Assigning sequence /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpb4ly0vez.tmp to Pmegacephalum
+[2022-03-16T13:53:58+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Processing file: /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpb4ly0vez.tmp
+[2022-03-16T13:53:58+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): The file /tmp/31b7dbe6e20c5530a80b63500230d645/6975/03ae/tmpb4ly0vez.tmp is specified incomplete, the sequences will not be attached
+[2022-03-16T13:54:09+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Constructed the initial flower with 433067 sequences and 10 events with string: ((((Cmccordii:1,Mmutica:2)Anc07:1,(Cabingdonii:1,Gevgoodei:1)Anc08:1)Anc03:1,Pmegacephalum:2)Anc01:9.22337e+18)ROOT:9.22337e+18;
+[2022-03-16T13:54:09+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Established the first Flower in the hierarchy, 218 seconds have elapsed
+[2022-03-16T14:20:24+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Converted alignment coordinates, 1793 seconds have elapsed
+[2022-03-16T14:20:24+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Stripped the unique IDs, 1793 seconds have elapsed
+[2022-03-16T14:20:26+0000] [MainThread] [I] [toil-rt] cactus_consolidated(Anc08): Starting annealing round with a minimum chain length of 64 and an alignment trim of 3
+[2022-03-16T14:52:07+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-16T15:58:27+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+slurmstepd: error: *** JOB 65964767 ON holygpu7c26106 CANCELLED AT 2022-03-17T10:13:03 ***
+slurmstepd: error: Detected 122923473 oom-kill event(s) in StepId=65964767.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

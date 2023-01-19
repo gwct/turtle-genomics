@@ -1,0 +1,71 @@
+0. If present, get IDs of V_gene_segment and C_gene_segment features in reference annotation
+                grep "V_gene_segment\|C_gene_segment" GCF_009764565.3_rDerCor1.pri.v4_genomic.gff | cut -f 9 | cut -d ";" -f 1 | sed 's/ID=//g' > gene-segments.txt
+                
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Dcoriacea/GCF_009764565.3_rDerCor1.pri.v4/gene-segments.txt
+
+1.  Get CDS only gff of reference genome:
+        - gffread
+        - note, gffread downgraded all the ucsc packages (gff3ToGenePred, genePredtoBed, faToTwoBit, pslPosTarget) and I had to update them to get them to work again
+        - gff file must be uncompressed
+                time -p gffread -C --nids gene-segments.txt -o GCF_009764565.3_rDerCor1.pri.v4_cds-no-segs.gff GCF_009764565.3_rDerCor1.pri.v4_genomic.gff
+                real 38.67
+                user 37.01
+                sys 1.62
+                
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Dcoriacea/GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_cds.gff
+
+
+2. Get isoform file for reference annotation:
+                awk '{if($3=="mRNA"){print $9}}' GCF_009764565.3_rDerCor1.pri.v4_cds-no-segs.gff | cut -d ";" -f 1,2 --output-delimiter=" " | awk '{print $2"\t"$1}' | sed -e 's/geneID=//g' -e 's/ID=//g' > GCF_009764565.3_rDerCor1.pri.v4_isoforms.tsv
+        
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Dcoriacea/GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_isoforms.tsv
+
+3.  Convert reference genome annotation to bed12:
+        - gff3ToGenePred
+                time -p gff3ToGenePred GCF_009764565.3_rDerCor1.pri.v4_cds-no-segs.gff GCF_009764565.3_rDerCor1.pri.v4_cds.genePred
+                real 6.01
+                user 4.77
+                sys 1.20
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Dcoriacea/GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_cds.genePred
+
+        - genePredtoBed
+                time -p genePredToBed GCF_009764565.3_rDerCor1.pri.v4_cds.genePred GCF_009764565.3_rDerCor1.pri.v4_cds.bed
+                real 0.72
+                user 0.57
+                sys 0.09
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Dcoriacea/GCF_009764565.3_rDerCor1.pri.v4/GCF_009764565.3_rDerCor1.pri.v4_genomic.bed
+
+4.  Convert all genomes to 2bit:
+        - faToTwoBit 
+                from original genomes --> tail -n+2 genomes.txt | cut -f 2 | parallel -j 5 "faToTwoBit {} {.}.2bit"
+                from hal file sequences --> singularity exec --cleanenv ../cactus_v2.2.0-gpu.sif halStats --genomes turtles.hal | sed 's/ /\n/g' | grep -v Anc | parallel -j 5 "singularity exec --cleanenv ../cactus_v2.2.0-gpu.sif hal2fasta turtles.hal {} | faToTwoBit stdin 2bit/{}.2bit"
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/01-2bit/
+
+5.  Generate chain files for all genomes to reference genome:
+        - https://github.com/ComparativeGenomicsToolkit/hal/blob/chaining-doc/doc/chaining-mapping.md
+        - REFERENCE IS SECOND IN LIFTOVER, SO GENERATE BEDS FOR ALL OTHERS
+
+        a. Make bed file for each genome to annotate:
+                time -p cat 00-etc/unnannotated-genomes.txt | parallel -j 5 "singularity exec --cleanenv ../cactus_v2.2.0-gpu.sif halStats --bedSequences {} turtles.hal > 02-bed/{}.bed"
+                real 4.74
+                user 1.94
+                sys 3.86
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/02-bed/
+
+        b. Liftover each genome to annotate:
+                cat 00-etc/unnannotated-genomes.txt | parallel -j 8 "singularity exec --cleanenv $cactus_path halLiftover --outPSL $hal {} 02-bed/{}.bed $ref /dev/stdout | pslPosTarget stdin 03-psl/{}-to-$ref.psl"
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/03-psl/
+
+
+        c. Generate chain files:
+                cat 00-etc/unnannotated-genomes.txt | parallel -j 8 "axtChain -psl -linearGap=loose 03-psl/{}-to-$ref.psl 01-2bit/$ref.2bit 01-2bit/{}.2bit 04-chain/{}-to-$ref.chain"
+
+                        /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/04-chain/     
+
+
+

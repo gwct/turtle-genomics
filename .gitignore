@@ -1,1 +1,4 @@
 __pycache__
+turtle-genomics.code-workspace
+scripts/.snakemake/
+scripts/cactus-snakemake-old/.snakemake/

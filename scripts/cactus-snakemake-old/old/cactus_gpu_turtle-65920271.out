@@ -1,0 +1,113 @@
+INFO:    Could not find any nv files on this host!
+[2022-03-15T17:28:01+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holy7c16309.rc.fas.harvard.edu.
+[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.leader] Issued job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1 with job batch system ID: 0 and cores: 32, disk: 13.0 Gi, and memory: 78.1 Gi
+[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/worker_log.txt
+[2022-03-15T17:28:03+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 0 jobs are issued and waiting to run
+[2022-03-15T17:33:13+0000] [Thread-1  ] [E] [toil.batchSystems.singleMachine] Got exit code 1 (indicating failure) from job _toil_worker CactusConsolidated file:/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/jobstore/9 kind-CactusConsolidated/instance-fg2wmbcz.
+[2022-03-15T17:33:13+0000] [MainThread] [W] [toil.leader] Job failed with exit value 1: 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1
+Exit reason: None
+[2022-03-15T17:33:13+0000] [MainThread] [W] [toil.leader] The job seems to have left a log file, indicating failure: 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v2
+[2022-03-15T17:33:13+0000] [MainThread] [W] [toil.leader] Log from job "kind-CactusConsolidated/instance-fg2wmbcz" follows:
+=========>
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.worker] ---TOIL WORKER OUTPUT LOG---
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holy7c16309.rc.fas.harvard.edu.
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.worker] Working on job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1
+	[2022-03-15T17:28:02+0000] [MainThread] [I] [toil.worker] Loaded body Job('CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1) from description 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1
+	[2022-03-15T17:28:55+0000] [MainThread] [I] [toil.statsAndLogging] Alignments file: /tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnscykfac.tmp
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Failed job accessed files:
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/for-job/kind-run_prepend_unique_ids/instance-mis7lukf/cleanup/file-06d00e7ab3db434892309416a6715d18/tmpdd_kdncw.tmp.fa' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmp55lu2eqr.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-4a5e0faa35d7493ca0bcf1254dfd9296/Anc08.cigar.og_fragment_0' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnqua0ije.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/for-job/kind-run_prepend_unique_ids/instance-mis7lukf/cleanup/file-a16e14c223eb404694b1addad9be6a71/tmp30z9c_sl.tmp.fa' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmptbnn1g14.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-7afc06122ac547abb717960cab3bcb89/Anc08.cigar.og_fragment_2' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmptz7gg_to.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-d2094f8184f040f7b33cd3dbe2b036de/Anc08.cigar.og_fragment_1' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmplbf1whry.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-d8466d02b63d4895af65a55085fbd076/Anc08.cigar' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnscykfac.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] LOG-TO-MASTER: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job files/for-job/kind-CactusConsolidated/instance-fg2wmbcz/cleanup/file-c57ec40f35ef469694be199804f70ade/stream used 177.94% disk (23.1 GiB [24798830592B] used, 13.0 GiB [13936453932B] requested).
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python3.8/dist-packages/toil/worker.py", line 405, in workerScript
+	    job._runner(jobGraph=None, jobStore=jobStore, fileStore=fileStore, defer=defer)
+	  File "/usr/local/lib/python3.8/dist-packages/cactus/shared/common.py", line 943, in _runner
+	    super(RoundedJob, self)._runner(*args, jobStore=jobStore,
+	  File "/usr/local/lib/python3.8/dist-packages/toil/job.py", line 2399, in _runner
+	    returnValues = self._run(jobGraph=None, fileStore=fileStore)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/job.py", line 2317, in _run
+	    return self.run(fileStore)
+	  File "/usr/local/lib/python3.8/dist-packages/cactus/pipeline/cactus_workflow.py", line 393, in run
+	    secondaryAlignments = fileStore.readGlobalFile(self.cactusWorkflowArguments.secondaryAlignmentsID)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/fileStores/nonCachingFileStore.py", line 111, in readGlobalFile
+	    self.jobStore.read_file(fileStoreID, localFilePath, symlink=symlink)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/jobStores/fileJobStore.py", line 513, in read_file
+	    atomic_copy(jobStoreFilePath, local_path, executable=executable)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/lib/io.py", line 112, in atomic_copy
+	    shutil.copyfile(src_path, dest_path_tmp)
+	  File "/usr/lib/python3.8/shutil.py", line 270, in copyfile
+	    _fastcopy_sendfile(fsrc, fdst)
+	  File "/usr/lib/python3.8/shutil.py", line 163, in _fastcopy_sendfile
+	    raise err from None
+	  File "/usr/lib/python3.8/shutil.py", line 149, in _fastcopy_sendfile
+	    sent = os.sendfile(outfd, infd, offset, blocksize)
+	OSError: [Errno 28] No space left on device: '/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output/Anc08.cigar.secondary' -> '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpmwjvwj5h.tmp.a8f59d35-451e-4677-8286-d2cdf655b8b5.tmp.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [E] [toil.worker] Exiting the worker because of a failed job on host holy7c16309.rc.fas.harvard.edu
+<=========
+[2022-03-15T17:33:13+0000] [MainThread] [W] [toil.job] Due to failure we are reducing the remaining try count of job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v2 with ID kind-CactusConsolidated/instance-fg2wmbcz to 0
+[2022-03-15T17:33:13+0000] [MainThread] [W] [toil.leader] Job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v3 is completely failed
+[2022-03-15T17:33:33+0000] [MainThread] [I] [toil.leader] Finished toil run with 6 failed jobs.
+[2022-03-15T17:33:33+0000] [MainThread] [I] [toil.leader] Failed jobs at end of the run: 'run_setup_phase' kind-run_setup_phase/instance-32gms_vh v3 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v3 'run_prepend_unique_ids' kind-run_prepend_unique_ids/instance-mis7lukf v3 'Job' kind-Job/instance-6h_hmd86 v3 'run_batch_align_jobs' kind-run_batch_align_jobs/instance-hb0x0zvb v2 'run_cactus_align' kind-run_cactus_align/instance-mlylqz9h v2
+[2022-03-15T17:33:33+0000] [MainThread] [I] [toil.realtimeLogger] Stopping real-time logging server.
+[2022-03-15T17:33:33+0000] [MainThread] [I] [toil.realtimeLogger] Joining real-time logging server thread.
+Traceback (most recent call last):
+  File "/usr/local/bin/cactus-align", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/dist-packages/cactus/setup/cactus_align.py", line 174, in main
+    results_dict = toil.restart()
+  File "/usr/local/lib/python3.8/dist-packages/toil/common.py", line 984, in restart
+    return self._runMainLoop(rootJobDescription)
+  File "/usr/local/lib/python3.8/dist-packages/toil/common.py", line 1273, in _runMainLoop
+    return Leader(config=self.config,
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 289, in run
+    raise FailedJobsException(self.jobStore, failed_jobs, exit_code=self.recommended_fail_exit_code)
+toil.leader.FailedJobsException: The job store '/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/jobstore/9' contains 6 failed jobs: 'run_setup_phase' kind-run_setup_phase/instance-32gms_vh v3, 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v3, 'run_prepend_unique_ids' kind-run_prepend_unique_ids/instance-mis7lukf v3, 'Job' kind-Job/instance-6h_hmd86 v3, 'run_batch_align_jobs' kind-run_batch_align_jobs/instance-hb0x0zvb v2, 'run_cactus_align' kind-run_cactus_align/instance-mlylqz9h v2
+Log from job "'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v3" follows:
+=========>
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.worker] ---TOIL WORKER OUTPUT LOG---
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holy7c16309.rc.fas.harvard.edu.
+	[2022-03-15T17:28:01+0000] [MainThread] [I] [toil.worker] Working on job 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1
+	[2022-03-15T17:28:02+0000] [MainThread] [I] [toil.worker] Loaded body Job('CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1) from description 'CactusConsolidated' kind-CactusConsolidated/instance-fg2wmbcz v1
+	[2022-03-15T17:28:55+0000] [MainThread] [I] [toil.statsAndLogging] Alignments file: /tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnscykfac.tmp
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Failed job accessed files:
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/for-job/kind-run_prepend_unique_ids/instance-mis7lukf/cleanup/file-06d00e7ab3db434892309416a6715d18/tmpdd_kdncw.tmp.fa' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmp55lu2eqr.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-4a5e0faa35d7493ca0bcf1254dfd9296/Anc08.cigar.og_fragment_0' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnqua0ije.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/for-job/kind-run_prepend_unique_ids/instance-mis7lukf/cleanup/file-a16e14c223eb404694b1addad9be6a71/tmp30z9c_sl.tmp.fa' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmptbnn1g14.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-7afc06122ac547abb717960cab3bcb89/Anc08.cigar.og_fragment_2' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmptz7gg_to.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-d2094f8184f040f7b33cd3dbe2b036de/Anc08.cigar.og_fragment_1' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmplbf1whry.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] Downloaded file 'files/no-job/file-d8466d02b63d4895af65a55085fbd076/Anc08.cigar' to path '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpnscykfac.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [W] [toil.fileStores.abstractFileStore] LOG-TO-MASTER: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job files/for-job/kind-CactusConsolidated/instance-fg2wmbcz/cleanup/file-c57ec40f35ef469694be199804f70ade/stream used 177.94% disk (23.1 GiB [24798830592B] used, 13.0 GiB [13936453932B] requested).
+	Traceback (most recent call last):
+	  File "/usr/local/lib/python3.8/dist-packages/toil/worker.py", line 405, in workerScript
+	    job._runner(jobGraph=None, jobStore=jobStore, fileStore=fileStore, defer=defer)
+	  File "/usr/local/lib/python3.8/dist-packages/cactus/shared/common.py", line 943, in _runner
+	    super(RoundedJob, self)._runner(*args, jobStore=jobStore,
+	  File "/usr/local/lib/python3.8/dist-packages/toil/job.py", line 2399, in _runner
+	    returnValues = self._run(jobGraph=None, fileStore=fileStore)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/job.py", line 2317, in _run
+	    return self.run(fileStore)
+	  File "/usr/local/lib/python3.8/dist-packages/cactus/pipeline/cactus_workflow.py", line 393, in run
+	    secondaryAlignments = fileStore.readGlobalFile(self.cactusWorkflowArguments.secondaryAlignmentsID)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/fileStores/nonCachingFileStore.py", line 111, in readGlobalFile
+	    self.jobStore.read_file(fileStoreID, localFilePath, symlink=symlink)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/jobStores/fileJobStore.py", line 513, in read_file
+	    atomic_copy(jobStoreFilePath, local_path, executable=executable)
+	  File "/usr/local/lib/python3.8/dist-packages/toil/lib/io.py", line 112, in atomic_copy
+	    shutil.copyfile(src_path, dest_path_tmp)
+	  File "/usr/lib/python3.8/shutil.py", line 270, in copyfile
+	    _fastcopy_sendfile(fsrc, fdst)
+	  File "/usr/lib/python3.8/shutil.py", line 163, in _fastcopy_sendfile
+	    raise err from None
+	  File "/usr/lib/python3.8/shutil.py", line 149, in _fastcopy_sendfile
+	    sent = os.sendfile(outfd, infd, offset, blocksize)
+	OSError: [Errno 28] No space left on device: '/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output/Anc08.cigar.secondary' -> '/tmp/9b05c415e2ad5f35acb84b881cdbf72a/dc82/9d2f/tmpmwjvwj5h.tmp.a8f59d35-451e-4677-8286-d2cdf655b8b5.tmp.tmp'
+	[2022-03-15T17:33:10+0000] [MainThread] [E] [toil.worker] Exiting the worker because of a failed job on host holy7c16309.rc.fas.harvard.edu
+<=========
+real 340.14
+user 5.86
+sys 116.98

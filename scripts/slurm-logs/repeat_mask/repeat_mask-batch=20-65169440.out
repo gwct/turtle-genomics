@@ -1,0 +1,58 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Wed Mar  9 17:40:55 2022]
+rule repeat_mask:
+    input: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+    output: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa.masked
+    log: logs/spec-20-repeat-masking.log
+    jobid: 0
+    wildcards: batch=20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, partition=holy-info,shared,bos-info, mem=4g, time=24:00:00, cpus=32
+
+
+        singularity exec /cvmfs/singularity.galaxyproject.org/r/e/repeatmasker:4.1.2.p1--pl5321hdfd78af_1 RepeatMasker -xsmall -pa 8 -gff -q -lib /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cpicta/chrPic1-repeats.fa /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+        
+RepeatMasker version 4.1.2-p1
+Search Engine: NCBI/RMBLAST [ 2.10.0+ ]
+Using Custom Repeat Library: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cpicta/chrPic1-repeats.fa
+
+
+analyzing file /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/20/20.fa
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+
+Checking for E. coli insertion elements
+identifying Simple Repeats in batch 6 of 2303
+identifying Simple Repeats in batch 7 of 2303
+identifying Simple Repeats in batch 3 of 2303
+identifying Simple Repeats in batch 1 of 2303
+identifying Simple Repeats in batch 2 of 2303
+identifying Simple Repeats in batch 4 of 2303
+identifying Simple Repeats in batch 8 of 2303
+identifying Simple Repeats in batch 5 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 3 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 7 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 6 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 1 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 4 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 2 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 8 of 2303
+identifying matches to chrPic1-repeats.fa sequences in batch 5 of 2303
+slurmstepd: error: *** JOB 65169440 ON holy2c0529 CANCELLED AT 2022-03-10T10:04:11 ***
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=65169440.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

@@ -1,0 +1,69 @@
+[2022-04-19T17:17:48+0000] [MainThread] [I] [toil.statsAndLogging] Importing /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cmydas/GCF_015237465.2_rCheMyd1.pri.v2/GCF_015237465.2_rCheMyd1.pri.v2_genomic.fna
+[2022-04-19T17:17:54+0000] [MainThread] [I] [toil.job] Saving graph of 1 jobs, 1 new
+[2022-04-19T17:17:54+0000] [MainThread] [I] [toil.job] Processing job 'unzip_then_pp' kind-unzip_then_pp/instance-_h9ghn0v v0
+[2022-04-19T17:17:54+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu2c0704.rc.fas.harvard.edu.
+[2022-04-19T17:17:54+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-04-19T17:17:54+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_then_pp' kind-unzip_then_pp/instance-_h9ghn0v v1 with job batch system ID: 0 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:17:55+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/a44f/worker_log.txt
+[2022-04-19T17:17:56+0000] [MainThread] [I] [toil.leader] 0 jobs are running, 0 jobs are issued and waiting to run
+[2022-04-19T17:17:56+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_gzs' kind-unzip_gzs/instance-wwp6ybeh v1 with job batch system ID: 1 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:17:57+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/98c1/worker_log.txt
+[2022-04-19T17:17:57+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor' kind-CactusPreprocessor/instance-u2xbd8v0 v1 with job batch system ID: 2 and cores: 1, disk: 1.5 Gi, and memory: 2.0 Gi
+[2022-04-19T17:17:58+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/594a/worker_log.txt
+[2022-04-19T17:17:58+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-b9dpi6ek v1 with job batch system ID: 3 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:17:59+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/f1e7/worker_log.txt
+[2022-04-19T17:17:59+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-oequ9cld v1 with job batch system ID: 4 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:00+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/218d/worker_log.txt
+[2022-04-19T17:18:01+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-cao3b3_r v1 with job batch system ID: 5 and cores: 1, disk: 7.5 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:01+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/7216/worker_log.txt
+[2022-04-19T17:18:16+0000] [MainThread] [I] [toil.leader] Issued job 'CutHeadersJob' kind-CutHeadersJob/instance-j_jnytd8 v1 with job batch system ID: 6 and cores: 1, disk: 5.6 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:16+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/3c14/worker_log.txt
+[2022-04-19T17:18:47+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-cao3b3_r v2 with job batch system ID: 7 and cores: 1, disk: 7.5 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:48+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/a844/worker_log.txt
+[2022-04-19T17:18:49+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-b1wj7k_7 v1 with job batch system ID: 8 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:49+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/bb34/worker_log.txt
+[2022-04-19T17:18:50+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-wtwwi_o9 v1 with job batch system ID: 9 and cores: 1, disk: 7.6 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/a049/worker_log.txt
+[2022-04-19T17:18:58+0000] [MainThread] [I] [toil.leader] Issued job 'CheckUniqueHeaders' kind-CheckUniqueHeaders/instance-a05_uuqu v1 with job batch system ID: 10 and cores: 1, disk: 3.5 Gi, and memory: 2.0 Gi
+[2022-04-19T17:18:59+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/54ac/worker_log.txt
+[2022-04-19T17:19:19+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-wtwwi_o9 v2 with job batch system ID: 11 and cores: 1, disk: 7.6 Gi, and memory: 2.0 Gi
+[2022-04-19T17:19:19+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/04a1/worker_log.txt
+[2022-04-19T17:19:20+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-01l4uof7 v1 with job batch system ID: 12 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-04-19T17:19:20+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/1235/worker_log.txt
+[2022-04-19T17:19:21+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-n77cm6_u v1 with job batch system ID: 13 and cores: 1, disk: 7.6 Gi, and memory: 2.0 Gi
+[2022-04-19T17:19:22+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/3965a6bbea1d50d08e7f2a42af5ee034/662a/worker_log.txt
+[2022-04-19T17:19:31+0000] [MainThread] [I] [toil.realtimeLogger] Stopping real-time logging server.
+[2022-04-19T17:19:31+0000] [MainThread] [I] [toil.realtimeLogger] Joining real-time logging server thread.
+Traceback (most recent call last):
+  File "/usr/local/bin/cactus-preprocess", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/dist-packages/cactus/preprocessor/cactus_preprocessor.py", line 525, in main
+    stageWorkflow(outputSequenceDir=None,
+  File "/usr/local/lib/python3.8/dist-packages/cactus/preprocessor/cactus_preprocessor.py", line 377, in stageWorkflow
+    outputSequenceIDs = toil.start(unzip_job)
+  File "/usr/local/lib/python3.8/dist-packages/toil/common.py", line 951, in start
+    return self._runMainLoop(rootJobDescription)
+  File "/usr/local/lib/python3.8/dist-packages/toil/common.py", line 1273, in _runMainLoop
+    return Leader(config=self.config,
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 251, in run
+    self.innerLoop()
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 709, in innerLoop
+    self._processReadyJobs()
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 606, in _processReadyJobs
+    self._processReadyJob(message.job_id, message.result_status)
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 547, in _processReadyJob
+    self._runJobSuccessors(job_id)
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 444, in _runJobSuccessors
+    self.issueJobs(successors)
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 886, in issueJobs
+    self.issueJob(job)
+  File "/usr/local/lib/python3.8/dist-packages/toil/leader.py", line 862, in issueJob
+    jobBatchSystemID = self.batchSystem.issueBatchJob(jobNode, job_environment=job_environment)
+  File "/usr/local/lib/python3.8/dist-packages/toil/batchSystems/singleMachine.py", line 616, in issueBatchJob
+    self.checkResourceRequest(jobDesc.memory, cores, jobDesc.disk, job_name=jobDesc.jobName,
+  File "/usr/local/lib/python3.8/dist-packages/toil/batchSystems/abstractBatchSystem.py", line 332, in checkResourceRequest
+    raise InsufficientSystemResources(msg)
+toil.batchSystems.abstractBatchSystem.InsufficientSystemResources: The job LastzRepeatMaskJob is requesting 32.0 cores, more than the maximum of 24 cores that SingleMachineBatchSystem was configured with, or enforced by --maxCores.Scale is set to 1.0.
+real 108.60
+user 40.88
+sys 54.03

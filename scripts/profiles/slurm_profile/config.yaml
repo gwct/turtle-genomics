@@ -1,0 +1,20 @@
+jobs: 25
+cluster-sync:
+  mkdir -p slurm-logs/{rule}/ &&
+  sbatch
+  --wait
+  --partition={resources.partition}
+  --cpus-per-task={resources.cpus}
+  --job-name={rule}-{wildcards}
+  --mem={resources.mem}
+  --time={resources.time}
+  --output=slurm-logs/{rule}/{rule}-{wildcards}-%j.out
+  --mail-type=END,FAIL
+  --mail-user=gthomas@g.harvard.edu
+default-resources:
+  - partition='holy-info,shared,bos-info'
+  - mem='12g'
+  - time='24:00:00'
+  - cpus=32
+latency-wait: 20
+verbose: true

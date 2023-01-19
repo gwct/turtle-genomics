@@ -1,0 +1,10 @@
+[2022-03-27T11:40:15+0000] [MainThread] [C] [toil.jobStores.abstractJobStore] Repairing job: kind-BlastSequencesAllAgainstAll/instance-56tn6xln
+[2022-03-27T11:40:15+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu7c26101.rc.fas.harvard.edu.
+[2022-03-27T11:40:15+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-03-27T11:40:15+0000] [MainThread] [I] [toil.leader] Issued job 'RunBlast' kind-RunBlast/instance-fjmj0ey2 v1 with job batch system ID: 0 and cores: 64, disk: 14.6 Gi, and memory: 13.2 Gi
+[2022-03-27T11:40:15+0000] [MainThread] [I] [toil.leader] Issued job 'RunSelfBlast' kind-RunSelfBlast/instance-pdjgo1aw v1 with job batch system ID: 1 and cores: 64, disk: 14.5 Gi, and memory: 13.0 Gi
+[2022-03-27T11:40:15+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/576a92c107fa518e8e88fd202a6c06d7/74aa/worker_log.txt
+[2022-03-27T11:40:17+0000] [MainThread] [I] [toil.leader] 1 jobs are running, 1 jobs are issued and waiting to run
+[2022-03-27T11:40:27+0000] [MainThread] [I] [toil-rt] 2022-03-27 11:40:27.046113: Running the command: "run_segalign /tmp/576a92c107fa518e8e88fd202a6c06d7/74aa/fcf9/tmpnwd1can0.tmp /tmp/576a92c107fa518e8e88fd202a6c06d7/74aa/fcf9/tmpvu5wtej_.tmp --format=cigar --notrivial --step=1 --ambiguous=iupac,100,100 --ydrop=3000"
+slurmstepd: error: *** JOB 1222508 ON holygpu7c26101 CANCELLED AT 2022-03-29T07:40:09 DUE TO TIME LIMIT ***
+slurmstepd: error: Detected 11021 oom-kill event(s) in StepId=1222508.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

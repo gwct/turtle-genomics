@@ -1,0 +1,191 @@
+No branch length for Cmccordii: setting to 1
+No branch length for Mmutica: setting to 1
+No branch length for Mreevesii: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Cabingdonii: setting to 1
+No branch length for Gevgoodei: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Tscripta: setting to 1
+No branch length for Mterrapin: setting to 1
+No branch length for : setting to 1
+No branch length for Cpicta: setting to 1
+No branch length for : setting to 1
+No branch length for Amarmorata: setting to 1
+No branch length for : setting to 1
+No branch length for Pmegacephalum: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Dmawii: setting to 1
+No branch length for Cserpentina: setting to 1
+No branch length for : setting to 1
+No branch length for Cmydas: setting to 1
+No branch length for Lkempii: setting to 1
+No branch length for : setting to 1
+No branch length for Dcoriacea: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Psinensis: setting to 1
+No branch length for Rswinhoei: setting to 1
+No branch length for : setting to 1
+No branch length for Cinsculpta: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for Esubglobosa: setting to 1
+No branch length for Mtuberculata: setting to 1
+No branch length for : setting to 1
+No branch length for Pcastaneus: setting to 1
+No branch length for Pexpansa: setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+No branch length for : setting to 1
+[2022-02-15T19:55:37+0000] [MainThread] [I] [toil.statsAndLogging] Importing /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Pmegacephalum/GCA_003942145.1_ASM394214v1/GCA_003942145.1_ASM394214v1_genomic.fna
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.statsAndLogging] Importing /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cmccordii/GCA_003846335.1_ASM384633v1/GCA_003846335.1_ASM384633v1_genomic.fna
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.statsAndLogging] Importing /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cabingdonii/GCA_003597395.1_ASM359739v1/GCA_003597395.1_ASM359739v1_genomic.fna
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.job] Saving graph of 1 jobs, 1 new
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.job] Processing job 'unzip_then_pp' kind-unzip_then_pp/instance-holcya30 v0
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil] Running Toil version 5.6.0-c34146a6437e4407a61e946e968bcce67a0ebbca on host holygpu2c0708.rc.fas.harvard.edu.
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.realtimeLogger] Starting real-time logging.
+[2022-02-15T19:55:43+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_then_pp' kind-unzip_then_pp/instance-holcya30 v1 with job batch system ID: 0 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:44+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/47bd/worker_log.txt
+[2022-02-15T19:55:45+0000] [MainThread] [I] [toil.leader] 0 jobs are running, 0 jobs are issued and waiting to run
+[2022-02-15T19:55:45+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_gzs' kind-unzip_gzs/instance-lk15ro92 v1 with job batch system ID: 1 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:45+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/832e/worker_log.txt
+[2022-02-15T19:55:46+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor' kind-CactusPreprocessor/instance-_1z260vt v1 with job batch system ID: 2 and cores: 1, disk: 1.5 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:46+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/14ae/worker_log.txt
+[2022-02-15T19:55:47+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-d2w0m_is v1 with job batch system ID: 3 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:47+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-1_zmo4xb v1 with job batch system ID: 4 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:47+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-vl64xs64 v1 with job batch system ID: 5 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/3abe/worker_log.txt
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/3961/worker_log.txt
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/2d83/worker_log.txt
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-zhkk1sf4 v1 with job batch system ID: 6 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-2yqcer_k v1 with job batch system ID: 7 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:48+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-okz6eiyd v1 with job batch system ID: 8 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:49+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/8830/worker_log.txt
+[2022-02-15T19:55:49+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/0a59/worker_log.txt
+[2022-02-15T19:55:49+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/7f11/worker_log.txt
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-w42vk8y3 v1 with job batch system ID: 9 and cores: 1, disk: 8.2 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-wpg867d3 v1 with job batch system ID: 10 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-yhpmz0iy v1 with job batch system ID: 11 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/b689/worker_log.txt
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/43dd/worker_log.txt
+[2022-02-15T19:55:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/7f63/worker_log.txt
+[2022-02-15T19:56:09+0000] [MainThread] [I] [toil.leader] Issued job 'CutHeadersJob' kind-CutHeadersJob/instance-v7i7u020 v1 with job batch system ID: 12 and cores: 1, disk: 5.9 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:09+0000] [MainThread] [I] [toil.leader] Issued job 'CutHeadersJob' kind-CutHeadersJob/instance-b2yx8qur v1 with job batch system ID: 13 and cores: 1, disk: 6.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:09+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/221a/worker_log.txt
+[2022-02-15T19:56:10+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/eedb/worker_log.txt
+[2022-02-15T19:56:12+0000] [MainThread] [I] [toil.leader] Issued job 'CutHeadersJob' kind-CutHeadersJob/instance-281xbhbx v1 with job batch system ID: 14 and cores: 1, disk: 6.1 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:13+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/41b9/worker_log.txt
+[2022-02-15T19:56:39+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-yhpmz0iy v2 with job batch system ID: 15 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:39+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/4976/worker_log.txt
+[2022-02-15T19:56:41+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-_whtngs1 v1 with job batch system ID: 16 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:41+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/505c/worker_log.txt
+[2022-02-15T19:56:46+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-bz80h779 v1 with job batch system ID: 17 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:46+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/b759/worker_log.txt
+[2022-02-15T19:56:47+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-w42vk8y3 v2 with job batch system ID: 18 and cores: 1, disk: 8.2 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:47+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/fd92/worker_log.txt
+[2022-02-15T19:56:49+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-y9a_4icx v1 with job batch system ID: 19 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:50+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-wpg867d3 v2 with job batch system ID: 20 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/6d65/worker_log.txt
+[2022-02-15T19:56:50+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/135f/worker_log.txt
+[2022-02-15T19:56:51+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-m1bbtk6m v1 with job batch system ID: 21 and cores: 1, disk: 8.1 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:51+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/1b88/worker_log.txt
+[2022-02-15T19:56:51+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-iqvdsy8p v1 with job batch system ID: 22 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:52+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/0e65/worker_log.txt
+[2022-02-15T19:56:52+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-g8e9kw62 v1 with job batch system ID: 23 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:53+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/9bf9/worker_log.txt
+[2022-02-15T19:56:55+0000] [MainThread] [I] [toil.leader] Issued job 'CheckUniqueHeaders' kind-CheckUniqueHeaders/instance-rfvi_ob_ v1 with job batch system ID: 24 and cores: 1, disk: 3.7 Gi, and memory: 2.0 Gi
+[2022-02-15T19:56:56+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/6449/worker_log.txt
+[2022-02-15T19:57:01+0000] [MainThread] [I] [toil.leader] Issued job 'CheckUniqueHeaders' kind-CheckUniqueHeaders/instance-p54mranz v1 with job batch system ID: 25 and cores: 1, disk: 3.7 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:01+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/b94f/worker_log.txt
+[2022-02-15T19:57:04+0000] [MainThread] [I] [toil.leader] Issued job 'CheckUniqueHeaders' kind-CheckUniqueHeaders/instance-f8v1act7 v1 with job batch system ID: 26 and cores: 1, disk: 3.8 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:05+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/265e/worker_log.txt
+[2022-02-15T19:57:16+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-bz80h779 v2 with job batch system ID: 27 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:16+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/caf7/worker_log.txt
+[2022-02-15T19:57:17+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-xbtng7th v1 with job batch system ID: 28 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:18+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/e681/worker_log.txt
+[2022-02-15T19:57:19+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-z99t4v9t v1 with job batch system ID: 29 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:19+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/d970/worker_log.txt
+[2022-02-15T19:57:25+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-m1bbtk6m v2 with job batch system ID: 30 and cores: 1, disk: 8.1 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:26+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/62d8/worker_log.txt
+[2022-02-15T19:57:26+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-kfss_s8v v1 with job batch system ID: 31 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:27+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/1c97/worker_log.txt
+[2022-02-15T19:57:28+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-r63kcj2p v1 with job batch system ID: 32 and cores: 1, disk: 8.1 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:28+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/8ca9/worker_log.txt
+[2022-02-15T19:57:29+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-g8e9kw62 v2 with job batch system ID: 33 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:29+0000] [MainThread] [I] [toil.leader] Issued job 'LastzRepeatMaskJob' kind-LastzRepeatMaskJob/instance-8f9q9t5v v1 with job batch system ID: 34 and cores: 32, disk: 10.3 Gi, and memory: 4.0 Gi
+[2022-02-15T19:57:30+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/f2b3/worker_log.txt
+[2022-02-15T19:57:31+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-8y8g1848 v1 with job batch system ID: 35 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:31+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/0e43/worker_log.txt
+[2022-02-15T19:57:32+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-cc2lswp1 v1 with job batch system ID: 36 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T19:57:33+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/c108/worker_log.txt
+[2022-02-15T19:57:37+0000] [MainThread] [I] [toil.leader] Issued job 'LastzRepeatMaskJob' kind-LastzRepeatMaskJob/instance-lef31nq_ v1 with job batch system ID: 37 and cores: 32, disk: 10.4 Gi, and memory: 4.0 Gi
+[2022-02-15T19:57:42+0000] [MainThread] [I] [toil.leader] Issued job 'LastzRepeatMaskJob' kind-LastzRepeatMaskJob/instance-zcnn939z v1 with job batch system ID: 38 and cores: 32, disk: 10.5 Gi, and memory: 4.0 Gi
+[2022-02-15T19:57:42+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/5603/worker_log.txt
+[2022-02-15T19:57:45+0000] [MainThread] [I] [toil-rt] 2022-02-15 19:57:45.858184: Running the command: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/5603/32ae/tmpe8bg12uq.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100"
+[2022-02-15T20:07:41+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:07:41.670554: Successfully ran: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/5603/32ae/tmpe8bg12uq.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100" in 595.8003 seconds and 50.8 Gi memory
+[2022-02-15T20:07:41+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:07:41.745391: Running the command: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/5603/32ae/tmpbt_fdihe.tmp"
+[2022-02-15T20:08:32+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:08:32.960534: Successfully ran: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/5603/32ae/tmpbt_fdihe.tmp" in 51.205 seconds and 159.0 Mi memory
+[2022-02-15T20:08:40+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-z99t4v9t v2 with job batch system ID: 39 and cores: 1, disk: 8.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:08:40+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/b0d4/worker_log.txt
+[2022-02-15T20:08:43+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:08:43.671210: Running the command: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/b0d4/83a5/tmpg704rvtl.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100"
+[2022-02-15T20:18:52+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:18:52.151850: Successfully ran: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/b0d4/83a5/tmpg704rvtl.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100" in 608.4652 seconds and 51.7 Gi memory
+[2022-02-15T20:18:52+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:18:52.233171: Running the command: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/b0d4/83a5/tmpu_6n5pxp.tmp"
+[2022-02-15T20:19:49+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:19:49.599372: Successfully ran: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/b0d4/83a5/tmpu_6n5pxp.tmp" in 57.3568 seconds and 760.4 Mi memory
+[2022-02-15T20:19:57+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-cc2lswp1 v2 with job batch system ID: 40 and cores: 1, disk: 8.3 Gi, and memory: 2.0 Gi
+[2022-02-15T20:19:58+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/fdd7/worker_log.txt
+[2022-02-15T20:19:58+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/5c9d/worker_log.txt
+[2022-02-15T20:19:59+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-icv3tsnh v1 with job batch system ID: 41 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:19:59+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-_b_qq_ft v1 with job batch system ID: 42 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:19:59+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/1005/worker_log.txt
+[2022-02-15T20:19:59+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/9896/worker_log.txt
+[2022-02-15T20:20:00+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-xbtng7th v3 with job batch system ID: 43 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:00+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-8y8g1848 v3 with job batch system ID: 44 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:00+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/377a/worker_log.txt
+[2022-02-15T20:20:00+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/5891/worker_log.txt
+[2022-02-15T20:20:01+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-_whtngs1 v3 with job batch system ID: 45 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:01+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-iqvdsy8p v3 with job batch system ID: 46 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:01+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/80b1/worker_log.txt
+[2022-02-15T20:20:01+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/7094/worker_log.txt
+[2022-02-15T20:20:02+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-zhkk1sf4 v2 with job batch system ID: 47 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:02+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-okz6eiyd v2 with job batch system ID: 48 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:02+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/aa2b/worker_log.txt
+[2022-02-15T20:20:02+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/2dab/worker_log.txt
+[2022-02-15T20:20:03+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-d2w0m_is v2 with job batch system ID: 49 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:03+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-vl64xs64 v2 with job batch system ID: 50 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:20:03+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/f760/worker_log.txt
+[2022-02-15T20:20:03+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/a67a/worker_log.txt
+[2022-02-15T20:20:04+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/d4fa/worker_log.txt
+[2022-02-15T20:20:07+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:20:07.769477: Running the command: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/d4fa/120d/tmpkxdn7ggx.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100"
+[2022-02-15T20:30:14+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:30:14.630656: Successfully ran: "segalign_repeat_masker /tmp/7d7d19f18cc55241bda70f38d74812d0/d4fa/120d/tmpkxdn7ggx.tmp --lastz_interval=3000000 --markend --neighbor_proportion 0.2 --M 10 --step=3 --ambiguous=iupac,100,100" in 606.8527 seconds and 50.9 Gi memory
+[2022-02-15T20:30:14+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:30:14.707289: Running the command: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/d4fa/120d/tmp3ub78tkl.tmp"
+[2022-02-15T20:31:08+0000] [MainThread] [I] [toil-rt] 2022-02-15 20:31:08.999852: Successfully ran: "cactus_fasta_softmask_intervals.py --origin=zero /tmp/7d7d19f18cc55241bda70f38d74812d0/d4fa/120d/tmp3ub78tkl.tmp" in 54.2831 seconds and 363.5 Mi memory
+[2022-02-15T20:31:16+0000] [MainThread] [I] [toil.leader] Issued job 'PreprocessSequence' kind-PreprocessSequence/instance-r63kcj2p v2 with job batch system ID: 51 and cores: 1, disk: 8.1 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:16+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/8a73/worker_log.txt
+[2022-02-15T20:31:17+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-l90nfm95 v1 with job batch system ID: 52 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:18+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/17d2/worker_log.txt
+[2022-02-15T20:31:19+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-kfss_s8v v3 with job batch system ID: 53 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:19+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/7be6/worker_log.txt
+[2022-02-15T20:31:19+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-y9a_4icx v3 with job batch system ID: 54 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:20+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/b72c/worker_log.txt
+[2022-02-15T20:31:20+0000] [MainThread] [I] [toil.leader] Issued job 'BatchPreprocessor' kind-BatchPreprocessor/instance-2yqcer_k v2 with job batch system ID: 55 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:21+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/bdd6/worker_log.txt
+[2022-02-15T20:31:21+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor2' kind-CactusPreprocessor2/instance-1_zmo4xb v2 with job batch system ID: 56 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:22+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/a7fa/worker_log.txt
+[2022-02-15T20:31:22+0000] [MainThread] [I] [toil.leader] Issued job 'zip_gzs' kind-zip_gzs/instance-65spwcjo v1 with job batch system ID: 57 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:23+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/eef9/worker_log.txt
+[2022-02-15T20:31:23+0000] [MainThread] [I] [toil.leader] Issued job 'CactusPreprocessor' kind-CactusPreprocessor/instance-_1z260vt v3 with job batch system ID: 58 and cores: 1, disk: 1.5 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:24+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/8a08/worker_log.txt
+[2022-02-15T20:31:24+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_gzs' kind-unzip_gzs/instance-lk15ro92 v2 with job batch system ID: 59 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:25+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/23ab/worker_log.txt
+[2022-02-15T20:31:25+0000] [MainThread] [I] [toil.leader] Issued job 'unzip_then_pp' kind-unzip_then_pp/instance-holcya30 v2 with job batch system ID: 60 and cores: 1, disk: 2.0 Gi, and memory: 2.0 Gi
+[2022-02-15T20:31:26+0000] [MainThread] [I] [toil.worker] Redirecting logging to /tmp/7d7d19f18cc55241bda70f38d74812d0/9714/worker_log.txt
+[2022-02-15T20:31:27+0000] [MainThread] [I] [toil.leader] Finished toil run successfully.
+[2022-02-15T20:31:27+0000] [MainThread] [I] [toil.realtimeLogger] Stopping real-time logging server.
+[2022-02-15T20:31:28+0000] [MainThread] [I] [toil.realtimeLogger] Joining real-time logging server thread.
+[2022-02-15T20:31:49+0000] [MainThread] [I] [toil.common] Successfully deleted the job store: FileJobStore(/n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/jobstore/0)
+real 2177.05
+user 9819.67
+sys 3430.75

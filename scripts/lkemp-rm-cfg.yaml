@@ -1,0 +1,11 @@
+#############################################################################
+# Configuration for repeat masking for L. kempii
+#############################################################################
+
+spec: lkemp
+
+input_dir: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Lkempii/LepKem1/repeat-masking/batches/
+
+repeat_library: /n/holylfs05/LABS/informatics/Users/gthomas/turtles/genomes/Cpicta/chrPic1-repeats.fa
+
+#############################################################################
