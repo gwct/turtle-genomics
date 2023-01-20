@@ -67,7 +67,7 @@ footer = RC.readFooter();
 
 outfilename = "../../" + pagefile;
 
-samples_file = "../../data/turtles.csv";
+samples_file = "../../../data/turtles.csv";
 
 sample_table = "";
 first = True;

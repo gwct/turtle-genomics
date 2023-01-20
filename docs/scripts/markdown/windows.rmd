@@ -1,0 +1,181 @@
+---
+title: "Turtle window analyses"
+author: "[gwct](https://gwct.github.io/)"
+date: "`r format(Sys.time(), '%m/%d/%Y %H:%M:%S %Z')`"
+output:
+  #html_document:
+  rmdformats::robobook:
+    highlight: kate
+    includes:
+      in_header: '../html-chunks/rmd_header.html'
+    df_print: paged
+    code_folding: hide
+    number_sections: true
+    toc_depth: 3
+---
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(ggplot2)
+library(cowplot)
+library(ggbeeswarm)
+library(reshape2)
+library(ggpubr)
+#library(plyr)
+library(dplyr)
+library(kableExtra)
+library(here)
+library(viridis)
+source("../lib/design.r")
+
+```
+
+From the whole genome alignment HAL format, we converted to MAF using Dcoriacea as the reference genome (for coordinate system) and then extracted 10kb windows across all 40 scaffolds in FASTA format.
+
+```{r read-windows, out.width="50%", fig.align = "center", warning=FALSE}
+
+total_spec = 22
+windows = read.csv(here("data", "dcoriacea-10kb-window-stats.csv"), header=T, comment.char="#")
+
+```
+
+# Number of windows per scaffold
+
+Essentially scaffold length in the alignment
+
+```{r win-per-scaff, out.width="50%", fig.align = "center", warning=FALSE}
+
+windows_per_scaff = windows %>% group_by(scaffold) %>% summarize(num.windows=n())
+
+windows_p = ggplot(windows_per_scaff, aes(x=scaffold, y=num.windows)) +
+  geom_segment(aes(x=scaffold, y=0, xend=scaffold, yend=num.windows), linetype="dotted", color="#666666") +
+  geom_point(size=4) +
+  geom_hline(yintercept=mean(windows_per_scaff$num.windows), color="#999999") +
+  scale_y_continuous(expand=c(0,0), limits=c(0,40000)) +
+  scale_color_manual(values=corecol(pal="wilke", numcol=3)) +
+  ylab("# windows") +
+  xlab(paste("")) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=4),
+        legend.title=element_text(size=12),
+        legend.position="bottom")
+print(windows_p)
+
+#aln_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+included_scaffs = subset(windows_per_scaff, num.windows > 100)$scaffold
+
+windows = subset(windows, scaffold %in% included_scaffs)
+
+```
+Scaffolds with fewer than 100 windows are removed from subsequent analyses.
+
+# Average sequence length without missing data characters
+
+N, n, X, x, -
+
+```{r avg-seq-len, out.width="50%", fig.align = "center", warning=FALSE, fig.height=4}
+
+aln_means = windows %>% group_by(scaffold) %>% summarize(avg.length.wo.missing=mean(avg.seq.len.wo.missing, na.rm=T), med.length.wo.missing=median(avg.seq.len.wo.missing, na.rm=T))
+
+#dodge = position_dodge(width = 0.9)
+
+aln_lens_p = ggplot(windows, aes(x=scaffold, y=avg.seq.len.wo.missing, fill=scaffold)) +
+  #geom_quasirandom(size=2, width=0.25, alpha=0.1, color="#666666") +
+  geom_violin(alpha=0.5) +
+  geom_boxplot(outlier.shape=NA, alpha=0, width=0.1, color="#000000") +
+  #geom_point(data=aln_means, aes(x=label, y=avg.length, group=dataset), size=2, color="red", position=dodge, show.legend=FALSE) +
+  #geom_point(data=aln_means, aes(x=label, y=median.length, group=dataset), size=2, color="blue", position=dodge, show.legend=FALSE) +
+  ylab("Avg. sequence length\nper 10kb window w/o\nmissing data") +
+  xlab("") +
+  #scale_fill_manual(labels=c("16 species", "19 species"), values=corecol()) +
+  bartheme() +
+  theme(legend.position="none", 
+        axis.text.x=element_text(angle=45, hjust=1, size=4),
+        axis.text.y=element_text(size=10),
+        axis.title.y=element_text(size=12))
+print(aln_lens_p)
+
+#aln_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+# Informative sites
+
+Informative sites are defined as sites in an alignment with at least 2 alleles that are present in at least 2 species.
+
+```{r inf-sites, out.width="50%", fig.align = "center", warning=FALSE, fig.height=4}
+
+inf_sites_p = ggplot(windows, aes(x=scaffold, y=informative.sites, fill=scaffold)) +
+  #geom_quasirandom(size=2, width=0.25, alpha=0.1, color="#666666") +
+  geom_violin(alpha=0.5) +
+  geom_boxplot(outlier.shape=NA, alpha=0, width=0.1, color="#000000") +
+  #geom_point(data=aln_means, aes(x=label, y=avg.length, group=dataset), size=2, color="red", position=dodge, show.legend=FALSE) +
+  #geom_point(data=aln_means, aes(x=label, y=median.length, group=dataset), size=2, color="blue", position=dodge, show.legend=FALSE) +
+  ylab("# of informative sites\nper 10kb window") +
+  xlab("") +
+  #scale_fill_manual(labels=c("16 species", "19 species"), values=corecol()) +
+  bartheme() +
+  theme(legend.position="none", 
+        axis.text.x=element_text(angle=45, hjust=1, size=4),
+        axis.text.y=element_text(size=10),
+        axis.title.y=element_text(size=12))
+print(inf_sites_p)
+
+#aln_means %>% kable() %>% kable_styling(bootstrap_options=c("striped", "condended", "responsive"), full_width=F)
+
+```
+
+# Window filtering
+
+Each sequence in each window is assessed for the number of characters that match missing data (N, n, X, x, -) or masked data (a, t, c, g, n, x). A sequence is said to be "missing" or "masked" if 50% of its characters are made up of either class. We can then assess how many windows we would filter with varying levels of number of sequences in each category being used to filter, e.g. filtering windows in which 30% of sequences are "missing" vs. 40%, and so on for "masked" as well.
+
+```{r filters, out.width="85%", fig.align = "center", warning=FALSE, fig.height=8}
+
+filter_file = here("data", "dcoriacea-10kb-windows-filters.csv")
+
+if(!file.exists(filter_file)){
+  filter_results = data.frame("scaffold"=c(), "missing.filter"=c(), "mask.filter"=c(), "num.windows"=c(), "perc.orig.windows"=c())
+  
+  for(missing in seq(0,11)){
+    cat("missing ", missing, "\n")
+    for(masked in seq(0,11)){
+      cat("masked ", masked, "\n")
+      for(cur_scaff in included_scaffs){
+        scaff_data = subset(windows, scaffold == cur_scaff)
+        filter_scaff_data = subset(scaff_data, seqs.above.repeat > masked & seqs.above.missing > missing)
+        num_windows = nrow(filter_scaff_data)
+        perc_windows = num_windows / windows_per_scaff[windows_per_scaff$scaffold==cur_scaff,]$num.windows
+        filter_results = rbind(filter_results, data.frame("scaffold"=cur_scaff, "missing.filter"=missing, "mask.filter"=masked, "num.windows"=num_windows, "perc.orig.windows"=perc_windows))
+      }
+    }
+  }
+  
+  write.csv(filter_results, filter_file, row.names=F)
+}else{
+  filter_results = read.csv(filter_file)
+}
+
+filter_results = subset(filter_results, mask.filter < 4 & missing.filter < 4)
+
+
+filter_p = ggplot(filter_results, aes(x=missing.filter, y=mask.filter, fill=perc.orig.windows)) +
+  geom_tile() +
+  #scale_fill_gradient2(limits=c(0,1), ) +
+  scale_fill_viridis(name='% windows remaining\nafter filter', option = "C", limits=c(0,1)) +
+  xlab("# of missing seqs to filter") +
+  ylab("# of masked seqs to filter") +
+  facet_wrap(~scaffold) +
+  theme(legend.position="bottom")
+
+print(filter_p)
+
+
+```
+
+
+
+
+
+
