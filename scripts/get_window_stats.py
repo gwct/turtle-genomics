@@ -173,7 +173,7 @@ if os.path.isfile(outfilename) and not args.overwrite:
 
 #########################
 
-headers = [ "window", "scaffold", "start", "end", "aln.len", "seqs.above.repeat", "seqs.above.missing", "avg.seq.len.wo.missing", "uniq.seqs", "ident.seqs", "invariant.sites", "informative.sites", "sites.w.missing" "percent.sites.with.missing", "sites.high.missing", "sites.all.missing" ];
+headers = [ "window", "scaffold", "start", "end", "aln.len", "seqs.above.repeat", "seqs.above.missing", "avg.seq.len.wo.missing", "uniq.seqs", "ident.seqs", "invariant.sites", "informative.sites", "sites.w.missing", "percent.sites.with.missing", "sites.high.missing", "sites.all.missing" ];
 
 #########################
 
