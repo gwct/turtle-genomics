@@ -144,7 +144,7 @@ if(!file.exists(filter_file)){
       cat("masked ", masked, "\n")
       for(cur_scaff in included_scaffs){
         scaff_data = subset(windows, scaffold == cur_scaff)
-        filter_scaff_data = subset(scaff_data, seqs.above.repeat > masked & seqs.above.missing > missing)
+        filter_scaff_data = subset(scaff_data, seqs.above.repeat >= masked & seqs.above.missing >= missing)
         num_windows = nrow(filter_scaff_data)
         perc_windows = num_windows / windows_per_scaff[windows_per_scaff$scaffold==cur_scaff,]$num.windows
         filter_results = rbind(filter_results, data.frame("scaffold"=cur_scaff, "missing.filter"=missing, "mask.filter"=masked, "num.windows"=num_windows, "perc.orig.windows"=perc_windows))
