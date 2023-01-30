@@ -22,6 +22,7 @@ library(dplyr)
 library(ggrepel)
 library(here)
 library(reshape2)
+library(phytools)
 source("../lib/design.r")
 ```
 
@@ -411,11 +412,36 @@ print(toga_p)
 
 ```
 
+## Divergence and Toga feature counts
+
+Divergence measured simply by the distance (in branch length; tree from [Thomson et al. 2021](https://www.pnas.org/content/118/7/e2012215118)) in the species tree between the query species and the reference species (Dcoriacea)
+
+```{r toga-spec-tree, out.width="50%", fig.align="center", fig.height=6}
+
+tree_file = here("data", "tree", "turtle-tree-cactus.tre")
+tree = read.tree(file=tree_file)
 
 
+toga_counts$dist = NA
 
+for(spec in factor(toga_counts$spec)){
+  toga_counts[toga_counts$spec==spec,]$dist = fastDist(tree, spec, "Dcoriacea")
+}
 
+toga_div_p = ggplot(toga_counts, aes(x=Freq, y=dist, color=Var1)) +
+  geom_point(size=4, alpha=0.8) +
+  geom_smooth(method="lm", se=F, linetype="dotted") +
+  scale_color_manual(labels=toga_class_names, values=cols) +
+  xlab("") +
+  ylab("# of genes") +
+  facet_wrap(~Var1, scales="free") +
+  bartheme() +
+  theme(legend.position="none",
+        axis.text.x=element_text(angle=45, hjust=1, size=8)) +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE))
+print(toga_div_p)
 
+```
 
 
 
