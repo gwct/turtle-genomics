@@ -238,7 +238,7 @@ print(cds_dist_p)
 
 ```{r busco-fig, out.width="66%", fig.align="center", fig.height=6}
 
-in_data = read.csv("../../data/turtles-full.csv", header=T, comment.char="#")
+in_data = read.csv(here("data", "turtles-full.csv"), header=T, comment.char="#")
 in_data = subset(in_data, node.type=="tip")
 # Read in the turtle data and exclude "alternate" species
 
@@ -265,7 +265,7 @@ print(busco_p)
 
 ```{r busco-ts-fig, out.width="66%", fig.align="center", fig.height=6}
 
-bt_data = read.csv("../../data/TurtleAnnotationBuscoScores.csv", header=T, comment.char="#")
+bt_data = read.csv(here("data", "TurtleAnnotationBuscoScores.csv"), header=T, comment.char="#")
 #in_data = subset(in_data, node.type=="tip")
 # Read in the turtle data and exclude "alternate" species
 
@@ -348,5 +348,85 @@ liftoff_transcripts_p = ggplot(liftoff, aes(x=spec, y=perc.ref.transcripts)) +
 print(liftoff_transcripts_p)
 
 ```
+
+## Toga annotations
+
+[Toga](https://github.com/hillerlab/TOGA) is a program that maps annotated features from one genome to another using a whole genome alignment.
+
+Out of 26,849 genes annotated in Dcoriacea, 18,331 were used as input to Toga.
+
+```{r toga-genes, out.width="50%", fig.align="center", fig.height=6}
+
+toga_file = here("data", "dcoriacea-toga.tsv")
+toga_data = read.csv(toga_file, header=T, sep="\t")
+# Read the toga data
+
+toga_counts = NULL
+# An empty var to store the counts for each species
+
+toga_classes = c("I", "PI", "M", "PM", "L", "UL", "PG", "abs")
+toga_class_names = c("Intact", "Partially intact", "Missing", "Partially missing", "Lost", "Uncertain loss","Paralogous", "absent")
+cols = corecol(numcol=length(toga_classes))
+names(cols)=toga_classes
+# Abbreviations and names for the toga classes, as well as colors for the plot
+
+for(i in 1:length(names(toga_data))){
+  if(i == 1){
+    names(toga_data)[i] = "gene.id"
+    # For the first column, add the name
+  } else {
+    spec = strsplit(names(toga_data)[i], ".", fixed=T)[[1]][1]
+    names(toga_data)[i] = spec
+    # Extract the species name from the current header and change the header
+    
+    cur_counts = table(toga_data[spec])[toga_classes]
+    cur_counts = as.data.frame(cur_counts)
+    cur_counts$spec = spec
+    # Count each class for the current species
+    
+    if(is.null(toga_counts)){
+      toga_counts = cur_counts
+    } else {
+      toga_counts = rbind(toga_counts, cur_counts)
+    }
+    # Add the counts to the count df
+  }
+}
+
+toga_counts$Var1 = factor(toga_counts$Var1, levels=toga_classes)
+
+toga_p = ggplot(toga_counts, aes(x=spec, y=Freq, fill=Var1, group=spec)) +
+  geom_bar(stat="identity", position="stack") +
+  geom_hline(yintercept=0.9*nrow(toga_data), linetype="dashed", col="#d3d3d3") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_fill_manual(labels=toga_class_names, values=cols) +
+  xlab("") +
+  ylab("# of genes") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(toga_p)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [< Back to samples](index.html)
