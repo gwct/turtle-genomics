@@ -56,30 +56,30 @@ with open(outfilename, "w") as outfile:
             feature_lens.append(("transcript", str(int(line[2]) - int(line[1]))));
             feature_counts["transcript"] += 1;
 
-            #feature_lens.append(("CDS", str(sum( [ int(block_size) for block_size in line[10].split(",")[:-1] ] ) )));
-            #feature_counts["CDS"] += 1;
+            for cds in line[10].split(",")[:-1]:
+                feature_lens.append(("CDS", cds));
+                feature_counts["CDS"] += 1;
 
         codon_fasta_file = os.path.join(indir, d, "codon.fasta");
         codon_seqs = SEQ.fastaReadSeqs(codon_fasta_file);
 
-        found = set();
-        for seq in codon_seqs:
-            if "REFERENCE" in seq:
-                continue;
+        # found = set();
+        # for seq in codon_seqs:
+        #     if "REFERENCE" in seq:
+        #         continue;
 
-            raw_seq = codon_seqs[seq].replace(" ", "").replace("X", "").replace("-", "");
-            raw_seq_len = len(raw_seq);
-            # assert raw_seq_len % 3 == 0, "not div 3: " + seq + " " + str(len(codon_seqs[seq])) + " " + str(raw_seq_len) + "\n" + codon_seqs[seq] + "\n\n" + raw_seq;
-            
-            seq_id = seq.split(" | ")[0];
-            if seq_id in found:
-                print("dup id: " + seq_id);
-            else:
-                found.add(seq_id);
+        #     raw_seq = codon_seqs[seq].replace(" ", "").replace("X", "").replace("-", "");
+        #     raw_seq_len = len(raw_seq);
+        #     # assert raw_seq_len % 3 == 0, "not div 3: " + seq + " " + str(len(codon_seqs[seq])) + " " + str(raw_seq_len) + "\n" + codon_seqs[seq] + "\n\n" + raw_seq;
 
-            feature_lens.append(("CDS", str(raw_seq_len)));
-            feature_counts["CDS"] += 1;
+        #     seq_id = seq.split(" | ")[0];
+        #     if seq_id in found:
+        #         print("dup id: " + seq_id);
+        #     else:
+        #         found.add(seq_id);
 
+        #     feature_lens.append(("CDS", str(raw_seq_len)));
+        #     feature_counts["CDS"] += 1;
 
         with open(feature_count_file, "w") as countfile:
             countfile.write("feature\tcount\n");
