@@ -18,6 +18,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(ggplot2)
+library(tidyr)
 library(dplyr)
 library(ggrepel)
 library(here)
@@ -30,11 +31,16 @@ source("../lib/design.r")
 
 Assemblies from each genome were downloaded from NCBI on 07.22.2021
 
+Un-annotated species were annotated with both [Liftoff](https://github.com/agshumate/Liftoff), which searches for sequence homology in an annotated reference assembly, and [TOGA](https://github.com/hillerlab/TOGA), which uses a whole genome alignment to project an annotation from one reference species to another.
+
+Both methods require a reference species for each annotation. For Liftoff, we used the closest related annotated species for each un-annotated assembly. For Toga, we used Dcoriacea as the reference for all un-annotated assemblies.
+
 ```{r read-data}
+
 annotated_specs = c("Cabingdonii", "Cmydas", "Cpicta", "Cserpentina", "Dcoriacea", "Gagassizi", "Gevgoodei", "Lkempii", "Mmutica", "Mreevesii", "Mterrapin", "Pcastaneus", "Pmegacephalum", "Psinensis", "Tcarolina", "Tscripta")
 
 liftoff_specs = c("Pexpansa", "Esubglobosa", "Mtuberculata", "Dmawii", "Cinsculpta", "Cmccordi", "Rswinhoei", "Amarmorata")
-# All species with annotations
+# All species with and without annotations
 
 final_specs = c(annotated_specs, liftoff_specs)
 
@@ -43,7 +49,6 @@ feature_lens = data.frame()
 # Data frames to keep track of feature counts and lengths
 
 for(spec in final_specs){
-  #print(spec)
   cur_feature_file = here("data", "feature-counts", paste(spec, "-feature-counts.tab", sep=""))
   cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
   cur_feature_counts$spec = spec
@@ -56,6 +61,8 @@ for(spec in final_specs){
   
   feature_counts = rbind(feature_counts, cur_feature_counts)
   # Read feature counts for the current species
+  # For annotated species these are counted from the annotated gff, for un-annotated species these are from
+  # the LIFTOFF gff
   
   cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens.tab", sep=""))
   cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
@@ -69,6 +76,27 @@ for(spec in final_specs){
   
   feature_lens = rbind(feature_lens, cur_feature_lens)
   # Read feature lengths for the current species
+  # For annotated species these are counted from the annotated gff, for un-annotated species these are from
+  # the LIFTOFF gff
+  
+  if(!spec %in% annotated_specs){
+    cur_toga_file = here("data", "feature-counts", paste(spec, "-feature-counts-Dcoriacea-toga.tab", sep=""))
+    cur_feature_counts = read.csv(cur_feature_file, sep="\t", header=T, comment.char="#")
+    cur_feature_counts$spec = spec
+    cur_feature_counts$type = "Toga"
+    feature_counts = rbind(feature_counts, cur_feature_counts)
+    # Read feature counts for the current species
+    
+    cur_len_file = here("data", "feature-counts", paste(spec, "-feature-counts-lens-Dcoriacea-toga.tab", sep=""))
+    cur_feature_lens = read.csv(cur_len_file, sep="\t", header=T, comment.char="#")
+    cur_feature_lens$spec = spec
+    cur_feature_lens$type = "Toga"
+
+    feature_lens = rbind(feature_lens, cur_feature_lens)
+    # Read feature lengths for the current species 
+  }
+  # For all the un-annotated species, also read the TOGA annotations, which are parsed from its various output files
+
 }
 
 feature_lens$feature[feature_lens$feature=="mRNA"] = "transcript"
@@ -87,13 +115,16 @@ gene_counts = subset(feature_lens, feature=="gene")
 gene_counts = gene_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.len=mean(length, na.rm=T))
 # Get genes from feature lengths and summarize by species
 
+cols = corecol(numcol=3, pal="wilke")
+names(cols) = c("Liftoff", "Pre-annotated", "Toga")
+
 gene_p = ggplot(gene_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4) +
+  geom_point(size=4, alpha=0.5) +
   scale_y_continuous(limits=c(0,50000), expand=c(0,0)) +
   ylab("# genes") +
   xlab(paste("")) +
-  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_color_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom",
@@ -118,7 +149,7 @@ gene_dist_p = ggplot(gene_lens, aes(x=length, fill=type)) +
   xlab("Gene length") +
   ylab("# genes") +
   facet_wrap(~spec) +
-  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_fill_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom")
@@ -136,11 +167,11 @@ transcript_counts = transcript_counts %>% group_by(spec, type) %>% summarize(cou
 
 transcript_p = ggplot(transcript_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4) +
-  scale_y_continuous(limits=c(0,80000), expand=c(0,0)) +
+  geom_point(size=4, alpha=0.5) +
+  scale_y_continuous(limits=c(0,85000), expand=c(0,0)) +
   ylab("# transcripts") +
   xlab(paste("")) +
-  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_color_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom")
@@ -160,7 +191,7 @@ transcript_lens = subset(feature_lens_lt20k, feature=="transcript")
 transcript_dist_p = ggplot(transcript_lens, aes(x=length, fill=type)) +
   geom_histogram(bins=50) +
   scale_y_continuous(expand=c(0,0)) +
-  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_fill_manual(values=cols) +
   xlab("Transcript length") +
   ylab("# transcripts") +
   facet_wrap(~spec) +
@@ -179,15 +210,63 @@ gene_transcript_counts = merge(gene_counts, transcript_counts, by="spec")
 
 gene_transcript_p = ggplot(gene_transcript_counts, aes(x=count.x, y=count.y, color=type.x)) +
   geom_point(size=3, alpha=0.7) +
-  geom_smooth(method="glm", se=F, linetype="dashed", color="#333333") +
-  geom_text_repel(aes(label=spec)) +
+  geom_smooth(aes(color=type.x), method="glm", se=F, linetype="dashed") +
+  geom_text_repel(aes(label=spec), show.legend=F) +
   ylab("# transcripts") +
   xlab("# genes") +
-  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_color_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom")
 print(gene_transcript_p)
+
+```
+
+## Toga genes x Liftoff genes
+
+```{r gene-toga-liftoff-fig, out.width="50%", fig.align="center"}
+
+new_counts = select(subset(gene_counts, type != "Pre-annotated"), -avg.len)
+new_counts$type = as.character(new_counts$type)
+new_counts_wide = new_counts %>% pivot_wider(names_from=type, values_from=count)
+# Combine gene and transcript counts into a data frame
+
+gene_lo_toga_p = ggplot(new_counts_wide, aes(x=Liftoff, y=Toga)) +
+  geom_point(size=3, alpha=0.7, color=corecol(numcol=1, offset=4, pal="wilke")) +
+  geom_smooth(aes(color="Fit"), method="glm", se=F, linetype="dashed") +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_text_repel(aes(label=spec), show.legend=F) +
+  xlab("# genes (Liftoff)") +
+  ylab("# genes (Toga)") +
+  scale_color_manual(values=c("1:1"="#666666", "Fit"=corecol(pal="wilke", numcol=1, offset=4))) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.position="right")
+print(gene_lo_toga_p)
+
+```
+
+## Toga transcripts x Liftoff transcripts
+
+```{r transcript-toga-liftoff-fig, out.width="50%", fig.align="center"}
+
+new_counts = select(subset(transcript_counts, type != "Pre-annotated"), -avg.len)
+new_counts$type = as.character(new_counts$type)
+new_counts_wide = new_counts %>% pivot_wider(names_from=type, values_from=count)
+# Combine gene and transcript counts into a data frame
+
+transcript_lo_toga_p = ggplot(new_counts_wide, aes(x=Liftoff, y=Toga)) +
+  geom_point(size=3, alpha=0.7, color=corecol(numcol=1, offset=4, pal="wilke")) +
+  geom_smooth(aes(color="Fit"), method="glm", se=F, linetype="dashed") +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_text_repel(aes(label=spec), show.legend=F) +
+  xlab("# transcripts (Liftoff)") +
+  ylab("# transcripts (Toga)") +
+  scale_color_manual(values=c("1:1"="#666666", "Fit"=corecol(pal="wilke", numcol=1, offset=4))) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.position="right")
+print(transcript_lo_toga_p)
 
 ```
 
@@ -201,11 +280,11 @@ cds_counts = cds_counts %>% group_by(spec, type) %>% summarize(count=n(), avg.le
 
 cds_p = ggplot(cds_counts, aes(x=spec, y=count, color=type)) +
   geom_segment(aes(x=spec, y=0, xend=spec, yend=count), linetype="dotted", color="#666666") +
-  geom_point(size=4) +
+  geom_point(size=4, alpha=0.5) +
   scale_y_continuous(limits=c(0,1000000), expand=c(0,0)) +
   ylab("# CDS") +
   xlab(paste("")) +
-  scale_color_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_color_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom")
@@ -226,11 +305,35 @@ cds_dist_p = ggplot(cds_lens, aes(x=length, fill=type)) +
   xlab("CDS length") +
   ylab("# CDS") +
   facet_wrap(~spec) +
-  scale_fill_manual(values=c("Pre-annotated"=corecol(pal="wilke", numcol=1, offset=1), "Liftoff"=corecol(pal="wilke", numcol=1))) +
+  scale_fill_manual(values=cols) +
   bartheme() +
   theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
         legend.position="bottom")
 print(cds_dist_p)
+```
+
+## Toga CDS x Liftoff CDS
+
+```{r cds-toga-liftoff-fig, out.width="50%", fig.align="center"}
+
+new_counts = select(subset(cds_counts, type != "Pre-annotated"), -avg.len)
+new_counts$type = as.character(new_counts$type)
+new_counts_wide = new_counts %>% pivot_wider(names_from=type, values_from=count)
+# Combine gene and transcript counts into a data frame
+
+transcript_lo_toga_p = ggplot(new_counts_wide, aes(x=Liftoff, y=Toga)) +
+  geom_point(size=3, alpha=0.7, color=corecol(numcol=1, offset=4, pal="wilke")) +
+  geom_smooth(aes(color="Fit"), method="glm", se=F, linetype="dashed") +
+  geom_abline(aes(slope=1, intercept=0, color="1:1"), size=1, linetype="dashed", show.legend=F) +
+  geom_text_repel(aes(label=spec), show.legend=F) +
+  xlab("# CDS (Liftoff)") +
+  ylab("# CDS (Toga)") +
+  scale_color_manual(values=c("1:1"="#666666", "Fit"=corecol(pal="wilke", numcol=1, offset=4))) +
+  bartheme() +
+  theme(axis.text.x=element_text(angle=45, hjust=1, size=10),
+        legend.position="right")
+print(transcript_lo_toga_p)
+
 ```
 
 ## BUSCO results
@@ -305,7 +408,6 @@ for(spec in liftoff_specs){
   ref_genes = in_data[in_data$label==ref,]$num.genes
   ref_transcripts = in_data[in_data$label==ref,]$num.transcripts
 
-  
   liftoff = rbind(liftoff, data.frame("spec"=spec, "genes"=row$num.genes, "transcripts"=row$num.transcripts, "ref"=ref, "ref.genes"=ref_genes, "ref.transcripts"=ref_transcripts))
 }
 
@@ -443,12 +545,36 @@ print(toga_div_p)
 
 ```
 
+## Orthology class summaries
 
+```{r toga-orths, out.width="50%", fig.align="center", fig.height=6}
 
+orth_file = here("data", "dcoriacea-toga-orthology-summary.tsv")
+orth_data = read.csv(orth_file, header=T, sep="\t")
 
+orth_summary = orth_data %>% group_by(query.spec, orth.class) %>% summarize(count=n())
 
+orth_class_names = c("one2one", "one2many", "many2one", "many2many", "one2zero")
+cols = corecol(numcol=length(orth_class_names), pal="wilke")
+names(cols)=orth_class_names
+# Abbreviations and names for the toga classes, as well as colors for the plot
 
+orth_summary$orth.class = factor(orth_summary$orth.class, levels=rev(orth_class_names))
 
+toga_p = ggplot(orth_summary, aes(x=query.spec, y=count, fill=orth.class)) +
+  geom_bar(stat="identity", position="stack") +
+  #geom_hline(yintercept=0.9*nrow(toga_data), linetype="dashed", col="#d3d3d3") +
+  scale_y_continuous(expand=c(0,0)) +
+  scale_fill_manual(labels=orth_class_names, values=cols) +
+  xlab("") +
+  ylab("# of transcripts") +
+  bartheme() +
+  theme(legend.position="bottom") +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
+  coord_flip()
+print(toga_p)
+
+```
 
 
 
