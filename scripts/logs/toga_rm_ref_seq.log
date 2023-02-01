@@ -1,0 +1,120 @@
+Dmawii
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Dmawii-to-Dcoriacea/nucleotide.fasta
+ > 129177 seqs read
+ > 68647 seqs retained (expected 64588.5)
+ > 17630 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Dmawii-to-Dcoriacea/codon.fasta
+ > 152744 seqs read
+ > 31 CDS seqs not divisible by 3
+ > 76341 seqs retained (expected 76341.0)
+ > 5 genes with no transcript
+ > 17625 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Dmawii-to-Dcoriacea/prot.fasta
+ > 152744 seqs read
+ > 76372 seqs retained (expected 76372.0)
+ > 17630 longest transcripts written
+Cinsculpta
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cinsculpta-to-Dcoriacea/nucleotide.fasta
+ > 128496 seqs read
+ > 68318 seqs retained (expected 64248.0)
+ > 17584 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cinsculpta-to-Dcoriacea/codon.fasta
+ > 149356 seqs read
+ > 68 CDS seqs not divisible by 3
+ > 74610 seqs retained (expected 74610.0)
+ > 4 genes with no transcript
+ > 17580 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cinsculpta-to-Dcoriacea/prot.fasta
+ > 149356 seqs read
+ > 74678 seqs retained (expected 74678.0)
+ > 17584 longest transcripts written
+Cmccordi
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cmccordi-to-Dcoriacea/nucleotide.fasta
+ > 140135 seqs read
+ > 79581 seqs retained (expected 70067.5)
+ > 18069 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cmccordi-to-Dcoriacea/codon.fasta
+ > 172724 seqs read
+ > 9 CDS seqs not divisible by 3
+ > 86353 seqs retained (expected 86353.0)
+ > 4 genes with no transcript
+ > 18065 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Cmccordi-to-Dcoriacea/prot.fasta
+ > 172724 seqs read
+ > 86362 seqs retained (expected 86362.0)
+ > 18069 longest transcripts written
+Pexpansa
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Pexpansa-to-Dcoriacea/nucleotide.fasta
+ > 128647 seqs read
+ > 68322 seqs retained (expected 64323.5)
+ > 17549 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Pexpansa-to-Dcoriacea/codon.fasta
+ > 147950 seqs read
+ > 42 CDS seqs not divisible by 3
+ > 73933 seqs retained (expected 73933.0)
+ > 7 genes with no transcript
+ > 17542 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Pexpansa-to-Dcoriacea/prot.fasta
+ > 147950 seqs read
+ > 73975 seqs retained (expected 73975.0)
+ > 17549 longest transcripts written
+Amarmorata
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Amarmorata-to-Dcoriacea/nucleotide.fasta
+ > 140101 seqs read
+ > 79579 seqs retained (expected 70050.5)
+ > 18364 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Amarmorata-to-Dcoriacea/codon.fasta
+ > 172562 seqs read
+ > 49 CDS seqs not divisible by 3
+ > 86232 seqs retained (expected 86232.0)
+ > 9 genes with no transcript
+ > 18355 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Amarmorata-to-Dcoriacea/prot.fasta
+ > 172562 seqs read
+ > 86281 seqs retained (expected 86281.0)
+ > 18364 longest transcripts written
+Mtuberculata
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Mtuberculata-to-Dcoriacea/nucleotide.fasta
+ > 131812 seqs read
+ > 71371 seqs retained (expected 65906.0)
+ > 18232 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Mtuberculata-to-Dcoriacea/codon.fasta
+ > 163138 seqs read
+ > 22 CDS seqs not divisible by 3
+ > 81547 seqs retained (expected 81547.0)
+ > 4 genes with no transcript
+ > 18228 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Mtuberculata-to-Dcoriacea/prot.fasta
+ > 163138 seqs read
+ > 81569 seqs retained (expected 81569.0)
+ > 18232 longest transcripts written
+Rswinhoei
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Rswinhoei-to-Dcoriacea/nucleotide.fasta
+ > 128023 seqs read
+ > 67551 seqs retained (expected 64011.5)
+ > 17607 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Rswinhoei-to-Dcoriacea/codon.fasta
+ > 144834 seqs read
+ > 104 CDS seqs not divisible by 3
+ > 72313 seqs retained (expected 72313.0)
+ > 13 genes with no transcript
+ > 17594 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Rswinhoei-to-Dcoriacea/prot.fasta
+ > 144834 seqs read
+ > 72417 seqs retained (expected 72417.0)
+ > 17607 longest transcripts written
+Esubglobosa
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Esubglobosa-to-Dcoriacea/nucleotide.fasta
+ > 130325 seqs read
+ > 69836 seqs retained (expected 65162.5)
+ > 17932 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Esubglobosa-to-Dcoriacea/codon.fasta
+ > 157876 seqs read
+ > 64 CDS seqs not divisible by 3
+ > 78874 seqs retained (expected 78874.0)
+ > 7 genes with no transcript
+ > 17925 longest transcripts written
+ > /n/holylfs05/LABS/informatics/Users/gthomas/turtles/cactus/turtle-output-smk/05-toga/Esubglobosa-to-Dcoriacea/prot.fasta
+ > 157876 seqs read
+ > 78938 seqs retained (expected 78938.0)
+ > 17932 longest transcripts written
