@@ -552,7 +552,9 @@ print(toga_div_p)
 orth_file = here("data", "dcoriacea-toga-orthology-summary.tsv")
 orth_data = read.csv(orth_file, header=T, sep="\t")
 
-orth_summary = orth_data %>% group_by(query.spec, orth.class) %>% summarize(count=n())
+orth_summary = select(orth_data, ref.gene, query.gene, orth.class, query.spec)
+orth_summary = unique(orth_summary[c("query.spec","ref.gene","query.gene", "orth.class")])
+orth_summary = orth_summary %>% group_by(query.spec, orth.class) %>% summarize(count=n())
 
 orth_class_names = c("one2one", "one2many", "many2one", "many2many", "one2zero")
 cols = corecol(numcol=length(orth_class_names), pal="wilke")
